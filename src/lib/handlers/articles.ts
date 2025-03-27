@@ -1,39 +1,24 @@
-import { getCollection } from "astro:content";
+import { getPosts } from "./wpApi";
 
-const articlesCollection = (
-  await getCollection("articles", ({ data }) => {
-    return data.isDraft !== true && new Date(data.publishedTime) < new Date();
-  })
-).sort((a, b) => b.data.publishedTime.localeCompare(a.data.publishedTime));
+const articlesCollection = await getPosts();
 
 export const articlesHandler = {
   allArticles: () => articlesCollection,
 
   mainHeadline: () => {
-    const article = articlesCollection.filter(
-      (article) => article.data.isBigHeadline === true
-    )[0];
+    const article = articlesCollection[0];
     if (!article)
-      throw new Error(
-        "Please ensure there is at least one item to display for the main headline."
+      throw new Error( /*TODO: leer sobre los throw */
+        "No se ha encontrado artículos"
       );
     return article;
   },
 
   subHeadlines: () => {
-    const mainHeadline = articlesHandler.mainHeadline();
-    const subHeadlines = articlesCollection
-      .filter(
-        (article) =>
-          article.data.isSmallHeadline === true &&
-          mainHeadline.id !== article.id
-      )
-      .slice(0, 4);
+    const subHeadlines = articlesCollection.slice(1,6);
 
-    if (subHeadlines.length === 0)
-      throw new Error(
-        "Please ensure there is at least one item to display for the sub headlines."
-      );
+    if (subHeadlines.length === 0) throw new Error("No se ha encontrado artículos");
+    
     return subHeadlines;
   },
 };

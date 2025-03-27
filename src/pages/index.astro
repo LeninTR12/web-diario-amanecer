@@ -1,4 +1,7 @@
 ---
+import { getPosts } from "@/lib/handlers/wpApi";
+const posts = await getPosts();
+
 import BaseLayout from "@/layouts/base.astro";
 import { getEntry } from "astro:content";
 import Headlines from "./_home/headlines.astro";
@@ -15,5 +18,5 @@ if (!entry) {
 <BaseLayout entry={entry}>
   <Headlines />
   <LatestNews />
-  <Authors />
+  <!-- TODO: <Authors /> -->
 </BaseLayout>

@@ -1,13 +1,13 @@
-import { getCollection } from "astro:content";
+import { getCategories } from "./wpApi";
 
-const categoriesCollection = await getCollection('categories');
+const categoriesCollection = await getCategories();
 
 export const categoriesHandler = {
     allCategories: () => categoriesCollection,
-    oneCategory: (categoryId: string) => {
-        const category = categoriesCollection.find((category) => category.id === categoryId);
+    oneCategory: (categorySlug: string) => {
+        const category = categoriesCollection.find((category:any) => category.slug === categorySlug);
         if (!category) {
-            throw new Error(`Category with id ${categoryId} not found`);
+            throw new Error(`Category with slug ${categorySlug} not found`);
         }
         return category;
     },

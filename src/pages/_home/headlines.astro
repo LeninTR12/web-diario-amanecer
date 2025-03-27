@@ -16,7 +16,7 @@ const smallHeadlines = articlesHandler.subHeadlines();
   </div>
   <div class="col-span-1 md:col-span-4">
     {
-      smallHeadlines.map((article, index) => (
+      smallHeadlines.map((article : any, index:number) => (
         <SubHeadlineCard
           article={article}
           isFirst={index === 0}
