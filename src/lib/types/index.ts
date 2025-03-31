@@ -34,5 +34,16 @@ export type ArticleMeta = Meta & {
   lastModified: string;
   authors: Author[];
 };
-
+export interface Category {
+  id:          string;
+  count:       number;
+  description: string;
+  link:        string;
+  name:        string;
+  slug:        string;
+  taxonomy:    string;
+  parent:      number;
+  meta:        any[];
+  _links:      Link[];
+}
 export type Entry = CollectionEntry<"articles" | "views">;

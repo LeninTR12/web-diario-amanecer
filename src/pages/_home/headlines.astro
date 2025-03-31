@@ -6,7 +6,6 @@ import { articlesHandler } from "@/lib/handlers/articles";
 const bigHeadline = articlesHandler.mainHeadline();
 const smallHeadlines = articlesHandler.subHeadlines();
 ---
-
 <section
   class="grid grid-cols-1 gap-6 md:grid-cols-10 container pt-4 md:pt-8"
   data-pagefind-ignore="all"
@@ -15,7 +14,7 @@ const smallHeadlines = articlesHandler.subHeadlines();
     <MainHeadline article={bigHeadline} />
   </div>
   <div class="col-span-1 md:col-span-4">
-    {
+    <!-- {
       smallHeadlines.map((article : any, index:number) => (
         <SubHeadlineCard
           article={article}
@@ -23,6 +22,6 @@ const smallHeadlines = articlesHandler.subHeadlines();
           isLast={index === smallHeadlines.length - 1}
         />
       ))
-    }
+    } -->
   </div>
 </section>

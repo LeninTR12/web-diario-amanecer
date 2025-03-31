@@ -15,28 +15,32 @@ export const SITE = {
 
 export const NAVIGATION_LINKS: Link[] = [
   {
-    href: "/categories/technology",
-    text: "Technology",
+    href: "/categorias/politica",
+    text: "Política",
   },
   {
-    href: "/categories/programming",
-    text: "Programming",
+    href: "/categorias/social",
+    text: "Social",
   },
   {
-    href: "/categories/lifestyle",
-    text: "Lifestyle",
+    href: "/categorias/policial",
+    text: "Policial",
   },
   {
-    href: "/categories/productivity",
-    text: "Productivity",
+    href: "/categorias/espectaculo",
+    text: "Espectáculo",
   },
   {
-    href: "/categories/health",
-    text: "Health",
+    href: "/categorias/ambiental",
+    text: "Ambiental",
   },
   {
-    href: "/categories/finance",
-    text: "Finance",
+    href: "/categorias/cultural",
+    text: "Cultural",
+  },
+  {
+    href: "/categorias/institucional",
+    text: "Institucional",
   },
 ];
 
@@ -77,23 +81,23 @@ export const OTHER_LINKS: Link[] = [
 
 export const SOCIAL_LINKS: Link[] = [
   {
-    href: "https://github.com",
-    text: "GitHub",
-    icon: "github",
-  },
-  {
-    href: "httpe://www.t.me",
-    text: "Telegram",
-    icon: "telegram",
-  },
-  {
-    href: "https://twitter.com",
-    text: "Twitter",
-    icon: "newTwitter",
-  },
-  {
-    href: "https://www.facebook.com",
+    href: "https://www.facebook.com/amanecersanmartin/",
     text: "Facebook",
     icon: "facebook",
+  },
+  {
+    href: "https://www.instagram.com/diarioamanecersanmartin/",
+    text: "Instagram",
+    icon: "instagram",
+  },
+  {
+    href: "https://www.youtube.com/@diarioamanecer1732",
+    text: "Youtube",
+    icon: "youtube",
+  },
+  {
+    href: "https://www.tiktok.com/@diarioamanecersm",
+    text: "Tiktok",
+    icon: "tiktok",
   },
 ];
