@@ -1,24 +1,24 @@
 ---
 import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
-import { render } from "astro:content";
 import Divider from "@/components/bases/divider.astro";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import { getDateDistance } from "@/lib/utils/date";
+import imageNotFound from "src/assets/images/default-image.jpg";
+import type { Article } from "@/lib/types";
 
-// type Props = {
-//   article: CollectionEntry<"articles">;
-// };
+
+type Props = {
+  article: Article;
+};
 
 const { article } = Astro.props;
-
 const category = categoriesHandler.oneCategory(article.categories[0]);
 ---
 
 <article class="group relative isolate flex flex-col-reverse md:flex-col gap-4">
   <div class="aspect-video overflow-hidden rounded-md">
     <Image
-    src={article._embedded["wp:featuredmedia"][0]["source_url"]}
+    src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
     alt={article.title.rendered}
     width={630}
     height={620}

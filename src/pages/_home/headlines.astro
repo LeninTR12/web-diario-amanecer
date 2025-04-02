@@ -2,9 +2,10 @@
 import MainHeadline from "@/components/cards/mainHeadline.astro";
 import SubHeadlineCard from "@/components/cards/subHeadlineCard.astro";
 import { articlesHandler } from "@/lib/handlers/articles";
+import type { Article } from "@/lib/types";
 
-const bigHeadline = articlesHandler.mainHeadline();
-const smallHeadlines = articlesHandler.subHeadlines();
+const bigHeadline : Article = await articlesHandler.mainHeadline();
+const smallHeadlines : Article[] = await articlesHandler.subHeadlines();
 ---
 <section
   class="grid grid-cols-1 gap-6 md:grid-cols-10 container pt-4 md:pt-8"
@@ -14,14 +15,14 @@ const smallHeadlines = articlesHandler.subHeadlines();
     <MainHeadline article={bigHeadline} />
   </div>
   <div class="col-span-1 md:col-span-4">
-    <!-- {
-      smallHeadlines.map((article : any, index:number) => (
+     {
+      smallHeadlines.map((article:Article, index:number) => (
         <SubHeadlineCard
           article={article}
           isFirst={index === 0}
           isLast={index === smallHeadlines.length - 1}
         />
       ))
-    } -->
+    }  
   </div>
 </section>

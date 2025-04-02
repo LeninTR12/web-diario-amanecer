@@ -1,23 +1,24 @@
 import { getPosts } from "./wpApi";
-
-const articlesCollection = await getPosts();
+import type { Article } from "../types";
 
 export const articlesHandler = {
-  allArticles: () => articlesCollection,
+  allArticles:  getPosts,
 
-  mainHeadline: () => {
-    const article = articlesCollection[0];
-    if (!article)
+  mainHeadline: async  () => {
+    const articles = await getPosts();
+    if (!articles)
       throw new Error( /*TODO: leer sobre los throw */
-        "No se ha encontrado artículos"
+        "No se han encontrado artículos"
       );
+    const article = articles[0];
     return article;
   },
 
-  subHeadlines: () => {
-    const subHeadlines = articlesCollection.slice(1,6);
+  subHeadlines: async () => {
+    const articlesAll = await getPosts();
+    const subHeadlines = articlesAll.slice(1,6);
 
-    if (subHeadlines.length === 0) throw new Error("No se ha encontrado artículos");
+    if (subHeadlines.length === 0) throw new Error("No se han encontrado artículos");
     
     return subHeadlines;
   },

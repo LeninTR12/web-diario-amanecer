@@ -6,9 +6,9 @@ import Footer from "@/components/shared/footer.astro";
 import type { Entry } from "@/lib/types";
 import { getMeta } from "@/lib/utils/getMeta";
 
-// type Props = {
-//   entry: Entry;
-// };
+ type Props = {
+   entry: Entry;
+ };
 
 const { entry } = Astro.props;
 
@@ -16,6 +16,7 @@ const meta = await getMeta(entry);
 ---
 
 <!doctype html>
+{console.log(SITE)}
 <html lang={SITE.locale} dir={SITE.dir}>
   <Head meta={meta} />
   <body class="flex flex-col">
