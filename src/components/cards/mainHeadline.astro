@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import Divider from "@/components/bases/divider.astro";
 import { categoriesHandler } from "@/lib/handlers/categories";
-import { getDateDistance } from "@/lib/utils/date";
+import { formatDateTime } from "@/lib/utils/date";
 import imageNotFound from "src/assets/images/default-image.jpg";
 import type { Article } from "@/lib/types";
 
@@ -42,7 +42,7 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
       <span class="text-primary dark:text-secondary">{category.name}</span
       >
       <Divider />
-      <span>{getDateDistance(article.date)}</span> 
+      <span>{formatDateTime(article.date)}</span> 
     </div>
   </div>
 </article> 
