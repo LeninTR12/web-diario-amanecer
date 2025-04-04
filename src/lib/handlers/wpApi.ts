@@ -8,7 +8,7 @@ export async function getPosts(){
 }
 
 export async function getPostBySlug(slug:string){
-    const res = await fetch(`${API_URL}/posts?slug=${slug}&&_embed`);
+    const res = await fetch(`${API_URL}/posts?slug=${slug}&_embed`);
     if (!res.ok) throw new Error("Error retrieving post");
     const posts = await res.json();
     return posts.length ? posts[0] : null;
@@ -18,6 +18,13 @@ export async function getPostById(id:number){
     const res = await fetch(`${API_URL}/posts/${id}?_embed`);
     if (!res.ok) throw new Error("Error retrieving post");
     const jsonResult = await res.json();
+    return jsonResult;
+}
+export async function getPostsByCategory(id:number){
+    const res = await fetch(`${API_URL}/posts?category=${id}&_embed`);
+    if (!res.ok) throw new Error("Error retrieving posts by category");
+    const jsonResult = await res.json();
+    console.log(jsonResult);
     return jsonResult;
 }
 export async function getCategories(){

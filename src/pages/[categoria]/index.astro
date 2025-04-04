@@ -1,0 +1,32 @@
+---
+import { articlesHandler } from "@/lib/handlers/articles";
+import { categoriesHandler } from "@/lib/handlers/categories";
+import { htmlToText } from "@/lib/utils/letter";
+import type { Article, ArticleMeta, Category } from "@/lib/types";
+import BaseLayout from "@/layouts/base.astro";
+import ContentLayout from "@/layouts/content.astro";
+import ArticleHeader from "../articles/_components/article-header.astro";
+
+const { categoria } = Astro.params;
+
+const category: Category = await categoriesHandler.oneCategoryBySlug(categoria as string);
+if (!category) return Astro.redirect("/404");
+
+const articles: Article[] = await articlesHandler.articlesByCategory(category.id);
+
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {articles.map((article)=>(
+        <h1>{article.title.rendered}</h1>
+        
+        ))}
+</body>
+</html>
+

@@ -9,27 +9,33 @@ import Divider from "@/components/bases/divider.astro";
 import { categoriesHandler } from "@/lib/handlers/categories";
 // import { authorsHandler } from "@/lib/handlers/authors";
 import Share from "@/components/elements/share.astro";
+import type { Article, Category } from "@/lib/types";
 
 type Props = {
-  article: CollectionEntry<"articles">;
-  readingTime: string;
+  article: Article;
+  // readingTime?: string;
 };
 
-const { article, readingTime } = Astro.props;
+const { article /*, readingTime*/ } = Astro.props;
 
-const category = categoriesHandler.oneCategory(article.data.category.id);
+const category: Category = categoriesHandler.oneCategory(article.categories[0]);
 // const authors = authorsHandler.getAuthors(article.data.authors);
 ---
 
 <section
-  class="mb-8 flex flex-col lg:flex-col-reverse border-b border-b-base-300 lg:border-none pb-4 pt-0 lg:pt-6"
+  class="mb-8 flex flex-col border-b border-b-base-300 lg:border-none pb-4 pt-0 lg:pt-6"
 >
   <div
     class="container px-0 lg:px-4 max-w-5xl aspect-[20/9] lg:mt-4 overflow-hidden"
   >
+    <h1 class="text-3xl lg:text-4xl font-bold text-left text-pretty">
+      {article.title.rendered}
+    </h1>
     <Picture
-      src={article.data.cover}
+      src={article._embedded["wp:featuredmedia"]?.[0]["source_url"]}
       alt="article"
+      width={976}
+      height={549}
       layout="full-width"
       loading={"eager"}
       formats={["avif", "webp"]}
@@ -38,38 +44,37 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
   </div>
   <div class="container my-4 max-w-5xl lg:hidden flex items-center gap-2">
     <ResourcesAdd size="16" />
-    <a href={`/categories/${category.data.path}`} class="a-01 font-semibold"
-      >{category.data.title}</a
+    <a href={`/categories/${category.slug}`} class="a-01 font-semibold"
+      >{category.name}</a
     >
   </div>
   <div class="container max-w-5xl">
-    <h1 class="text-3xl lg:text-4xl font-bold text-left text-pretty">
-      {article.data.title}
-    </h1>
     <div class="flex flex-col gap-4 items-start mt-2 lg:mt-6 text-sm">
       <div class="text-base-content/70 flex items-center gap-2">
         <span class="hidden lg:flex items-center gap-1">
           <ResourcesAdd size="15" />
-          <a href={`/categories/${category.id}`} class="a-01 font-semibold"
-            >{category.data.title}</a
+          <a href={`/categories/${category.slug}`} class="a-01 font-semibold"
+            >{category.name}</a
           >
         </span>
+
         <Divider responsive />
         <span class="flex items-center gap-1">
           <Calendar04 size="15" />
-          <time class="hidden lg:block" datetime={article.data.publishedTime}
-            >{formatDate(article.data.publishedTime, "long")}</time
-          >
-          <time class="block lg:hidden" datetime={article.data.publishedTime}
-            >{formatDate(article.data.publishedTime, "short")}</time
+          <time class="hidden lg:block" datetime={article.date}
+            >{formatDate(article.date, "long")}
+          </time>
+          <time class="block lg:hidden" datetime={article.date}
+            >{formatDate(article.date, "short")}</time
           >
         </span>
         <Divider />
         <span class="flex items-center gap-1">
           <Time04 size="15" />
-          <span>{readingTime}</span>
+          <!-- <span>{readingTime}</span> -->
         </span>
       </div>
+      <Share text={article.title.rendered} />
       <!-- TODO: fix name, href, avatar of author -->
       <div class="w-full flex flex-wrap gap-2 items-center justify-between">
         <div class="flex flex-wrap gap-4">
@@ -99,8 +104,8 @@ const category = categoriesHandler.oneCategory(article.data.category.id);
             ))
           } -->
         </div>
-        <Share text={article.data.title} />
       </div>
     </div>
   </div>
+  <div set:html={article.content.rendered} />
 </section>

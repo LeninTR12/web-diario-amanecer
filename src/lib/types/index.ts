@@ -1,5 +1,4 @@
 import type { HTMLString } from "astro/runtime/server/escape.js";
-import type { CollectionEntry } from "astro:content";
 
 export type Icon = {
   size?: string;
@@ -33,7 +32,6 @@ export type Meta = {
 export type ArticleMeta = Meta & {
   publishedTime: string;
   lastModified: string;
-  authors: Author[];
 };
 export interface Category {
   id:          number;
@@ -77,4 +75,4 @@ export interface Article {
   _links:         any;
   _embedded:      any;
 }
-export type Entry = CollectionEntry<"articles" | "views">;
+

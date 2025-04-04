@@ -1,0 +1,40 @@
+---
+import { articlesHandler } from "@/lib/handlers/articles";
+import { categoriesHandler } from "@/lib/handlers/categories";
+import { htmlToText } from "@/lib/utils/letter";
+import type { Article, ArticleMeta, Category } from "@/lib/types";
+import BaseLayout from "@/layouts/base.astro";
+import ContentLayout from "@/layouts/content.astro";
+import ArticleHeader from "../articles/_components/article-header.astro";
+
+const { categoria, slug } = Astro.params;
+
+const articles: Article[] = await articlesHandler.allArticles();
+const category: Category = await categoriesHandler.oneCategoryBySlug(
+  categoria as string
+);
+
+const article = articles.find(
+  (article) => article.slug === slug && article.categories[0] === category.id
+);
+
+if (!article) return Astro.redirect("/404");
+
+const meta: ArticleMeta = {
+  title: article.title.rendered,
+  metaTitle: article.title.rendered,
+  description: htmlToText(article.excerpt.rendered),
+  type: "article",
+  ogImage: article._embedded["wp:featuredmedia"]?.[0]["source_url"],
+  ogImageAlt: article._embedded["wp:featuredmedia"]?.[0]["source_url"],
+  publishedTime: article.date,
+  lastModified: article.modified,
+};
+---
+
+<BaseLayout meta={meta}>
+  <ArticleHeader article={article} />
+  <!-- <ContentLayout>
+      <Content />
+    </ContentLayout> -->
+</BaseLayout>
