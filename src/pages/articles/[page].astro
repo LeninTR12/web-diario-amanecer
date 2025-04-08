@@ -29,7 +29,7 @@ const [HEADER] = entry.data.blocks;
 console.log(articles.length, SITE.postsPerPage);
 ---
 
-<ListLayout header={HEADER.title} entry={entry}>
+<ListLayout header={HEADER.title} meta={entry}>
   <section class="flex-1">
     <ul class="flex flex-col gap-4">
       {

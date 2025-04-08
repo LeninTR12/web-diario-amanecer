@@ -21,15 +21,30 @@ export async function getPostById(id:number){
     return jsonResult;
 }
 export async function getPostsByCategory(id:number){
-    const res = await fetch(`${API_URL}/posts?category=${id}&_embed`);
+    const res = await fetch(`${API_URL}/posts?categories=${id}&_embed`);
     if (!res.ok) throw new Error("Error retrieving posts by category");
-    const jsonResult = await res.json();
-    console.log(jsonResult);
+
+    const jsonResult = await res.json();   
+    return jsonResult;
+}
+export async function getPostsByScope(id:number){
+    const res = await fetch(`${API_URL}/posts?ambito=${id}&_embed`);
+    if (!res.ok) throw new Error("Error retrieving posts by category");
+    
+    const jsonResult = await res.json();  
     return jsonResult;
 }
 export async function getCategories(){
     const res = await fetch(`${API_URL}/categories?_embed`);
     if (!res.ok) throw new Error("Error retrieving categories");
+
+    const jsonResult = await res.json();
+    return jsonResult;
+}
+export async function getScopes(){
+    const res = await fetch(`${API_URL}/ambito`);
+    if (!res.ok) throw new Error("Error retrieving categories");
+
     const jsonResult = await res.json();
     return jsonResult;
 }

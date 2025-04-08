@@ -1,15 +1,18 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { getDateDistance } from "@/lib/utils/date";
+import { formatDateTime, getDateDistance } from "@/lib/utils/date";
 import Divider from "../bases/divider.astro";
+import type { Article } from "@/lib/types";
+import { format } from "node:path";
 
 type Props = {
-  article: CollectionEntry<"articles">;
+  categorySlug?: string;
+  article: Article;
   isLast: boolean;
 };
 
-const { article, isLast } = Astro.props;
+const { categorySlug, article, isLast } = Astro.props;
 ---
 
 <li
@@ -18,7 +21,7 @@ const { article, isLast } = Astro.props;
   <div
     class="flex-shrink-0 aspect-square w-32 text-sm text-base-content/60 text-pretty capitalize hidden lg:flex pt-1"
   >
-    {getDateDistance(article.data.publishedTime)}
+    {formatDateTime(article.date)}
   </div>
   <div
     class:list={[
@@ -27,11 +30,12 @@ const { article, isLast } = Astro.props;
     ]}
   >
     <div class="w-full lg:w-60 aspect-video">
+      <!-- /*TODO: cambiar width y height */ -->
       <Image
-        src={article.data.cover}
-        alt={article.data.covert_alt
-          ? article.data.covert_alt
-          : article.data.title}
+        src={article._embedded["wp:featuredmedia"]?.[0]["source_url"]}
+        alt={article.title.rendered}
+        width={800}
+        height={450} 
         layout="responsive"
         loading={"eager"}
         class="aspect-video rounded w-full h-full"
@@ -39,28 +43,26 @@ const { article, isLast } = Astro.props;
     </div>
     <div class="flex-1 space-y-2">
       <h3 class="text-xl font-semibold lg:group-hover:underline">
-        <a href={`/articles/${article.id}`}>
+        <a href={`/${categorySlug}/${article.slug}`}>
           <span class="absolute inset-0 z-10"></span>
-          {article.data.title}
+          {article.title.rendered}
         </a>
       </h3>
-      <p class="text-base-content/80 max-w-xl text-pretty">
-        {article.data.description}
-      </p>
+      <p class="text-base-content/80 max-w-xl text-pretty" set:html={article.excerpt.rendered} >   </p>
     </div>
     <div class="text-sm lg:hidden flex item-center text-base-content/70 pt-2">
       <time
         class="flex items-center gap-1"
-        datetime={String(article.data.publishedTime)}
+        datetime={String(article.date)}
       >
         <span>
-          {getDateDistance(article.data.publishedTime)}
+          {formatDateTime(article.date)}
         </span>
       </time>
       <Divider />
       <small class="flex items-center gap-1">
         <span class="capitalize text-sm">
-          {article.data.category.id}
+          <!-- {article.data.category.id} -->
         </span>
       </small>
     </div>

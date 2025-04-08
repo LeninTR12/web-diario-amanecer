@@ -2,10 +2,9 @@ import type { Link } from "../types";
 
 export const SITE = {
   title: "Amanecer",
-  description: "A news website built with Astro",
-  author: "Mohammad Rahmani",
-  url: "https://astro-news-six.vercel.app",
-  github: "https://github.com/Mrahmani71/astro-news",
+  description: " Una propuesta de prensa escrita desde el Alto Mayo para toda la región San Martín",
+  author: "",
+  url: "https://amanecer.pe",
   locale: "es-Es",
   dir: "ltr",
   charset: "UTF-8",
@@ -15,32 +14,47 @@ export const SITE = {
 
 export const NAVIGATION_LINKS: Link[] = [
   {
-    href: "/categorias/politica",
+    href: "/politica",
     text: "Política",
   },
   {
-    href: "/categorias/social",
+    href: "/social",
     text: "Social",
   },
   {
-    href: "/categorias/policial",
+    href: "/policial",
     text: "Policial",
   },
   {
-    href: "/categorias/espectaculo",
+    href: "/espectaculo",
     text: "Espectáculo",
   },
   {
-    href: "/categorias/ambiental",
+    href: "/ambiental",
     text: "Ambiental",
   },
   {
-    href: "/categorias/cultural",
+    href: "/cultural",
     text: "Cultural",
   },
   {
-    href: "/categorias/institucional",
+    href: "/institucional",
     text: "Institucional",
+  },
+];
+
+export const SCOPE_LINKS: Link[] = [
+  {
+    href:"/local",
+    text: "Local",
+  },
+  {
+    href:"/regional",
+    text: "Regional",
+  },
+  {
+    href:"/nacional",
+    text: "Nacional",
   },
 ];
 

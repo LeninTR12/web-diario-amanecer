@@ -6,17 +6,18 @@ import type { Article, ArticleMeta, Category } from "@/lib/types";
 import BaseLayout from "@/layouts/base.astro";
 import ContentLayout from "@/layouts/content.astro";
 import ArticleHeader from "../articles/_components/article-header.astro";
+import { scopesHandler } from "@/lib/handlers/scopes";
+import Content from "../articles/_components/article-content.astro";
 
 const { categoria, slug } = Astro.params;
 
-const articles: Article[] = await articlesHandler.allArticles();
-const category: Category = await categoriesHandler.oneCategoryBySlug(
-  categoria as string
-);
+const categoryXcat: Category = await categoriesHandler.oneCategoryBySlug(categoria as string);
+const categoryXScope = await scopesHandler.oneScopeSlug(categoria as string);
 
-const article = articles.find(
-  (article) => article.slug === slug && article.categories[0] === category.id
-);
+const category = categoryXcat || categoryXScope;
+if (!category) return Astro.redirect("/404");
+
+const article:Article = await articlesHandler.oneArticleBySlug(slug as string);
 
 if (!article) return Astro.redirect("/404");
 
@@ -26,15 +27,16 @@ const meta: ArticleMeta = {
   description: htmlToText(article.excerpt.rendered),
   type: "article",
   ogImage: article._embedded["wp:featuredmedia"]?.[0]["source_url"],
-  ogImageAlt: article._embedded["wp:featuredmedia"]?.[0]["source_url"],
+  ogImageAlt: article.title.rendered,
   publishedTime: article.date,
   lastModified: article.modified,
 };
+
 ---
 
 <BaseLayout meta={meta}>
   <ArticleHeader article={article} />
-  <!-- <ContentLayout>
-      <Content />
-    </ContentLayout> -->
+  <ContentLayout>
+      <Content article = {article} />
+    </ContentLayout>
 </BaseLayout>

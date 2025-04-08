@@ -2,21 +2,37 @@
 import NewsCard from "@/components/cards/newsCard.astro";
 import HeaderSection from "./headerSection.astro";
 import { articlesHandler } from "@/lib/handlers/articles";
+import type { Article } from "@/lib/types";
 
-const articles = articlesHandler.allArticles();
+interface Props{
+  title:string,
+  link_title: string
+  link_url: string,
+  count: number
+}
+
+const {title, link_title, link_url,count}:Props = Astro.props;
+
+const allArticles :Article[] = await articlesHandler.allArticles();
+const removeArticles:Article[] = allArticles.slice(0,6);
+const scopeArticles:Article[] = await articlesHandler.articlesByScope(link_url.replace("/", ""));
+
+const articles:Article[] =  scopeArticles.filter((article)=>(
+  !removeArticles.some((removeArticle)=>
+    removeArticle.id ===article.id)));
+
 ---
 
 <section class="container pt-12 pb-0 space-y-4" data-pagefind-ignore="all">
   <HeaderSection
-    title="Latest News"
-    link_title="View all"
-    link_url="/articles"
+    title={title}
+    link_url={link_url}
   />
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-6 md:grid-rows-2">
     {
       articles
-        .slice(0, 6)
-        .map((article:any, index:any) => <NewsCard article={article} index={index} />)
+        .slice(0, count)
+        .map((article, index) => <NewsCard article={article} index={index} />)
     }
   </div>
 </section>

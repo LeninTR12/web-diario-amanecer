@@ -33,7 +33,7 @@ export type ArticleMeta = Meta & {
   publishedTime: string;
   lastModified: string;
 };
-export interface Category {
+export type Scope = {
   id:          number;
   count:       number;
   description: string;
@@ -41,12 +41,14 @@ export interface Category {
   name:        string;
   slug:        string;
   taxonomy:    string;
-  parent:      number;
   meta:        any[];
-  _links:      Link[];
+  _links:      any;
+}
+export type Category = Scope & {
+  parent?:      number;
 }
 
-export interface Article {
+export type Article = {
   id:             string;
   date:           string;
   date_gmt:       string;

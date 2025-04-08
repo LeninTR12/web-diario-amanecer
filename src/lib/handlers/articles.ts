@@ -1,6 +1,7 @@
-import { getPosts, getPostsByCategory } from "./wpApi";
+import { getPostBySlug, getPosts, getPostsByCategory, getPostsByScope } from "./wpApi";
 import type { Article } from "../types";
 import { categoriesHandler } from "./categories";
+import { scopesHandler } from "./scopes";
 
 export const articlesHandler = {
   allArticles: getPosts,
@@ -30,8 +31,23 @@ export const articlesHandler = {
     const categoryId = isId
       ? category
       : await categoriesHandler.oneCategoryBySlug(category).id;
+
     const articles: Article[] = await getPostsByCategory(categoryId);
+    return articles as Article[];
+  },
+  articlesByScope: async (scope : string | number) => {
+    const isId = typeof scope === "number";
+
+    const scopeId = isId
+      ? scope
+      : await scopesHandler.oneScopeSlug(scope).id;
+      
+    const articles: Article[] = await getPostsByScope(scopeId); 
 
     return articles as Article[];
   },
+  oneArticleBySlug: async (slug : string)=>{
+    const article = await getPostBySlug(slug);
+    return article as Article;
+  }
 };

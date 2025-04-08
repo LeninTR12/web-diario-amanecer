@@ -6,13 +6,13 @@ import type { ArticleMeta, Meta } from "@/lib/types";
 
 type Props = {
   header: string;
-  entry: CollectionEntry<"views">;
+  meta: Meta;
 };
 
-const { entry, header } = Astro.props;
+const { meta, header } = Astro.props;
 ---
 
-<BaseLayout entry={entry}>
+<BaseLayout meta={meta}>
   <div
     class="container flex flex-col h-full pb-8 pt-4"
     data-pagefind-ignore="all"

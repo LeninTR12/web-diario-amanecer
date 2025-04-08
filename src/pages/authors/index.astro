@@ -16,7 +16,7 @@ const authors = authorsHandler.allAuthors();
 const [HEADER, ATTENTION] = entry.data.blocks;
 ---
 
-<ListLayout header={HEADER.title} entry={entry}>
+<ListLayout header={HEADER.title} meta={entry}>
   <section role="alert" class="alert alert-info mb-4 bg-info/60">
     <Info size="16" />
     <span>{ATTENTION.description}</span>

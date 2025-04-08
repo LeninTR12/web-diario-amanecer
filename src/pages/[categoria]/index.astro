@@ -1,32 +1,62 @@
 ---
 import { articlesHandler } from "@/lib/handlers/articles";
 import { categoriesHandler } from "@/lib/handlers/categories";
-import { htmlToText } from "@/lib/utils/letter";
-import type { Article, ArticleMeta, Category } from "@/lib/types";
-import BaseLayout from "@/layouts/base.astro";
-import ContentLayout from "@/layouts/content.astro";
-import ArticleHeader from "../articles/_components/article-header.astro";
+import type { Article, Category, Meta } from "@/lib/types";
+import ListLayout from "@/layouts/list.astro";
+import { capitalizeFirstLetter } from "@/lib/utils/letter";
+import WideCard from "@/components/cards/wideCard.astro";
+import { scopesHandler } from "@/lib/handlers/scopes";
+
 
 const { categoria } = Astro.params;
 
-const category: Category = await categoriesHandler.oneCategoryBySlug(categoria as string);
-if (!category) return Astro.redirect("/404");
+const categoryXCat = await categoriesHandler.oneCategoryBySlug(categoria as string);
+const categoryXScope = await scopesHandler.oneScopeSlug(categoria as string);
+const category = categoryXCat || categoryXScope;
 
-const articles: Article[] = await articlesHandler.articlesByCategory(category.id);
+ if (!category) return Astro.redirect("/404");
+
+const articles: Article[] = categoryXCat
+  ?await articlesHandler.articlesByCategory(category.id) 
+  : await articlesHandler.articlesByScope(category.id); 
+
+ if(articles.length === 0) return Astro.redirect("/404");
+
+const meta: Meta = {
+  title: capitalizeFirstLetter(category.name),
+  metaTitle: capitalizeFirstLetter(category.name),
+  description: category.description,
+  type: "website",
+  ogImage: articles?.[0]._embedded["wp:featuredmedia"]?.[0]["source_url"],
+  ogImageAlt: articles?.[0].title.rendered,
+};
 
 ---
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {articles.map((article)=>(
-        <h1>{article.title.rendered}</h1>
-        
-        ))}
-</body>
-</html>
+<ListLayout header={meta.title} meta={meta}>
+    <ul class="flex flex-col gap-2 flex-1">
+      {
+        articles.map((article) => (
+          <WideCard
+            categorySlug={categoria}
+            article={article}
+            isLast={articles.lastIndexOf(article) === articles.length - 1}
+          />
+        ))
+      }
+    </ul>
+    <!-- {
+      articles.length > SITE.postsPerPage ? (
+        <Pagination
+          length={page.lastPage}
+          currentUrl={page.url.current}
+          currentPage={page.currentPage}
+          firstUrl={`/${firstPath}`}
+          prevUrl={page.url.prev}
+          nextUrl={page.url.next}
+          lastUrl={`/${firstPath}/${page.lastPage}`}
+        />
+      ) : null
+    } -->
+  </ListLayout>
+
 

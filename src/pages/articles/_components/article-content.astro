@@ -1,0 +1,10 @@
+---
+import type { Article } from '@/lib/types';
+ 
+interface Props{
+    article: Article,
+}
+const { article } = Astro.props;
+---
+
+<p set:html={article.content.rendered}></p>

@@ -1,22 +1,28 @@
 ---
-import { getEntry } from "astro:content";
+import type { Meta } from "@/lib/types";
 import BaseLayout from "../layouts/base.astro";
+import imageNotFound from "@/assets/images/404.webp";
 
-const entry = await getEntry("views", "error404");
+const meta : Meta = {
+  title: "404 - Página no encontrada",
+  metaTitle: "404 - Página no encontrada",
+  description: "La página que buscas no existe o fue movida ",
+  type: "website",
+  ogImage: imageNotFound.src,
+  ogImageAlt: "404 - Página no encontrada", 
+};
 
-if (!entry) {
-  throw new Error("404 page not found");
-}
-
-const [HERO] = entry.data.blocks;
 ---
 
-<BaseLayout entry={entry}>
+<BaseLayout meta={meta}>
   <div class="container flex flex-col items-center justify-center py-20">
-    <h1 class="text-4xl">{HERO.title}</h1>
-    <p class="mt-2">{HERO.description}</p>
-    <a href={HERO.link_url} class="btn mt-6" aria-label="Return to Homepage"
-      >{HERO.link_text}</a
-    >
+    <h1 class="text-4xl text-[#FBC208]">¡Oops!
+      <span class="text-[#081423]">No encontramos esta noticia</span>
+    </h1>
+    <p class="mt-2">Parece que te perdiste. La página que buscas no existe o fue movida. </p>
+    <span>
+      <a href="javascript:history.back()" class="btn mt-6" aria-label="Volver a la página anterior">Volver</a>
+      <a href="/" class="btn mt-6" aria-label="Ir al inicio">Últimas noticias</a>
+    </span>
   </div>
 </BaseLayout>

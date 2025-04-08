@@ -1,6 +1,5 @@
 ---
 import { Image, Picture } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
 import { formatDate } from "@/lib/utils/date";
 import ResourcesAdd from "@/assets/svgs/resources-add.astro";
 import Time04 from "@/assets/svgs/time-04.astro";
@@ -10,6 +9,7 @@ import { categoriesHandler } from "@/lib/handlers/categories";
 // import { authorsHandler } from "@/lib/handlers/authors";
 import Share from "@/components/elements/share.astro";
 import type { Article, Category } from "@/lib/types";
+import imageNotFound from "src/assets/images/404.webp";
 
 type Props = {
   article: Article;
@@ -28,12 +28,10 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
   <div
     class="container px-0 lg:px-4 max-w-5xl aspect-[20/9] lg:mt-4 overflow-hidden"
   >
-    <h1 class="text-3xl lg:text-4xl font-bold text-left text-pretty">
-      {article.title.rendered}
-    </h1>
+    <h1 class="text-3xl lg:text-4xl font-bold text-left text-pretty" set:html={article.title.rendered}></h1>
     <Picture
-      src={article._embedded["wp:featuredmedia"]?.[0]["source_url"]}
-      alt="article"
+      src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
+      alt={article.title.rendered}
       width={976}
       height={549}
       layout="full-width"
@@ -107,5 +105,4 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
       </div>
     </div>
   </div>
-  <div set:html={article.content.rendered} />
 </section>

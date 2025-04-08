@@ -57,8 +57,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={meta.metaTitle} />
   <meta property="og:description" content={meta.description} />
-  <!-- <meta property="og:image" content={meta.ogImage} /> -->
-  <!-- <meta property="og:image:alt" content={meta.ogImageAlt} /> -->
+  <meta property="og:image" content={meta.ogImage} /> 
+   <meta property="og:image:alt" content={meta.ogImageAlt} /> 
 
   <!-- Twitter -->
   <meta property="twitter:site" content={Astro.site} />
@@ -66,8 +66,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
   <meta property="twitter:url" content={canonicalURL} />
   <meta property="twitter:title" content={meta.metaTitle} />
   <meta property="twitter:description" content={meta.description} />
-  <!-- <meta property="twitter:image" content={meta.ogImage} />
-  <meta property="twitter:image:alt" content={meta.ogImageAlt} /> -->
+  <meta property="twitter:image" content={meta.ogImage} />
+  <meta property="twitter:image:alt" content={meta.ogImageAlt} />
 
   {
     isArticleMeta(meta) ? (
