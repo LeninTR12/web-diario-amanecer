@@ -5,6 +5,8 @@ import imageNotFound from "@/assets/images/404.webp";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import type { Article } from "@/lib/types";
 import { formatDateTime } from "@/lib/utils/date";
+import { decode } from "html-entities";
+import { SITE } from "@/lib/config";
 
 type Props = {
   article: Article;
@@ -22,7 +24,7 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
   <div class="aspect-video overflow-hidden rounded-md">
     <Image
     src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
-    alt={article.title.rendered}
+    alt={decode(String(article.title.rendered))}
     width={165}
       height={125}
       loading={index < 3 ? "eager" : "lazy"}
@@ -41,13 +43,10 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
     </h3>
     <p class="text-sm text-base-content/80 line-clamp-3 text-pretty lg:mb-auto" set:html={article.excerpt.rendered}></p>
     <div class="flex items-center text-xs text-base-content/80 mt-2">
-      <span class="text-xs text-primary dark:text-secondary"
-        >{category.name}</span
-      >
+      <span class="text-xs text-primary dark:text-secondary px-1 bg-amber-300 mx-1" >{category.name}</span>
+      <span class="text-xs text-base-content/80 "> {formatDateTime(article.date)}</span>
       <Divider />
-      <span class="text-xs text-base-content/80"
-        >{formatDateTime(article.date)}</span
-      >
+      <span class="text-primary dark:text-secondary">{SITE.author}</span>
     </div>
   </div>
 </article>

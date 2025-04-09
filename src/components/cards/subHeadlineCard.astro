@@ -5,6 +5,8 @@ import imageNotFound from "src/assets/images/404.webp";
 import { formatDateTime, getDateDistance } from "@/lib/utils/date";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import type { Category, Article } from "@/lib/types";
+import { decode } from "html-entities";
+import { SITE } from "@/lib/config";
 
 type Props = {
   article: Article;
@@ -40,14 +42,14 @@ const category : Category = categoriesHandler.oneCategory(article.categories[0])
       
       <span>{formatDateTime(article.date)}</span>
       <Divider />
-      <span class="text-primary dark:text-secondary">Diario Amanecer</span>
+      <span class="text-primary dark:text-secondary">{SITE.author}</span>
     </div>
   </div>
 
   <div class="overflow-hidden w-[165px] h-[125px] shrink-0">
     <Image
     src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
-    alt={article.title.rendered}
+    alt={decode(String(article.title.rendered))}
       loading="eager"
       class="object-cover rounded w-full h-full"
       width={165}
