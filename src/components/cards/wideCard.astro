@@ -5,6 +5,8 @@ import { formatDateTime, getDateDistance } from "@/lib/utils/date";
 import Divider from "../bases/divider.astro";
 import type { Article } from "@/lib/types";
 import { format } from "node:path";
+import { decode } from "html-entities";
+import imageNotFound from "../../assets/images/404.webp";
 
 type Props = {
   categorySlug?: string;
@@ -32,8 +34,8 @@ const { categorySlug, article, isLast } = Astro.props;
     <div class="w-full lg:w-60 aspect-video">
       <!-- /*TODO: cambiar width y height */ -->
       <Image
-        src={article._embedded["wp:featuredmedia"]?.[0]["source_url"]}
-        alt={article.title.rendered}
+        src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
+        alt={decode(String(article.title.rendered))}
         width={800}
         height={450} 
         layout="responsive"

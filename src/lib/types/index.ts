@@ -59,7 +59,7 @@ export type Article = {
   status:         string;
   type:           string;
   link:           string;
-  title:         {rendered: string };
+  title:         {rendered: HTMLString };
   content:        {rendered:HTMLString};
   excerpt:        {rendered:HTMLString};
   author:         string;

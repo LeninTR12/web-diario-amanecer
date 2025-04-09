@@ -47,7 +47,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Page Metadata -->
-  <title>{meta.title}</title>
+  <title>{ `${meta.title} - ${SITE.title}`}</title>
   {console.log(meta.title)}
   <meta name="title" content={meta.metaTitle} />
   <meta name="description" content={meta.description} />

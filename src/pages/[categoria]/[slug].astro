@@ -8,6 +8,7 @@ import ContentLayout from "@/layouts/content.astro";
 import ArticleHeader from "../articles/_components/article-header.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
 import Content from "../articles/_components/article-content.astro";
+import { decode } from "html-entities";
 
 const { categoria, slug } = Astro.params;
 
@@ -22,12 +23,12 @@ const article:Article = await articlesHandler.oneArticleBySlug(slug as string);
 if (!article) return Astro.redirect("/404");
 
 const meta: ArticleMeta = {
-  title: article.title.rendered,
-  metaTitle: article.title.rendered,
+  title: decode(String (article.title.rendered)),
+  metaTitle: decode(String (article.title.rendered)),
   description: htmlToText(article.excerpt.rendered),
   type: "article",
   ogImage: article._embedded["wp:featuredmedia"]?.[0]["source_url"],
-  ogImageAlt: article.title.rendered,
+  ogImageAlt:decode(String (article.title.rendered)),
   publishedTime: article.date,
   lastModified: article.modified,
 };
