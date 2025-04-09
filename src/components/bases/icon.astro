@@ -1,7 +1,9 @@
 ---
 
-import Telegram from "@/assets/svgs/telegram.astro";
 import Facebook from "@/assets/svgs/facebook.astro";
+import Instagram from "@/assets/svgs/instagram.astro";
+import Tiktok from "@/assets/svgs/tiktok.astro";
+import Youtube from "@/assets/svgs/youtube.astro";
 
 export interface Props {
   icon: string | undefined;
@@ -14,5 +16,7 @@ if (!icon) {
 }
 ---
 
-{icon === "telegram" && <Telegram />}
 {icon === "facebook" && <Facebook />}
+{icon === "instagram" && <Instagram />}
+{icon === "tiktok" && <Tiktok />}
+{icon === "youtube" && <Youtube />}

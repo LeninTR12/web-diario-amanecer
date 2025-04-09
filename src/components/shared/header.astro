@@ -1,11 +1,23 @@
 ---
 import TopHeader from "../elements/top-header.astro";
 import Navbar from "../elements/navbar.astro";
+import MenuDropdown from "../elements/menu-dropdown.astro";
 ---
 
 <header
-  class="border-b border-primary-content/80 dark:border-primary-content/20"
+  class="border-b border-primary-content/80 dark:border-primary-content/20 bg-[#E3E3E4]"
 >
   <TopHeader />
+
+  <div
+    class="flex justify-between items-center lg:justify-center px-4 py-3 bg-[#FBC208] text-[#1A346B] dark:bg-black"
+  >
+    <div class="text-[#1A346B] lg:hidden">
+      <MenuDropdown />
+    </div>
+    <strong class="text-3xl md:text-4xl font-serif">AMANECER</strong>
+    <div class="w-10 h-10"></div>
+  </div>
+
   <Navbar />
 </header>

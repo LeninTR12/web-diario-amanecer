@@ -1,33 +1,36 @@
 ---
-import Github from "@/assets/svgs/github.astro";
 import Search01 from "@/assets/svgs/search-01.astro";
-import MenuDropdown from "./menu-dropdown.astro";
-import { SITE } from "@/lib/config";
+import { SOCIAL_LINKS } from "@/lib/config";
 import ThemeController from "../bases/theme-controller.astro";
+import Icon from "../bases/icon.astro";
 ---
 
-<div
-  class="navbar border-b border-primary-content/80 dark:border-primary-content/20"
->
-  <div class="navbar-start lg:w-1/2">
-    <MenuDropdown />
-    <a class="text-xl px-2 text-nowrap lg:hidden" href="/">{SITE.title}</a>
-  </div>
-  <div class="navbar-center hidden lg:flex">
-    <a class="text-xl px-2" href="/">{SITE.title}</a>
-  </div>
-  <div class="navbar-end">
-    <ThemeController />
-    <a class="btn btn-ghost btn-circle" href="/search" aria-label="Search">
+<div class="flex px-4 h-8 bg-[#1A346B]">
+  <div class="navbar-start">
+    <a class="text-white" href="/search" aria-label="Search">
       <Search01 />
     </a>
-    <a
-      class="btn btn-ghost btn-circle"
-      href={SITE.github}
-      target="_blank"
-      aria-label="GitHub"
-    >
-      <Github />
-    </a>
+  </div>
+
+  <div class="navbar-end gap-1">
+    <div class="hidden">
+      <ThemeController/>
+    </div>
+
+    <div class="flex flex-row gap-3">
+      {
+        SOCIAL_LINKS.map(({ href, icon, text, target }) => (
+          <a
+            href={href}
+            class="text-white"
+            target={target ?? "_blank"}
+            title={text}
+            aria-label={text}
+          >
+            <Icon icon={icon} />
+          </a>
+        ))
+      }
+    </div>
   </div>
 </div>

@@ -1,73 +1,115 @@
 ---
-import { NAVIGATION_LINKS, SOCIAL_LINKS, OTHER_LINKS } from "@/lib/config";
+import {
+  NAVIGATION_LINKS,
+  SOCIAL_LINKS,
+  OTHER_LINKS,
+  SCOPE_LINKS,
+} from "@/lib/config";
 import Hashtag from "@/assets/svgs/hashtag.astro";
 import Icon from "../bases/icon.astro";
 ---
 
 <footer
-  class="footer border-t border-primary-content/80 dark:border-primary-content/20 py-6"
+  class="w-full bg-white dark:bg-black border-t border-primary-content/80 dark:border-primary-content/20"
 >
-  <div class="container">
-    <div class="flex flex-col gap-4">
-      <aside class="flex items-center gap-2">
-        <Hashtag />
+  <div
+    class="w-full max-w-5xl mx-auto px-4 py-10 flex flex-col gap-4 lg:py-8 lg:px-10"
+  >
+    <div
+      class="flex flex-col py-4 gap-4 lg:gap-8 md:items-center md:justify-center"
+    >
+      <aside class="flex items-center">
         <p>
-          <strong class="text-lg">Astro News</strong>
-          <br />
-          A news website built with <a
-            class="underline"
-            href="https://astro.build"
-            target="_blank">Astro</a
-          >.
+          <strong class="text-4xl text-[#FFCA00]">Amanecer</strong>
         </p>
       </aside>
-      <nav
-        class="flex flex-col gap-4 lg:flex-row lg:flex-wrap text-base lg:text-sm font-semibold"
+
+      <div
+        class="flex flex-col gap-4 md:flex-row lg:justify-between w-full"
       >
-        <a href="/" class="link link-hover">Home</a>
-        <a href="/articles" class="link link-hover">Articles</a>
-        {
-          NAVIGATION_LINKS.map(({ href, text, target }) => (
-            <a href={href} class="link link-hover" target={target ?? "_self"}>
-              {text}
-            </a>
-          ))
-        }
-      </nav>
-    </div>
-    <div class="divider w-full h-1"></div>
-    <div class="flex flex-col gap-4">
-      <nav>
-        <div class="flex gap-4">
-          <p class="font-bold">Social Media:</p>
-          <ul class="flex flex-wrap gap-4">
-            {
-              SOCIAL_LINKS.map(({ href, icon, text, target }) => (
-                <li>
-                  <a
-                    href={href}
-                    class="link link-hover"
-                    target={target ?? "_blank"}
-                    title={text}
-                    aria-label={text}
-                  >
-                    <Icon icon={icon} />
+        <div class="flex flex-col gap-4 w-full lg:w-1/2 lg:gap-8">
+          <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
+            <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
+              Nuestras categorías
+            </p>
+            <div class="flex flex-col gap-2 lg:flex-row lg:flex-wrap lg:gap-6">
+              {
+                NAVIGATION_LINKS.map(({ href, text, target }) => (
+                  <a href={href} class="font-light" target={target ?? "_self"}>
+                    {text}
                   </a>
-                </li>
-              ))
-            }
-          </ul>
+                ))
+              }
+            </div>
+          </nav>
+
+          <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
+            <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
+              Enlaces de interés
+            </p>
+            <div class="flex flex-col gap-2 lg:flex-row lg:gap-6">
+              {
+                SCOPE_LINKS.map(({ href, text, target }) => (
+                  <a href={href} class="font-light" target={target ?? "_self"}>
+                    {text}
+                  </a>
+                ))
+              }
+            </div>
+          </nav>
         </div>
-      </nav>
-      <nav class="flex flex-wrap gap-4 text-xs mt-2">
-        {
-          OTHER_LINKS.map(({ href, text, target }) => (
-            <a href={href} class="link link-hover" target={target ?? "_self"}>
-              {text}
-            </a>
-          ))
-        }
-      </nav>
+
+        <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
+          <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
+            Diario Amanecer
+          </p>
+          {
+            OTHER_LINKS.map(({ href, text, target }) => (
+              <a href={href} class="font-light" target={target ?? "_self"}>
+                {text}
+              </a>
+            ))
+          }
+        </nav>
+
+        <nav class="flex flex-col gap-2 text-base lg:text-sm font-light">
+          <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
+            Contacto
+          </p>
+          <div><span>+51 990 305 287</span></div>
+          <div><span>info@amanecer.pe</span></div>
+          <div><span>Jr. Andalucía Cdra 2</span></div>
+        </nav>
+      </div>
+
+      <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4">
+            <p class="font-bold text-lg lg:text-center">Visítanos en:</p>
+            <ul class="flex gap-4">
+              {
+                SOCIAL_LINKS.map(({ href, icon, text, target }) => (
+                  <li>
+                    <a
+                      href={href}
+                      class="link link-hover"
+                      target={target ?? "_blank"}
+                      title={text}
+                      aria-label={text}
+                    >
+                      <Icon icon={icon} />
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+      </div>
+    </div>
+
+    <div
+      class="flex flex-col border-t border-[#E3E3E4] py-3 items-center justify-center"
+    >
+      <p>© 2025 Diario Amanecer. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>

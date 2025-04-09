@@ -60,37 +60,21 @@ export const SCOPE_LINKS: Link[] = [
 
 export const OTHER_LINKS: Link[] = [
   {
-    href: "/about",
-    text: "About us",
+    href: "/nosotros",
+    text: "Nosotros",
   },
   {
-    href: "/authors",
-    text: "Authors",
+    href: "/termninos",
+    text: "Términos y condiciones",
   },
   {
-    href: "/contact",
-    text: "Contact",
+    href: "/politicas",
+    text: "Políticas de privacidad",
   },
   {
-    href: "/privacy",
-    text: "Privacy",
-  },
-  {
-    href: "/terms",
-    text: "Terms",
-  },
-  {
-    href: "/cookie-policy",
-    text: "Cookie Policy",
-  },
-  {
-    href: "https://astro-news-six.vercel.app/rss.xml",
-    text: "RSS",
-  },
-  {
-    href: "https://astro-news-six.vercel.app/sitemap-index.xml",
-    text: "Sitemap",
-  },
+    href: "/contacto",
+    text: "Contacto",
+  }
 ];
 
 export const SOCIAL_LINKS: Link[] = [
@@ -105,13 +89,13 @@ export const SOCIAL_LINKS: Link[] = [
     icon: "instagram",
   },
   {
-    href: "https://www.youtube.com/@diarioamanecer1732",
-    text: "Youtube",
-    icon: "youtube",
-  },
-  {
     href: "https://www.tiktok.com/@diarioamanecersm",
     text: "Tiktok",
     icon: "tiktok",
+  },
+  {
+    href: "https://www.youtube.com/@diarioamanecer1732",
+    text: "Youtube",
+    icon: "youtube",
   },
 ];
