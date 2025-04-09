@@ -3,9 +3,10 @@ import { articlesHandler } from "@/lib/handlers/articles";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import type { Article, Category, Meta } from "@/lib/types";
 import ListLayout from "@/layouts/list.astro";
-import { capitalizeFirstLetter } from "@/lib/utils/letter";
+import { capitalizeFirstLetter, htmlToText } from "@/lib/utils/letter";
 import WideCard from "@/components/cards/wideCard.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
+import { decode } from "html-entities";
 
 
 const { categoria } = Astro.params;
@@ -28,7 +29,7 @@ const meta: Meta = {
   description: category.description,
   type: "website",
   ogImage: articles?.[0]._embedded["wp:featuredmedia"]?.[0]["source_url"],
-  ogImageAlt: articles?.[0].title.rendered,
+  ogImageAlt: decode(String (articles?.[0].title.rendered)),
 };
 
 ---
