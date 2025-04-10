@@ -2,6 +2,7 @@
 import TopHeader from "../elements/top-header.astro";
 import Navbar from "../elements/navbar.astro";
 import MenuDropdown from "../elements/menu-dropdown.astro";
+import { SITE } from "@/lib/config";
 ---
 
 <header
@@ -15,7 +16,7 @@ import MenuDropdown from "../elements/menu-dropdown.astro";
     <div class="text-[#1A346B] lg:hidden">
       <MenuDropdown />
     </div>
-    <strong class="text-3xl md:text-4xl font-serif">AMANECER</strong>
+    <a href="/" class="text-3xl md:text-4xl font-serif">{SITE.author}</a>
     <div class="w-10 h-10"></div>
   </div>
 
