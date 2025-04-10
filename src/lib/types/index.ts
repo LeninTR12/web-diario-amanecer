@@ -78,3 +78,31 @@ export type Article = {
   _embedded:      any;
 }
 
+export type Page = {
+  id:             number;
+  date:           String;
+  date_gmt:       String;
+  guid:           any;
+  modified:       String;
+  modified_gmt:   String;
+  slug:           string;
+  status:         string;
+  type:           string;
+  link:           string;
+  title:          {rendered:HTMLString};
+  content:        {rendered:HTMLString};
+  excerpt:        {rendered:HTMLString};
+  author:         number;
+  featured_media: number;
+  parent:         number;
+  menu_order:     number;
+  comment_status: string;
+  ping_status:    string;
+  template:       string;
+  meta:           any;
+  class_list:     string[];
+  _links:         any;
+  _embedded:      {author: any[],
+                  "wp:featuredmedia": any[]
+                  };
+}

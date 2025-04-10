@@ -1,4 +1,4 @@
-const API_URL = "https://api.amanecer.pe/wp-json/wp/v2" 
+const API_URL = import.meta.env.API_URL
 
 export async function getPosts(){
     const res = await fetch(`${API_URL}/posts?_embed&_=${new Date().getTime()}`);
@@ -29,7 +29,7 @@ export async function getPostsByCategory(id:number){
 }
 export async function getPostsByScope(id:number){
     const res = await fetch(`${API_URL}/posts?ambito=${id}&_embed`);
-    if (!res.ok) throw new Error("Error retrieving posts by category");
+    if (!res.ok) throw new Error("Error retrieving posts by scopes");
     
     const jsonResult = await res.json();  
     return jsonResult;
@@ -43,8 +43,23 @@ export async function getCategories(){
 }
 export async function getScopes(){
     const res = await fetch(`${API_URL}/ambito`);
-    if (!res.ok) throw new Error("Error retrieving categories");
+    if (!res.ok) throw new Error("Error retrieving scopes");
 
     const jsonResult = await res.json();
     return jsonResult;
 }
+
+export async function getPageBySlug(slug:string){
+    const res = await fetch(`${API_URL}/pages?slug=${slug}&_embed`);
+    if (!res.ok) throw new Error("Error retrieving page");
+
+    const jsonResult = await res.json();
+    return jsonResult;
+}
+// export async function getPages(){
+//     const res = await fetch(`${API_URL}/ambito`);
+//     if (!res.ok) throw new Error("Error retrieving categories");
+
+//     const jsonResult = await res.json();
+//     return jsonResult;
+// }
