@@ -60,18 +60,6 @@ export const SCOPE_LINKS: Link[] = [
 
 export const OTHER_LINKS: Link[] = [
   {
-    href: "/nosotros",
-    text: "Nosotros",
-  },
-  {
-    href: "/termninos",
-    text: "Términos y condiciones",
-  },
-  {
-    href: "/politicas",
-    text: "Políticas de privacidad",
-  },
-  {
     href: "/contacto",
     text: "Contacto",
   }
@@ -99,8 +87,8 @@ export const SOCIAL_LINKS: Link[] = [
     icon: "youtube",
   },
   {
-    href: "https://www.tiktok.com/@diarioamanecersm",
-    text: "Tiktok",
-    icon: "tiktok",
+    href: "https://wa.me/51921402321",
+    text: "Whatsapp",
+    icon: "whatsapp",
   },
 ];

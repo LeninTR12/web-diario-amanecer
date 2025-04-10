@@ -7,24 +7,26 @@ export const articlesHandler = {
   allArticles: getPosts,
 
   mainHeadline: async () => {
-    const articles = await getPosts();
-    if (!articles)
+    const allArticles = await getPosts();
+    const articles = allArticles.slice(0, 3);
+    if (articles.length === 0)
       throw new Error(
         /*TODO: leer sobre los throw */ "No se han encontrado artículos"
       );
-    const article = articles[0];
-    return article as Article;
+      
+    return articles as Article[];
   },
 
   subHeadlines: async () => {
     const articlesAll = await getPosts();
-    const subHeadlines = articlesAll.slice(1, 6);
+    const subHeadlines = articlesAll.slice(3, 6);
 
     if (subHeadlines.length === 0)
       throw new Error("No se han encontrado artículos");
 
     return subHeadlines as Article[];
   },
+
   articlesByCategory: async (category: string | number) => {
     const isId = typeof category === "number";
 
@@ -35,6 +37,7 @@ export const articlesHandler = {
     const articles: Article[] = await getPostsByCategory(categoryId);
     return articles as Article[];
   },
+
   articlesByScope: async (scope : string | number) => {
     const isId = typeof scope === "number";
 
@@ -46,6 +49,7 @@ export const articlesHandler = {
 
     return articles as Article[];
   },
+
   oneArticleBySlug: async (slug : string)=>{
     const article = await getPostBySlug(slug);
     return article as Article;

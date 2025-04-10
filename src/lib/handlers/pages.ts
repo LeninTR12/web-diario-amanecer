@@ -6,6 +6,6 @@ export const pagesHandler ={
     onePageBySlug: async (slug : string)=>{
         const page = await getPageBySlug(slug);
 
-        return page as Page;
+        return page[0] as Page;
     }
 }

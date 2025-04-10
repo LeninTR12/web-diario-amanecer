@@ -2,28 +2,42 @@
 import MainHeadline from "@/components/cards/mainHeadline.astro";
 import SubHeadlineCard from "@/components/cards/subHeadlineCard.astro";
 import { articlesHandler } from "@/lib/handlers/articles";
+import { pagesHandler } from "@/lib/handlers/pages";
 import type { Article } from "@/lib/types";
+import Image from "astro/components/Image.astro";
+import imageNotFound  from "../../assets/images/404.webp";
 
-const bigHeadline : Article = await articlesHandler.mainHeadline();
-const smallHeadlines : Article[] = await articlesHandler.subHeadlines();
+const mainArticles : Article[] = await articlesHandler.mainHeadline();
+const subArtcles : Article[] = await articlesHandler.subHeadlines();
+const printEditionPage = await pagesHandler.onePageBySlug("edicion-impresa");
+
 ---
 <section
   class="grid grid-cols-1 gap-6 md:grid-cols-10 container pt-4 md:pt-8"
   data-pagefind-ignore="all"
 >
   <div class="col-span-1 md:col-span-6">
-    <MainHeadline article={bigHeadline} />
+    <MainHeadline articles={mainArticles} />
   </div>
   <div class="col-span-1 md:col-span-4">
      {
-      smallHeadlines.map((article:Article, index:number) => (
+      subArtcles.map((article:Article, index:number) => (
         <SubHeadlineCard
           article={article}
           isFirst={index === 0}
-          isLast={index === smallHeadlines.length - 1}
+          isLast={index === subArtcles.length - 1}
         />
       ))
     }  
+    <div>
+      <h2 class="font-sans " >Edición Impresa</h2>
+      <Image
+        src={printEditionPage?._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
+        alt="Edición impresa"
+        width={380}
+        height={538}
+      />
+
+    </div>
   </div>
-  <!-- Edicion imopresa va por aquí -->
 </section>
