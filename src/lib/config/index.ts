@@ -3,7 +3,7 @@ import type { Link } from "../types";
 export const SITE = {
   title: "Amanecer",
   description: " Una propuesta de prensa escrita desde el Alto Mayo para toda la región San Martín",
-  author: "",
+  author: "Diario Amanecer",
   url: "https://amanecer.pe",
   locale: "es-Es",
   dir: "ltr",
@@ -97,5 +97,10 @@ export const SOCIAL_LINKS: Link[] = [
     href: "https://www.youtube.com/@diarioamanecer1732",
     text: "Youtube",
     icon: "youtube",
+  },
+  {
+    href: "https://www.tiktok.com/@diarioamanecersm",
+    text: "Tiktok",
+    icon: "tiktok",
   },
 ];

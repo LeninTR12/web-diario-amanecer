@@ -10,16 +10,16 @@ import { categoriesHandler } from "@/lib/handlers/categories";
 import Share from "@/components/elements/share.astro";
 import type { Article, Category } from "@/lib/types";
 import imageNotFound from "src/assets/images/404.webp";
+import { decode } from "html-entities";
+import { SITE } from "@/lib/config";
 
 type Props = {
   article: Article;
-  // readingTime?: string;
 };
 
-const { article /*, readingTime*/ } = Astro.props;
-
+const { article } = Astro.props;
 const category: Category = categoriesHandler.oneCategory(article.categories[0]);
-// const authors = authorsHandler.getAuthors(article.data.authors);
+
 ---
 
 <section
@@ -31,7 +31,7 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
     <h1 class="text-3xl lg:text-4xl font-bold text-left text-pretty" set:html={article.title.rendered}></h1>
     <Picture
       src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
-      alt={article.title.rendered}
+      alt={decode(String(article.title.rendered))}
       width={976}
       height={549}
       layout="full-width"
@@ -49,58 +49,22 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
   <div class="container max-w-5xl">
     <div class="flex flex-col gap-4 items-start mt-2 lg:mt-6 text-sm">
       <div class="text-base-content/70 flex items-center gap-2">
-        <span class="hidden lg:flex items-center gap-1">
-          <ResourcesAdd size="15" />
-          <a href={`/categories/${category.slug}`} class="a-01 font-semibold"
-            >{category.name}</a
-          >
-        </span>
-
-        <Divider responsive />
         <span class="flex items-center gap-1">
           <Calendar04 size="15" />
           <time class="hidden lg:block" datetime={article.date}
-            >{formatDate(article.date, "long")}
+            >{formatDate(article.date, "short")}
           </time>
           <time class="block lg:hidden" datetime={article.date}
             >{formatDate(article.date, "short")}</time
           >
         </span>
         <Divider />
-        <span class="flex items-center gap-1">
-          <Time04 size="15" />
-          <!-- <span>{readingTime}</span> -->
-        </span>
+        <span class="text-primary dark:text-secondary">{SITE.author}</span>
+        
       </div>
-      <Share text={article.title.rendered} />
-      <!-- TODO: fix name, href, avatar of author -->
+      <Share text={decode(String(article.title.rendered))} />
       <div class="w-full flex flex-wrap gap-2 items-center justify-between">
         <div class="flex flex-wrap gap-4">
-          <!-- {
-            authors.map((author) => (
-              <div class="flex items-center gap-2">
-                <a
-                  href={`/authors/${author.id}`}
-                  class="flex items-center gap-2"
-                >
-                  <div class="avatar">
-                    <div class="w-8 rounded-full">
-                      <Image
-                        src={author.data.avatar}
-                        alt="author"
-                        width={48}
-                        height={48}
-                        loading={"eager"}
-                        format="webp"
-                        quality={80}
-                      />
-                    </div>
-                  </div>
-                  <span class="font-bold capitalize">{author.data.name}</span>
-                </a>
-              </div>
-            ))
-          } -->
         </div>
       </div>
     </div>
