@@ -1,9 +1,6 @@
 ---
+import Roboto from "@/assets/fonts/roboto.css";
 import { ClientRouter } from "astro:transitions";
-import "@fontsource/source-sans-pro/400.css";
-import "@fontsource/source-sans-pro/600.css";
-import "@fontsource/source-sans-pro/700.css";
-import "@fontsource-variable/source-serif-4";
 import "@/assets/styles/globals.css";
 import { SITE } from "@/lib/config";
 import type { ArticleMeta, Meta } from "@/lib/types";
@@ -47,8 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Page Metadata -->
-  <title>{ `${meta.title} - ${SITE.title}`}</title>
-  {console.log(meta.title)}
+  <title>{meta.title}</title>
   <meta name="title" content={meta.metaTitle} />
   <meta name="description" content={meta.description} />
 

@@ -7,7 +7,7 @@ interface Props{
 const { article } = Astro.props;
 ---
 
-<p set:html={article.content.rendered}></p>
+<div set:html={article.content.rendered}></div>
 
 <style>
     /* Estilos aquí */

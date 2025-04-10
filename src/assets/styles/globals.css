@@ -1,3 +1,5 @@
+@import "@fontsource/roboto";
+@import "@fontsource/roboto-serif";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -12,13 +14,8 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @theme {
   /* Font Family */
-  --font-sans:
-    "Roboto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-
-  --font-serif:
-    "Source Serif 4 Variable", ui-serif, Georgia, Cambria, "Times New Roman",
-    Times, serif;
+  --font-sans: "Roboto", sans-serif;
+  --font-serif: "Roboto Serif", "Times New Roman", Times, serif;
 }
 
 @layer base {
@@ -31,7 +28,7 @@
 
   @media (min-width: 1024px) {
     html {
-      @apply text-[17px];
+      @apply text-[16px];
     }
   }
 
@@ -40,7 +37,11 @@
   }
 
   h1,
-  h2 {
+  h2,
+  h3 {
+    @apply font-serif;
+  }
+  p{
     @apply font-sans;
   }
 

@@ -7,6 +7,7 @@ import ContentLayout from "@/layouts/content.astro";
 import ArticleHeader from "../articles/_components/article-header.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
 import Content from "../articles/_components/article-content.astro";
+import { SITE } from "@/lib/config";
 import { decode } from "html-entities";
 
 const { categoria, slug } = Astro.params;
@@ -22,7 +23,7 @@ const article:Article = await articlesHandler.oneArticleBySlug(slug as string);
 if (!article) return Astro.redirect("/404");
 
 const meta: ArticleMeta = {
-  title: decode(String (article.title.rendered)),
+  title: `${decode(String (article.title.rendered))} - ${SITE.title}`,
   metaTitle: decode(String (article.title.rendered)),
   description: decode(String(article.excerpt.rendered)),
   type: "article",

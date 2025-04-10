@@ -7,6 +7,7 @@ import { capitalizeFirstLetter } from "@/lib/utils/letter";
 import WideCard from "@/components/cards/wideCard.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
 import { decode } from "html-entities";
+import { SITE } from "@/lib/config";
 
 
 const { categoria } = Astro.params;
@@ -23,8 +24,9 @@ const articles: Article[] = categoryXCat
 
  if(articles.length === 0) return Astro.redirect("/404");
 
+
 const meta: Meta = {
-  title: capitalizeFirstLetter(category.name),
+  title:`Noticias en ${capitalizeFirstLetter(category.name)} - ${SITE.title}`,
   metaTitle: capitalizeFirstLetter(category.name),
   description: category.description,
   type: "website",
