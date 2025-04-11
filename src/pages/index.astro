@@ -4,7 +4,7 @@ import Headlines from "./_home/headlines.astro";
 import LatestNews from "./_home/latestNews.astro";
 import type { Meta } from "@/lib/types";
 import { SCOPE_LINKS, SITE } from "@/lib/config";
-
+import CustomAds from "src/components/widgets/CustomAds.astro";
 const countByScopes = [6,3,3];
 
 const meta:Meta ={
@@ -18,10 +18,11 @@ const meta:Meta ={
 ---
 
 <BaseLayout meta={meta}>
-  <Headlines />
+  <CustomAds/>
+  <Headlines />  
   {
     SCOPE_LINKS.map((item, index)=>(
     <LatestNews title={item.text} link_title="Ver más" link_url={item.href} count={countByScopes[index]} /> 
     ))
   }
-</BaseLayout>
+</BaseLayout> 

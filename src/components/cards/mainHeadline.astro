@@ -6,48 +6,107 @@ import { formatDateTime } from "@/lib/utils/date";
 import imageNotFound from "src/assets/images/404.webp";
 import type { Article } from "@/lib/types";
 import { decode } from "html-entities";
-
+import { SITE } from "@/lib/config";
 
 type Props = {
-  article: Article;
+  articles: Article[];
 };
 
-const { article } = Astro.props;
-const category = categoriesHandler.oneCategory(article.categories[0]);
+const { articles } = Astro.props;
+
+const bigArticle = articles[0];
+const smallArticles = articles.slice(1, 3);
+
+const bigArticleCategory = categoriesHandler.oneCategory(
+  bigArticle.categories[0]
+);
+const smallArticlesCategories = smallArticles.map((article) =>
+  categoriesHandler.oneCategory(article.categories[0])
+);
 ---
 
 <article class="group relative isolate flex flex-col md:flex-col gap-5 py-6">
   <div class="flex bg-cover rounded-md">
     <Image
-    src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
-    alt={decode(String(article.title.rendered))}
-    width={630}
-    height={620}
-    layout="responsive"
-    loading={"eager"}
+      src={bigArticle._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
+        imageNotFound}
+      alt={decode(String(bigArticle.title.rendered))}
+      width={630}
+      height={620}
+      layout="responsive"
+      loading={"eager"}
     />
   </div>
   <div class="flex flex-col gap-3">
     <div>
       <h2
-        class="text-xl font-semibold lg:group-hover:underline underline-offset-2 "
+        class="text-xl font-semibold lg:group-hover:underline underline-offset-2"
       >
-        <a href={`/${category.slug}/${article.slug}`} title={decode(String(article.title.rendered))}>
-          {decode(String(article.title.rendered))}
+        <a
+          href={`/${bigArticleCategory.slug}/${bigArticle.slug}`}
+          title={decode(String(bigArticle.title.rendered))}
+        >
+          {decode(String(bigArticle.title.rendered))}
         </a>
       </h2>
-      <span class=" text-base max-w-lg text-[#FBC208] "
-        set:html={article.excerpt.rendered}
-        >        
-      </span>
+      <span
+        class="text-base max-w-lg text-[#FBC208]"
+        set:html={bigArticle.excerpt.rendered}
+      />
     </div>
-    <div class="flex items-center text-xs text-base-content/80">
-      <span class="px-1.5 mx-2 text-[#10477C] bg-[#FBC208] rounded-md dark:text-secondary">{category.name}</span
+    <div class="flex items-center text-xs text-base-content/80 mt-2">
+      <span class="text-primary dark:text-secondary"
+        >{bigArticleCategory.name}</span
       >
       <Divider />
-      <span>{formatDateTime(article.date)}</span> 
-      <Divider />
-      <span class="text-[#10477C]">Diario Amanecer</span> 
+      <span>{formatDateTime(bigArticle.date)}</span>
     </div>
   </div>
-</article> 
+</article>
+<div>
+  {
+    smallArticles.map((article, index) => (
+      <article
+        class="group py-2 flex items-stretch gap-2 group relative isolate"        
+      >
+        <div class="flex flex-col flex-1">
+          <div class="flex items-center gap-2 mb-1">
+            <div class="flex-1">
+              <h3 class="text-base lg:group-hover:underline mb-1">
+                <a
+                  href={`/${smallArticlesCategories[index].slug}/${article.slug}`}
+                  title={decode(String(article.title.rendered))}
+                >
+                  {article.title.rendered}
+                </a>
+              </h3>
+            </div>
+          </div>
+          <div class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto">
+            <span class="text-[#10477C] dark:text-secondary px-1 mx-2 bg-[#FBC208]">
+              {smallArticlesCategories[index].name}
+            </span>
+
+            <span>{formatDateTime(article.date)}</span>
+            <Divider />
+            <span class="text-primary dark:text-secondary">{SITE.author}</span>
+          </div>
+        </div>
+
+        <div class="overflow-hidden w-[165px] h-[125px] shrink-0">
+          <Image
+            src={
+              article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
+              imageNotFound
+            }
+            alt={decode(String(article.title.rendered))}
+            loading="eager"
+            class="object-cover rounded w-full h-full"
+            width={165}
+            height={125}
+          />
+        </div>
+      </article>
+    ))
+  }
+</div>

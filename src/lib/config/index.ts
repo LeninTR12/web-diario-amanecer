@@ -12,6 +12,19 @@ export const SITE = {
   postsPerPage: 4,
 };
 
+export const API_PAGES = {
+  printEdition: {
+    title: "Edición Impresa",
+    description: "Edición Impresa del Diario Amanecer",
+    slug: "edicion-impresa",
+  },
+  customAds: {
+    title: "Publicidad Personalizada",
+    description: "Publicidad Personalizada del Diario Amanecer",
+    slug: "pulicidad-pesonalizada",
+  },
+};
+
 export const NAVIGATION_LINKS: Link[] = [
   {
     href: "/politica",
@@ -60,18 +73,6 @@ export const SCOPE_LINKS: Link[] = [
 
 export const OTHER_LINKS: Link[] = [
   {
-    href: "/nosotros",
-    text: "Nosotros",
-  },
-  {
-    href: "/termninos",
-    text: "Términos y condiciones",
-  },
-  {
-    href: "/politicas",
-    text: "Políticas de privacidad",
-  },
-  {
     href: "/contacto",
     text: "Contacto",
   }
@@ -99,8 +100,8 @@ export const SOCIAL_LINKS: Link[] = [
     icon: "youtube",
   },
   {
-    href: "https://www.tiktok.com/@diarioamanecersm",
-    text: "Tiktok",
-    icon: "tiktok",
+    href: "https://wa.me/51921402321",
+    text: "Whatsapp",
+    icon: "whatsapp",
   },
 ];
