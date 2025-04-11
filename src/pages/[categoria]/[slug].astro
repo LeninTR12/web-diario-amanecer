@@ -5,10 +5,12 @@ import type { Article, ArticleMeta, Category } from "@/lib/types";
 import BaseLayout from "@/layouts/base.astro";
 import ContentLayout from "@/layouts/content.astro";
 import ArticleHeader from "../articles/_components/article-header.astro";
+import CustomAds from "src/components/widgets/CustomAds.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
 import Content from "../articles/_components/article-content.astro";
 import { SITE } from "@/lib/config";
 import { decode } from "html-entities";
+import PrintEdition from "@/components/widgets/printEdition.astro";
 
 const { categoria, slug } = Astro.params;
 
@@ -36,8 +38,11 @@ const meta: ArticleMeta = {
 ---
 
 <BaseLayout meta={meta}>
+  <CustomAds/>
   <ArticleHeader article={article} />
   <ContentLayout>
       <Content article = {article} />
     </ContentLayout>
+    
+    <PrintEdition/>
 </BaseLayout>
