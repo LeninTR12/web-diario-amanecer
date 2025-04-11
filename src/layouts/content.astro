@@ -1,6 +1,48 @@
-<article
-  class="prose md:prose-lg py-8 container prose-img:border prose-img:mx-auto prose-img:border-base-200 prose-img:rounded-lg prose-p:break-words prose-a:break-all prose-pre:break-words prose-pre:cursor-text prose-code:break-words prose-code:whitespace-pre-wrap"
-  data-pagefind-body
->
-  <slot />
-</article>
+---
+import PrintEdition from "@/components/widgets/printEdition.astro";
+import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
+import ArrowLeft from "@/assets/svgs/arrow-left.astro";
+---
+
+<div>
+  <div class="flex flex-col items-center justify-center gap-8">
+    <section
+      class="prose w-full max-w-5xl md:prose-lg py-8 container prose-img:border prose-img:mx-auto prose-img:border-base-200 prose-img:rounded-lg prose-p:break-words prose-a:break-all prose-pre:break-words prose-pre:cursor-text prose-code:break-words prose-code:whitespace-pre-wrap items-center lg:items-start flex flex-col lg:flex-row lg:gap-8 lg:px-0"
+      data-pagefind-body
+    >
+      <slot />
+      <div
+        class="flex flex-col w-full lg:w-[358px] justify-center items-center"
+      >
+        <PrintEdition />
+        <div
+          class="flex bg-blue-200 w-full h-[322px] justify-center items-center"
+        >
+          <span class="flex gap-2.5"> NOTICIAS RECIENTES </span>
+        </div>
+      </div>
+    </section>
+    <div
+      class="flex justify-center items-center gap-2.5 bg-[#0E4F8F] text-white w-[234px] h-11 rounded-full"
+    >
+      <ArrowLeft size="20" />
+      <button
+        onclick="if (document.referrer) { history.back(); } else { window.location.href = '/' }"
+        class="font-semibold hover:underline cursor-pointer"
+      >
+        Ir a la página anterior
+      </button>
+    </div>
+    <button
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+      class="w-full h-12 flex justify-center items-center bg-[#F5F5F5] text-[#A9A9A9] cursor-pointer"
+    >
+      <div
+        class="flex w-full max-w-full lg:max-w-5xl items-center gap-2.5 pointer-events-none"
+      >
+        <CircleArrowUp />
+        <h6 class="font-semibold font-serif">Regresar al inicio</h6>
+      </div>
+    </button>
+  </div>
+</div>

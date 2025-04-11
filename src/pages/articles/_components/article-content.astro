@@ -1,14 +1,40 @@
 ---
-import type { Article } from '@/lib/types';
- 
-interface Props{
-    article: Article,
-}
+import type { Article, Category } from "@/lib/types";
+
+import { formatDate } from "@/lib/utils/date";
+import Divider from "@/components/bases/divider.astro";
+import { categoriesHandler } from "@/lib/handlers/categories";
+// import { authorsHandler } from "@/lib/handlers/authors";
+import Share from "@/components/elements/share.astro";
+import { decode } from "html-entities";
+import { SITE } from "@/lib/config";
+
+type Props = {
+  article: Article;
+};
+
 const { article } = Astro.props;
 ---
 
-<div set:html={article.content.rendered}></div>
+<div class="max-w-[634px] w-full">
+  <div
+    class="flex w-full border-y h-9 border-[#E3E3E4] text-[#1A346B] justify-between items-center px-2"
+  >
+    <div class="flex items-center gap-2 text-sm">
+      <time class="hidden lg:block" datetime={article.date}>
+        {formatDate(article.date, "short")}
+      </time>
+      <time class="block lg:hidden" datetime={article.date}>
+        {formatDate(article.date, "short")}
+      </time>
+      <Divider />
+      <h6 class="text-[#1A346B]">{SITE.author}</h6>
+    </div>
 
-<style>
-    /* Estilos aquí */
-</style>
+    <div class="flex items-center">
+      <Share text={decode(String(article.title.rendered))} />
+    </div>
+  </div>
+
+  <article set:html={article.content.rendered} />
+</div>
