@@ -15,44 +15,46 @@ type Props = {
 };
 
 const { article, isLast, isFirst } = Astro.props;
-const category : Category = categoriesHandler.oneCategory(article.categories[0]);
-
+const category: Category = categoriesHandler.oneCategory(article.categories[0]);
 ---
 
 <article
   class:list={[
-    "group py-2 flex items-stretch gap-2 group relative isolate",
+    "group flex items-stretch gap-4 group relative isolate",
     isFirst ? "pt-0" : "pt-2",
-    isLast ? "border-b-0 pb-0" : "border-b border-base-300",
   ]}
 >
+  <div class="overflow-hidden w-[149px] h-[84px] shrink-0">
+    <Image
+      src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
+        imageNotFound}
+      alt={decode(String(article.title.rendered))}
+      loading="eager"
+      class="object-cover rounded w-full h-full"
+      width={149}
+      height={84}
+    />
+  </div>
+
   <div class="flex flex-col flex-1">
     <div class="flex items-center gap-2 mb-1">
       <div class="flex-1">
         <h3 class="text-base lg:group-hover:underline mb-1">
           <a href={`/${category.slug}/${article.slug}`} title={decode(String(article.title.rendered))}>
-            {article.title.rendered}
+            {decode(String(article.title.rendered))}
           </a>
         </h3>
       </div>
     </div>
     <div class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto">
-      <span class="text-[#10477C] dark:text-secondary px-1 mx-2 bg-[#FBC208]">{category.name}</span>
-      
+      <span
+        class="text-[#10477C] dark:text-secondary px-1.5 mx-2 bg-[#FBC208] rounded-md"
+        >{category.name}</span
+      >
+      <Divider />
       <span>{formatDateTime(article.date)}</span>
       <Divider />
-      <span class="text-primary dark:text-secondary">{SITE.author}</span>
+      <span class="text-[#10477C] dark:text-secondary">Diario Amanecer</span>
     </div>
-  </div>
-
-  <div class="overflow-hidden w-[165px] h-[125px] shrink-0">
-    <Image
-    src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
-    alt={decode(String(article.title.rendered))}
-      loading="eager"
-      class="object-cover rounded w-full h-full"
-      width={165}
-      height={125}
-    />
   </div>
 </article>

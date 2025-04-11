@@ -16,8 +16,8 @@ const { article } = Astro.props;
 const category = categoriesHandler.oneCategory(article.categories[0]);
 ---
 
-<article class="group relative isolate flex flex-col-reverse md:flex-col gap-4">
-  <div class="aspect-video overflow-hidden rounded-md">
+<article class="group relative isolate flex flex-col md:flex-col gap-5 py-6">
+  <div class="flex bg-cover rounded-md">
     <Image
     src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
     alt={decode(String(article.title.rendered))}
@@ -27,7 +27,7 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
     loading={"eager"}
     />
   </div>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-3">
     <div>
       <h2
         class="text-xl font-semibold lg:group-hover:underline underline-offset-2 "
@@ -41,11 +41,13 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
         >        
       </span>
     </div>
-    <div class="flex items-center text-xs text-base-content/80 mt-2">
-      <span class="text-primary dark:text-secondary">{category.name}</span
+    <div class="flex items-center text-xs text-base-content/80">
+      <span class="px-1.5 mx-2 text-[#10477C] bg-[#FBC208] rounded-md dark:text-secondary">{category.name}</span
       >
       <Divider />
       <span>{formatDateTime(article.date)}</span> 
+      <Divider />
+      <span class="text-[#10477C]">Diario Amanecer</span> 
     </div>
   </div>
 </article> 
