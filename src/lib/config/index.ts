@@ -12,6 +12,19 @@ export const SITE = {
   postsPerPage: 4,
 };
 
+export const API_PAGES = {
+  printEdition: {
+    title: "Edición Impresa",
+    description: "Edición Impresa del Diario Amanecer",
+    slug: "edicion-impresa",
+  },
+  customAds: {
+    title: "Publicidad Personalizada",
+    description: "Publicidad Personalizada del Diario Amanecer",
+    slug: "pulicidad-pesonalizada",
+  },
+};
+
 export const NAVIGATION_LINKS: Link[] = [
   {
     href: "/politica",

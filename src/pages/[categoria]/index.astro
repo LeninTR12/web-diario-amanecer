@@ -35,7 +35,7 @@ const meta: Meta = {
 };
 
 ---
-<ListLayout header={meta.title} meta={meta}>
+<ListLayout header={`Noticias en ${category.name}`} meta={meta}>
     <ul class="flex flex-col gap-2 flex-1">
       {
         articles.map((article) => (

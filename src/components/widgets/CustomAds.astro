@@ -1,0 +1,40 @@
+---
+import { API_PAGES } from "@/lib/config";
+import { pagesHandler } from "@/lib/handlers/pages";
+import Image from "astro/components/Image.astro";
+
+const customAds = await pagesHandler.onePageBySlug(API_PAGES.customAds.slug);
+---
+
+<div class="w-full flex justify-center">
+  {
+    customAds ? (
+      <div
+        class="slider-custom-ads aspect-[512/175] max-w-[1024px] bg-[#e2ca7b] flex justify-center items-center overflow-hidden mt-2"
+        set:html={customAds.content.rendered}
+      ></div>
+    ) : (
+      <Image
+        src="/custom-ads.webp"
+        alt={API_PAGES.customAds.title}
+        width={1024}
+        height={350}
+        class="object-cover"
+      />
+    )
+  }
+</div>
+<style is:global>
+    .slider-custom-ads{
+        flex-direction: row;
+        justify-content: start;
+                
+
+    }
+  .slider-custom-ads>figure.size-large,
+  .slider-custom-ads>figure.size-large>img {
+    max-width: 1024px !important;
+    aspect-ratio: 512 / 175 ;
+    
+  }
+</style>
