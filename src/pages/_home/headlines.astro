@@ -7,7 +7,7 @@ import PrintEdition from "@/components/widgets/printEdition.astro";
 
 
 const mainArticles : Article[] = await articlesHandler.mainHeadline();
-const subArtcles : Article[] = await articlesHandler.subHeadlines();
+const subArticles : Article[] = await articlesHandler.subHeadlines();
 ---
 <section
   class="grid grid-cols-1 md:grid-cols-10 container gap-2.5 pt-4 md:pt-8"
@@ -18,11 +18,11 @@ const subArtcles : Article[] = await articlesHandler.subHeadlines();
   </div>
   <div class="flex flex-col gap-4 col-span-1 md:col-span-4 py-6">
      {
-      subArtcles.map((article:Article, index:number) => (
+      subArticles.map((article:Article, index:number) => (
         <SubHeadlineCard
           article={article}
           isFirst={index === 0}
-          isLast={index === subArtcles.length - 1}
+          isLast={index === subArticles.length - 1}
         />
       ))
     }  

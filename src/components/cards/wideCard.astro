@@ -32,7 +32,6 @@ const { categorySlug, article, isLast } = Astro.props;
     ]}
   >
     <div class="w-full lg:w-60 aspect-video">
-      <!-- /*TODO: cambiar width y height */ -->
       <Image
         src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
         alt={decode(String(article.title.rendered))}
@@ -46,7 +45,7 @@ const { categorySlug, article, isLast } = Astro.props;
     <div class="flex-1 space-y-2">
       <h3 class="text-xl font-semibold lg:group-hover:underline">
         <a href={`/${categorySlug}/${article.slug}`} title={decode(String(article.title.rendered))}>
-          {article.title.rendered}
+          {decode(String(article.title.rendered))}
         </a>
       </h3>
       <p class="text-base-content/80 max-w-xl text-pretty" set:html={article.excerpt.rendered} >   </p>

@@ -7,14 +7,16 @@ import { categoriesHandler } from "@/lib/handlers/categories";
 import type { Category, Article } from "@/lib/types";
 import { decode } from "html-entities";
 import { SITE } from "@/lib/config";
+import { undefined } from "astro:schema";
 
 type Props = {
   article: Article;
   isFirst?: boolean;
   isLast?: boolean;
+  type?: "singlePost" | "category";
 };
 
-const { article, isLast, isFirst } = Astro.props;
+const { article, isLast, isFirst, type} = Astro.props;
 const category: Category = categoriesHandler.oneCategory(article.categories[0]);
 ---
 
@@ -46,15 +48,28 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
         </h3>
       </div>
     </div>
-    <div class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto">
-      <span
-        class="text-[#10477C] dark:text-secondary px-1.5 mx-2 bg-[#FBC208] rounded-md"
-        >{category.name}</span
-      >
-      <Divider />
-      <span>{formatDateTime(article.date)}</span>
-      <Divider />
-      <span class="text-[#10477C] dark:text-secondary">Diario Amanecer</span>
-    </div>
+    {
+      !type === null || type === "category"
+      ? null 
+      :(
+        <div class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto">
+          <span
+            class="text-[#10477C] dark:text-secondary px-1.5 mx-2 bg-[#FBC208] rounded-md"
+            >
+              {category.name}
+          </span>
+          <Divider />
+          <span>{formatDateTime(article.date)}</span>
+          {
+            type
+            ? null
+            :(  
+            <Divider />
+            <span class="text-[#10477C] dark:text-secondary">{SITE.author}</span>
+            )
+          }
+        </div>
+      )
+    }
   </div>
 </article>

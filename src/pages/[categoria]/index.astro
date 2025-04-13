@@ -8,6 +8,8 @@ import WideCard from "@/components/cards/wideCard.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
 import { decode } from "html-entities";
 import { SITE } from "@/lib/config";
+import RecentNews from "../_home/recentNews.astro";
+import BigArticleCard from "@/components/cards/bigArticleCard.astro";
 
 
 const { categoria } = Astro.params;
@@ -18,24 +20,40 @@ const category = categoryXCat || categoryXScope;
 
  if (!category) return Astro.redirect("/404");
 
-const articles: Article[] = categoryXCat
+const allArticles: Article[] = categoryXCat
   ?await articlesHandler.articlesByCategory(category.id) 
   : await articlesHandler.articlesByScope(category.id); 
 
- if(articles.length === 0) return Astro.redirect("/404");
+ if(allArticles.length === 0) return Astro.redirect("/404");
 
+const bigArticle = allArticles[0];
+const articles = allArticles.slice(1, allArticles.length);
+
+ const title = categoryXCat 
+                ? `Noticias en ${(category.name).toLowerCase()}`
+                : `Noticias del ámbito ${(category.name).toLowerCase()}`;
 
 const meta: Meta = {
-  title:`Noticias en ${capitalizeFirstLetter(category.name)} - ${SITE.title}`,
-  metaTitle: capitalizeFirstLetter(category.name),
+  title:`${title} - ${SITE.title}`,
+  metaTitle: title,
   description: category.description,
   type: "website",
-  ogImage: articles?.[0]._embedded["wp:featuredmedia"]?.[0]["source_url"],
-  ogImageAlt: decode(String (articles?.[0].title.rendered)),
+  ogImage: bigArticle?._embedded["wp:featuredmedia"]?.[0]["source_url"],
+  ogImageAlt: decode(String (bigArticle?.title.rendered)),
 };
 
 ---
-<ListLayout header={`Noticias en ${category.name}`} meta={meta}>
+<ListLayout headerTitle={title} meta={meta}>
+  <div class="flex ">
+    <BigArticleCard
+      article={bigArticle}
+      category={category}
+    />
+    <RecentNews page="category" />
+  </div>
+  {articles.length === 0 
+    ? null
+    :(
     <ul class="flex flex-col gap-2 flex-1">
       {
         articles.map((article) => (
@@ -47,6 +65,7 @@ const meta: Meta = {
         ))
       }
     </ul>
+    )}
     <!-- {
       articles.length > SITE.postsPerPage ? (
         <Pagination

@@ -1,0 +1,38 @@
+---
+import SubHeadlineCard from '@/components/cards/subHeadlineCard.astro';
+import { articlesHandler } from '@/lib/handlers/articles';
+import Index from '../articles/index.astro';
+
+
+type Props = {
+    page: "singlePost" | "category";
+
+}
+
+const {page} =Astro.props as Props;
+
+const mainArticles = await articlesHandler.mainHeadline();
+const articles = page === "singlePost" 
+    ? mainArticles 
+    :  mainArticles.concat(await articlesHandler.subHeadlines());
+
+
+
+---
+<aside>
+    <span
+        class:list={ ["flex",
+        page === "singlePost" 
+            ? "uppercase "
+            : "flexrow"
+            ]}
+    >Noticias recientes</span>
+    {articles.map((article, index)=>(
+        <SubHeadlineCard
+            article={article}
+            isFirst={index === 0}
+            isLast={index === articles.length - 1}
+            type={page}
+        />
+    ))}
+</aside>
