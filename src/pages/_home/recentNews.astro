@@ -19,7 +19,12 @@ const articles = page === "singlePost"
 
 
 ---
-<aside>
+<aside class:list={ ["flex flex-col",
+page === "singlePost" 
+    ? " bg-blue-200 w-full h-fit justify-center items-center"
+    : ""
+    ]}
+    >
     <span
         class:list={ ["flex",
         page === "singlePost" 
