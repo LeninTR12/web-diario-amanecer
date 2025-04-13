@@ -5,32 +5,47 @@ import ThemeController from "../bases/theme-controller.astro";
 import Icon from "../bases/icon.astro";
 ---
 
-<div class="flex w-full px-4 h-8 bg-[#1A346B]">
-  <div class="navbar-start">
-    <a class="text-white" href="/search" aria-label="Search">
-      <Search01 />
-    </a>
-  </div>
+<div class="flex w-full h-10 bg-[#1A346B] items-center justify-center">
+  <div
+    class="flex w-full max-w-5xl px-4 h-8 lg:px-0 justify-between items-center"
+  >
+    <form
+      action="/search"
+      method="GET"
+      aria-label="Search"
+      class="flex w-[200px] h-6 bg-white text-[#1A346B] items-center justify-between rounded-full px-3 font-sans"
+    >
+      <input
+        type="text"
+        name="q"
+        placeholder="Buscar"
+        class="bg-transparent text-sm outline-none w-full placeholder-[#1A346B]"
+      />
+      <button type="submit" class="ml-2">
+        <Search01 />
+      </button>
+    </form>
 
-  <div class="navbar-end gap-1">
-    <div class="hidden">
-      <ThemeController/>
-    </div>
+    <div class="navbar-end gap-1">
+      <div class="hidden">
+        <ThemeController />
+      </div>
 
-    <div class="flex flex-row gap-3">
-      {
-        SOCIAL_LINKS.map(({ href, icon, text, target }) => (
-          <a
-            href={href}
-            class="text-white"
-            target={target ?? "_blank"}
-            title={text}
-            aria-label={text}
-          >
-            <Icon icon={icon} />
-          </a>
-        ))
-      }
+      <div class="flex flex-row gap-3">
+        {
+          SOCIAL_LINKS.map(({ href, icon, text, target }) => (
+            <a
+              href={href}
+              class="text-white"
+              target={target ?? "_blank"}
+              title={text}
+              aria-label={text}
+            >
+              <Icon icon={icon} />
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </div>

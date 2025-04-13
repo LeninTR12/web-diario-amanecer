@@ -4,6 +4,7 @@ import Facebook from "@/assets/svgs/facebook.astro";
 import Instagram from "@/assets/svgs/instagram.astro";
 import Tiktok from "@/assets/svgs/tiktok.astro";
 import Youtube from "@/assets/svgs/youtube.astro";
+import Whatsapp from "@/assets/svgs/whatsapp.astro";
 
 export interface Props {
   icon: string | undefined;
@@ -16,6 +17,7 @@ if (!icon) {
 }
 ---
 
+{icon === "whatsapp" && <Whatsapp />}
 {icon === "facebook" && <Facebook />}
 {icon === "instagram" && <Instagram />}
 {icon === "tiktok" && <Tiktok />}
