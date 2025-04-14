@@ -62,12 +62,7 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
   <div class="flex flex-col flex-1">
     <div class="flex items-center gap-2 mb-1">
       <div class="flex-1">
-        <h3 class="text-base lg:group-hover:underline leading-5 font-serif font-semibold line-clamp-3">
-          <a
-            href={`/${category.slug}/${article.slug}`}
-            title={decode(String(article.title.rendered))}
-          >
-        <h3 class:list={[ " lg:hover:underline ",
+        <h3 class:list={[ " text-base lg:hover:underline leading-5 font-serif font-semibold line-clamp-3 ",
           !type
             ? " text-base mb-1 "
             : type === "singlePost" 
@@ -88,19 +83,12 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
       :(
         <div class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto">
           <span
-            class="flex text-[#10477C] min-h-[18px] items-center font-medium dark:text-secondary px-1.5 mx-2 bg-[#FBC208] rounded-md"
+            class="flex uppercase text-[#10477C] min-h-[18px] items-center font-medium dark:text-secondary px-1.5 mx-2 bg-[#FBC208] rounded-md"
             >
               {category.name}
           </span>
           <span>{formatDateTime(article.date)}</span>
-          {
-            type
-            ? null
-            :(  
-            <Divider />
-            <span class="text-[#10477C] dark:text-secondary">{SITE.author}</span>
-            )
-          }
+          
         </div>
       )
     }
