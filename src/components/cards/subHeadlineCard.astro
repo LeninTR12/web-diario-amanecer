@@ -16,7 +16,7 @@ type Props = {
   type?: "singlePost" | "category";
 };
 
-const { article, isLast, isFirst, type} = Astro.props;
+const { article, isLast, isFirst, type } = Astro.props;
 const category: Category = categoriesHandler.oneCategory(article.categories[0]);
 ---
 
@@ -62,6 +62,11 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
   <div class="flex flex-col flex-1">
     <div class="flex items-center gap-2 mb-1">
       <div class="flex-1">
+        <h3 class="text-base lg:group-hover:underline leading-5 font-serif font-semibold line-clamp-3">
+          <a
+            href={`/${category.slug}/${article.slug}`}
+            title={decode(String(article.title.rendered))}
+          >
         <h3 class:list={[ " lg:hover:underline ",
           !type
             ? " text-base mb-1 "

@@ -17,11 +17,11 @@ const { meta } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={SITE.locale} dir={SITE.dir} transition:animate={slide({ duration: '0.5s' })}>
+<html lang={SITE.locale} dir={SITE.dir} >
   <Head meta={meta} />
   <body class="flex flex-col">
     <Header />
-    <main class="flex-1">
+    <main class="flex-1 mt-[120px] z-0" transition:animate={slide({ duration: '0.5s' })}>
       <slot />
     </main>
     <Footer />
