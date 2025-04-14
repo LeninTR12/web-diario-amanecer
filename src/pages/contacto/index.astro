@@ -1,0 +1,132 @@
+---
+import type { entry } from "@/lib/types";
+import BaseLayout from "@/layouts/base.astro";
+import { getEntry } from "astro:content";
+import PrintEdition from "@/components/widgets/printEdition.astro";
+import Check from "@/assets/svgs/check.astro";
+
+const entry = await getEntry("views", "search");
+
+if (!entry) {
+  return Astro.redirect("/404");
+}
+---
+
+<BaseLayout meta={entry}>
+  <section
+    class="flex w-full max-w-5xl m-auto px-4 py-6 md:justify-between lg:py-16 lg:px-0 md:gap-6"
+  >
+    <form
+      class="flex flex-col w-full gap-3 md:py-6 lg:w-[542px] lg:h-[684px]"
+      autocomplete="off"
+      method="POST"
+      action="#"
+    >
+      <div class="flex flex-col gap-3 md:grid md:grid-cols-2">
+        <label
+          for="firstName"
+          class="flex flex-col gap-3 font-medium text-[#5B5B5B]"
+        >
+          Nombre *
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            required
+            autocomplete="off"
+            class="w-full p-2 border font-light border-[#CACACA] rounded-md text-[#5B5B5B] focus:border-[#1A346B] outline-none"
+          />
+        </label>
+
+        <label
+          for="lastName"
+          class="flex flex-col gap-3 font-medium text-[#5B5B5B]"
+        >
+          Apellido *
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            required
+            autocomplete="off"
+            class="w-full p-2 border font-light border-[#CACACA] rounded-md text-[#5B5B5B] focus:border-[#1A346B] outline-none"
+          />
+        </label>
+      </div>
+
+      <label for="email" class="flex flex-col gap-3 font-medium text-[#5B5B5B]">
+        Correo *
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          autocomplete="off"
+          class="w-full p-2 border font-light border-[#CACACA] rounded-md text-[#5B5B5B] focus:border-[#1A346B] outline-none"
+        />
+      </label>
+
+      <label for="phone" class="flex flex-col gap-3 font-medium text-[#5B5B5B]">
+        Celular *
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          required
+          autocomplete="off"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          class="w-full p-2 border font-light border-[#CACACA] rounded-md text-[#5B5B5B] focus:border-[#1A346B] outline-none"
+        />
+      </label>
+
+      <label
+        for="message"
+        class="flex flex-col gap-3 font-medium text-[#5B5B5B]"
+      >
+        Mensaje *
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          required
+          autocomplete="off"
+          class="w-full p-2 border font-light border-[#CACACA] rounded-md text-[#5B5B5B] focus:border-[#1A346B] outline-none"
+        ></textarea>
+      </label>
+
+      <label for="terms" class="flex items-center py-3 cursor-pointer">
+        <input
+          type="checkbox"
+          name="terms"
+          id="terms"
+          class="peer hidden"
+          required
+        />
+        <span
+          class="w-6 h-6 border border-[#e3e3e4] rounded-md mr-2 flex items-center justify-center transition-all duration-200 peer-checked:bg-[#1A346B] peer-checked:border-[#1A346B]"
+        >
+        <div class="text-white">
+          <Check />
+        </div>
+        </span>
+        <span class="text-[#5B5B5B] font-light">
+          Acepto las <a href="/politica-privacidad" class="text-[#105eac]"
+            >políticas de privacidad</a
+          > y uso de datos.
+        </span>
+      </label>
+
+      <button
+        type="submit"
+        class="w-full py-2.5 rounded-full font-medium transition-all bg-[#105eac] text-white hover:bg-[#1A346B]"
+      >
+        Enviar Mensaje
+      </button>
+    </form>
+
+    <div class="hidden md:flex p-6 max-[542px] h-auto">
+      <PrintEdition />
+    </div>
+  </section>
+</BaseLayout>
