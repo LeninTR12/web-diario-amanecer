@@ -3,8 +3,8 @@ import { NAVIGATION_LINKS } from "@/lib/config";
 import NavbarItem from "../bases/navbar-item.astro";
 ---
 
-<nav class="navbar-center hidden lg:flex container lg:h-[23px]">
-  <ul class="menu menu-sm menu-horizontal mx-auto">
+<nav class="navbar-center hidden lg:flex container lg:h-[23px] justify-center">
+  <ul class="flex justify-between w-full max-w-[1024px] items-center">
     <NavbarItem item={{ href: "/", text: "Actualidad" }} />
     {NAVIGATION_LINKS.map((item) => <NavbarItem item={item} />)}
   </ul>
