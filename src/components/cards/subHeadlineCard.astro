@@ -71,7 +71,7 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
       
         ]} 
         >
-          <a class=" !break-normal h-full " href={`/${category.slug}/${article.slug}`} title={decode(String(article.title.rendered))}>
+          <a class=" !break-normal h-full no-underline " href={`/${category.slug}/${article.slug}`} title={decode(String(article.title.rendered))}>
             {decode(String(article.title.rendered))}
           </a>
         </h3>
