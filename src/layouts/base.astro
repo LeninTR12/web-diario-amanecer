@@ -1,11 +1,13 @@
 ---
 import { SITE } from "@/lib/config";
+import '@fontsource-variable/roboto';
+import '@fontsource-variable/roboto-serif';
 import Head from "@/components/bases/head.astro";
 import Header from "@/components/shared/header.astro";
 import Footer from "@/components/shared/footer.astro";
 import type { Meta, ArticleMeta } from "@/lib/types";
 import { getMeta } from "@/lib/utils/getMeta";
-
+import { slide } from 'astro:transitions';
  type Props = {
    meta: Meta | ArticleMeta,
  };
@@ -15,7 +17,7 @@ const { meta } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={SITE.locale} dir={SITE.dir}>
+<html lang={SITE.locale} dir={SITE.dir} transition:animate={slide({ duration: '0.5s' })}>
   <Head meta={meta} />
   <body class="flex flex-col">
     <Header />
@@ -25,3 +27,9 @@ const { meta } = Astro.props;
     <Footer />
   </body>
 </html>
+
+<style is:global>
+  body {
+  font-family: 'Roboto Variable', sans-serif;
+}
+</style>
