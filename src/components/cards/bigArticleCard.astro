@@ -14,7 +14,7 @@ type Props = {
 const { article, category } = Astro.props as Props;
 ---
 
-<article class="group relative isolate flex flex-col md:flex-col gap-5 py-6">
+<article class="group relative isolate flex flex-col md:flex-col gap-5 ">
   <div class="flex bg-cover rounded-md">
     <Image
       src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||

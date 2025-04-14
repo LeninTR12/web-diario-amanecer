@@ -23,7 +23,7 @@ const { category, article, isLast } = Astro.props;
 >
   <div
     class:list={[
-      "flex flex-col gap-4 lg:flex-row lg:gap-4 lg:p-2",
+      "flex flex-col gap-4 lg:flex-row lg:gap-4 lg:py-2",
       isLast ? "border-b-0" : "border-b border-base-300",
     ]}
   >
@@ -38,7 +38,7 @@ const { category, article, isLast } = Astro.props;
         class="object-cover rounded-[2px] w-full h-full !max-w-none !max-h-none "
       />
     </div>
-    <div class="flex flex-col  " >
+    <div class="flex flex-col gap-4 justify-center " >
       <div class="flex flex-col gap-2   ">
         <h3 class="text-xl font-semibold text-[#081423] line-clamp-2 lg:group-hover:underline">
           <a href={`/${category.slug}/${article.slug}`} title={decode(String(article.title.rendered))}>

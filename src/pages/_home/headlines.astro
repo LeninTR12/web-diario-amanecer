@@ -16,7 +16,7 @@ const subArticles : Article[] = await articlesHandler.subHeadlines();
   <div class="col-span-1 md:col-span-6">
     <MainHeadline articles={mainArticles} />
   </div>
-  <div class="flex flex-col gap-5 col-span-1 md:col-span-4 py-6">
+  <div class="flex flex-col gap-5 col-span-1 md:col-span-4 ">
      {
       subArticles.map((article:Article, index:number) => (
         <SubHeadlineCard
