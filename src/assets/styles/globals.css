@@ -14,8 +14,8 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @theme {
   /* Font Family */
-  --font-sans: "Roboto", sans-serif;
-  --font-serif: "Roboto Serif", "Times New Roman", Times, serif;
+  --font-sans: "Roboto Variable", sans-serif;
+  --font-serif: "Roboto Serif Variable", "Times New Roman", Times, serif;
 }
 
 @layer base {
