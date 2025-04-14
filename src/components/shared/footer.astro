@@ -7,10 +7,13 @@ import {
 } from "@/lib/config";
 import Icon from "../bases/icon.astro";
 import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
+import Whatsapp from "@/assets/svgs/whatsapp.astro";
+import Mail from "@/assets/svgs/mail.astro";
+import Location from "@/assets/svgs/location.astro";
 ---
 
 <footer
-  class="w-full bg-white dark:bg-black dark:border-primary-content/20"
+  class="w-full bg-white dark:bg-black dark:border-primary-content/20 pt-[64px]"
 >
   <button
     onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
@@ -32,20 +35,22 @@ import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
     >
       <aside class="flex items-center">
         <p>
-          <strong class="text-4xl text-[#FFCA00]">Amanecer</strong>
+          <strong class="text-4xl font-serif text-[#FFCA00]">AMANECER</strong>
         </p>
       </aside>
 
       <div class="flex flex-col gap-4 md:flex-row lg:justify-between w-full">
         <div class="flex flex-col gap-4 w-full lg:w-1/2 lg:gap-8">
           <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
-            <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
+            <p
+              class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3"
+            >
               Nuestras categorías
             </p>
             <div class="flex flex-col gap-2 lg:flex-row lg:flex-wrap lg:gap-6">
               {
                 NAVIGATION_LINKS.map(({ href, text, target }) => (
-                  <a href={href} class="font-light" target={target ?? "_self"}>
+                  <a href={href} class="font-normal" target={target ?? "_self"}>
                     {text}
                   </a>
                 ))
@@ -54,13 +59,15 @@ import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
           </nav>
 
           <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
-            <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
+            <p
+              class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3"
+            >
               Enlaces de interés
             </p>
             <div class="flex flex-col gap-2 lg:flex-row lg:gap-6">
               {
                 SCOPE_LINKS.map(({ href, text, target }) => (
-                  <a href={href} class="font-light" target={target ?? "_self"}>
+                  <a href={href} class="font-normal" target={target ?? "_self"}>
                     {text}
                   </a>
                 ))
@@ -70,12 +77,19 @@ import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
         </div>
 
         <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
-          <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
+          <p
+            class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3"
+          >
             Diario Amanecer
+          </p>
+
+          <p class="font-normal max-w-[200px]">
+            Una propuesta de prensa escrita desde el Alto Mayo para toda la
+            región San Martín
           </p>
           {
             OTHER_LINKS.map(({ href, text, target }) => (
-              <a href={href} class="font-light" target={target ?? "_self"}>
+              <a href={href} class="font-normal" target={target ?? "_self"}>
                 {text}
               </a>
             ))
@@ -83,18 +97,25 @@ import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
         </nav>
 
         <nav class="flex flex-col gap-2 text-base lg:text-sm font-light">
-          <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
+          <p
+            class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3"
+          >
             Contacto
           </p>
-          <div><span>+51 990 305 287</span></div>
-          <div><span>info@amanecer.pe</span></div>
-          <div><span>Jr. Andalucía Cdra 2</span></div>
+          <div class="flex flex-col gap-4">
+
+            <span class="font-normal flex gap-2"> <Whatsapp /> +51 990 305 287</span>
+            <span class="font-normal flex gap-2"> <Mail/> info@amanecer.pe</span>
+            <span class="font-normal flex gap-2"> <Location/> Jr. Andalucía Cdra 2</span>
+          </div>
         </nav>
       </div>
 
       <div class="flex flex-col gap-4">
         <div class="flex flex-col gap-4">
-          <p class="font-bold text-lg lg:text-center">Visítanos en:</p>
+          <p class="font-bold text-lg lg:text-center font-serif">
+            Visítanos en:
+          </p>
           <ul class="flex gap-4">
             {
               SOCIAL_LINKS.map(({ href, icon, text, target }) => (
@@ -119,7 +140,9 @@ import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
     <div
       class="flex flex-col border-t border-[#E3E3E4] py-3 items-center justify-center"
     >
-      <p>© 2025 Diario Amanecer. Todos los derechos reservados.</p>
+      <p class="font-serif">
+        © 2025 Diario Amanecer. Todos los derechos reservados.
+      </p>
     </div>
   </div>
 </footer>

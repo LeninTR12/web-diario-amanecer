@@ -23,12 +23,12 @@ const articles:Article[] =  scopeArticles.filter((article)=>(
 
 ---
 
-<section class="container pt-12 pb-0 space-y-4" data-pagefind-ignore="all">
+<section class="flex flex-col w-full px-4 xl:px-0 max-w-[1024px] m-auto gap-8 py-8" data-pagefind-ignore="all">
   <HeaderSection
     title={title}
     link_url={link_url}
   />
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-6 md:grid-rows-2">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-8">
     {
       articles
         .slice(0, count)
