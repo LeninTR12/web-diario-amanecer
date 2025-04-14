@@ -5,13 +5,25 @@ import {
   OTHER_LINKS,
   SCOPE_LINKS,
 } from "@/lib/config";
-import Hashtag from "@/assets/svgs/hashtag.astro";
 import Icon from "../bases/icon.astro";
+import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
 ---
 
 <footer
-  class="w-full bg-white dark:bg-black border-t border-primary-content/80 dark:border-primary-content/20"
+  class="w-full bg-white dark:bg-black dark:border-primary-content/20"
 >
+  <button
+    onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    class="w-full h-12 flex justify-center items-center bg-[#F5F5F5] text-[#A9A9A9] cursor-pointer border-b border-primary-content/80"
+  >
+    <div
+      class="flex w-full max-w-full lg:max-w-5xl items-center justify-center gap-2.5 pointer-events-none md:justify-start"
+    >
+      <CircleArrowUp />
+      <h6 class="font-semibold font-serif">Regresar al inicio</h6>
+    </div>
+  </button>
+
   <div
     class="w-full max-w-5xl mx-auto px-4 py-10 flex flex-col gap-4 lg:py-8 lg:px-10"
   >
@@ -24,9 +36,7 @@ import Icon from "../bases/icon.astro";
         </p>
       </aside>
 
-      <div
-        class="flex flex-col gap-4 md:flex-row lg:justify-between w-full"
-      >
+      <div class="flex flex-col gap-4 md:flex-row lg:justify-between w-full">
         <div class="flex flex-col gap-4 w-full lg:w-1/2 lg:gap-8">
           <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
             <p class="font-semibold text-lg border-y border-[#E3E3E4] py-3">
@@ -83,26 +93,26 @@ import Icon from "../bases/icon.astro";
       </div>
 
       <div class="flex flex-col gap-4">
-          <div class="flex flex-col gap-4">
-            <p class="font-bold text-lg lg:text-center">Visítanos en:</p>
-            <ul class="flex gap-4">
-              {
-                SOCIAL_LINKS.map(({ href, icon, text, target }) => (
-                  <li>
-                    <a
-                      href={href}
-                      class="link link-hover"
-                      target={target ?? "_blank"}
-                      title={text}
-                      aria-label={text}
-                    >
-                      <Icon icon={icon} />
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
+        <div class="flex flex-col gap-4">
+          <p class="font-bold text-lg lg:text-center">Visítanos en:</p>
+          <ul class="flex gap-4">
+            {
+              SOCIAL_LINKS.map(({ href, icon, text, target }) => (
+                <li>
+                  <a
+                    href={href}
+                    class="link link-hover"
+                    target={target ?? "_blank"}
+                    title={text}
+                    aria-label={text}
+                  >
+                    <Icon icon={icon} />
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
     </div>
 
