@@ -25,22 +25,32 @@ const smallArticlesCategories = smallArticles.map((article) =>
   categoriesHandler.oneCategory(article.categories[0])
 );
 ---
-<BigArticleCard
-  article={bigArticle}
-  category={bigArticleCategory}
-/>
-<div>
+
+<BigArticleCard article={bigArticle} category={bigArticleCategory} />
+<div class="grid sm:grid-cols-2 gap-6">
   {
     smallArticles.map((article, index) => (
-      <article
-        class="group py-2 flex items-stretch gap-2 group relative isolate"        
-      >
-        <div class="flex flex-col flex-1">
+      <article class="group py-2 flex flex-col items-stretch gap-2 group relative isolate">
+        <div class="overflow-hidden  shrink-0">
+          <Image
+            src={
+              article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
+              imageNotFound
+            }
+            alt={decode(String(article.title.rendered))}
+            loading="eager"
+            class="object-cover rounded-md w-full h-full"
+            width={600}
+            height={380}
+            layout="responsive"
+          />
+        </div>
+        <div class="flex flex-col flex-1 gap-4">
           <div class="flex items-center gap-2 mb-1">
             <div class="flex-1">
-              <h3 class="text-base lg:group-hover:underline mb-1">
+              <h3 class="text-xl lg:group-hover:underline line-clamp-2">
                 <a
-                class="text-red-400 font-extrabold"
+                  class="font-extrabold"
                   href={`/${smallArticlesCategories[index].slug}/${article.slug}`}
                   title={decode(String(article.title.rendered))}
                 >
@@ -49,29 +59,16 @@ const smallArticlesCategories = smallArticles.map((article) =>
               </h3>
             </div>
           </div>
-          <div class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto">
-            <span class="text-[#10477C] dark:text-secondary px-1 mx-2 bg-[#FBC208]">
+
+          <div class="flex text-xs items-center gap-2">
+            <span class="flex px-1.5 py-0.5 rounded-md font-semibold uppercase text-[#10477C] bg-[#FBC208]">
               {smallArticlesCategories[index].name}
             </span>
-
-            <span>{formatDateTime(article.date)}</span>
-            <Divider />
-            <span class="text-primary dark:text-secondary">{SITE.author}</span>
+            <span class="flex gap-1 text-[#10477C]">
+              <span>{formatDateTime(article.date)}</span>|
+              <span>Diario Amanecer</span>
+            </span>
           </div>
-        </div>
-
-        <div class="overflow-hidden w-[165px] h-[125px] shrink-0">
-          <Image
-            src={
-              article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
-              imageNotFound
-            }
-            alt={decode(String(article.title.rendered))}
-            loading="eager"
-            class="object-cover rounded w-full h-full"
-            width={165}
-            height={125}
-          />
         </div>
       </article>
     ))

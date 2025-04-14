@@ -3,7 +3,6 @@ import { API_PAGES } from "@/lib/config";
 import { pagesHandler } from "@/lib/handlers/pages";
 import imageNotFound from "src/assets/images/404.webp";
 import Image from "astro/components/Image.astro";
-import Divider from "@/components/bases/divider.astro";
 
 const printEditionPage = await pagesHandler.onePageBySlug(
   API_PAGES.printEdition.slug
@@ -12,15 +11,14 @@ const printEditionPage = await pagesHandler.onePageBySlug(
 
 <aside class="w-full flex flex-col">
   <div class="flex gap-2.5 text-[#1A346B] w-full">
-    <Divider />
-    <span class="font-sans text-base !m-0">EDICIÓN IMPRESA</span>
+    <span class="font-sans font-semibold text-base !m-0">EDICIÓN IMPRESA</span>
   </div>
   <Image
     src={printEditionPage?._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
     alt={API_PAGES.printEdition.title}
     width={358} 
     height={540}
-    class="w-full h-auto"
+    class="w-full h-auto border border-[#e3e3e4] p-1 rounded-md"
   />
 </aside>
 
