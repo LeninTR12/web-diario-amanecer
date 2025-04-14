@@ -22,17 +22,38 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
 
 <article
   class:list={[
-    "group flex items-stretch gap-4 group relative isolate",
+    "flex   ",
     isFirst ? "pt-0" : "pt-2",
+    !type
+      ? "group items-stretch gap-4 group relative isolate"
+      : type === "singlePost" 
+        ? "h-fit items-center gap-4" 
+        :"h-fit items-center gap-1.5 py-2 "
   ]}
 >
-  <div class="overflow-hidden w-[149px] h-[84px] shrink-0">
+  <div
+    class:list={[
+      !type 
+        ? "overflow-hidden w-[149px] h-[84px] shrink-0"
+        : type === "singlePost" 
+          ? " aspect-[5/3]" 
+          :"h-[60px] aspect-[17/10]"
+
+  ]} 
+  >
     <Image
       src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
         imageNotFound}
       alt={decode(String(article.title.rendered))}
       loading="eager"
-      class="object-cover rounded w-full h-full"
+      class:list={[
+        "object-cover w-full h-full",
+        !type
+          ? " rounded "
+          : type === "singlePost" 
+            ? "rounded-md !m-0" 
+            :" "
+      ]}
       width={149}
       height={84}
     />
@@ -41,8 +62,16 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
   <div class="flex flex-col flex-1">
     <div class="flex items-center gap-2 mb-1">
       <div class="flex-1">
-        <h3 class="text-base lg:group-hover:underline mb-1">
-          <a href={`/${category.slug}/${article.slug}`} title={decode(String(article.title.rendered))}>
+        <h3 class:list={[ " lg:hover:underline ",
+          !type
+            ? " text-base mb-1 "
+            : type === "singlePost" 
+              ? " !text-base line-clamp-3 font-medium !m-0 leading-[1.2] " 
+              :"text-sm font-normal line-clamp-3 "
+      
+        ]} 
+        >
+          <a class=" !break-normal h-full " href={`/${category.slug}/${article.slug}`} title={decode(String(article.title.rendered))}>
             {decode(String(article.title.rendered))}
           </a>
         </h3>
@@ -54,11 +83,10 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
       :(
         <div class="flex items-center text-xs text-base-content/80 mt-1 lg:mt-auto">
           <span
-            class="text-[#10477C] dark:text-secondary px-1.5 mx-2 bg-[#FBC208] rounded-md"
+            class="flex text-[#10477C] min-h-[18px] items-center font-medium dark:text-secondary px-1.5 mx-2 bg-[#FBC208] rounded-md"
             >
               {category.name}
           </span>
-          <Divider />
           <span>{formatDateTime(article.date)}</span>
           {
             type
