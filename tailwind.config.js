@@ -15,8 +15,8 @@ export default {
             paragraphBlack:"202020",
         },
         fontFamily:{
-            sans: ['Roboto', 'sans-serif'],
-            serif: ['Roboto Serif', 'Times New Roman', 'Times', 'serif'],
+            sans: ['Roboto Variable', 'sans-serif'],
+            serif: ['Roboto Serif Variable', 'Times New Roman', 'Times', 'serif'],
         }
     },
   },

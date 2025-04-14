@@ -40,6 +40,7 @@ const smallArticlesCategories = smallArticles.map((article) =>
             <div class="flex-1">
               <h3 class="text-base lg:group-hover:underline mb-1">
                 <a
+                class="text-red-400 font-black"
                   href={`/${smallArticlesCategories[index].slug}/${article.slug}`}
                   title={decode(String(article.title.rendered))}
                 >
