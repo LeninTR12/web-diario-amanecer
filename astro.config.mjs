@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import { SITE } from "./src/lib/config";
-import pagefind from "astro-pagefind";
 import tailwindcss from "@tailwindcss/vite";
+import netlify from "@astrojs/netlify"
 
 import sitemap from "@astrojs/sitemap";
 
@@ -10,11 +10,16 @@ export default defineConfig({
   output: "server",
   site: SITE.url,
   base: SITE.basePath,
-  integrations: [sitemap(), pagefind()],
+  adapter: netlify({
+    edgeMiddleware: false,
+    useFilesystemSessionCache: false,
+  }),
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },
   experimental: {
     responsiveImages: true,
+    session: true,
   },
 });
