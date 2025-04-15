@@ -1,7 +1,5 @@
 import { defineConfig } from "astro/config";
-import mdx from "@astrojs/mdx";
 import { SITE } from "./src/lib/config";
-import { modifiedTime, readingTime } from "./src/lib/utils/remarks.mjs";
 import pagefind from "astro-pagefind";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -12,10 +10,7 @@ export default defineConfig({
   output: "server",
   site: SITE.url,
   base: SITE.basePath,
-  markdown: {
-    remarkPlugins: [readingTime, modifiedTime],
-  },
-  integrations: [mdx(), sitemap(), pagefind()],
+  integrations: [sitemap(), pagefind()],
   vite: {
     plugins: [tailwindcss()],
   },
