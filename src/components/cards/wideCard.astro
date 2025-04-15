@@ -3,68 +3,59 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { formatDateTime, getDateDistance } from "@/lib/utils/date";
 import Divider from "../bases/divider.astro";
-import type { Article } from "@/lib/types";
+import type { Article, Category } from "@/lib/types";
 import { format } from "node:path";
 import { decode } from "html-entities";
 import imageNotFound from "../../assets/images/404.webp";
+import { SITE } from "@/lib/config";
 
 type Props = {
-  categorySlug?: string;
+  category: Category;
   article: Article;
   isLast: boolean;
 };
 
-const { categorySlug, article, isLast } = Astro.props;
+const { category, article, isLast } = Astro.props;
 ---
 
 <li
-  class="group w-full max-w-md mx-auto lg:max-w-full relative isolate flex flex-col lg:flex-row gap-4 "
+  class="group w-full max-w-md mx-auto lg:max-w-full relative isolate flex flex-col "
 >
   <div
-    class="flex-shrink-0 aspect-square w-32 text-sm text-base-content/60 text-pretty capitalize hidden lg:flex pt-1"
-  >
-    {formatDateTime(article.date)}
-  </div>
-  <div
     class:list={[
-      "flex-1 flex flex-col gap-4 lg:flex-row-reverse pb-2 lg:pb-4",
+      "flex flex-col gap-4 lg:flex-row lg:gap-4 lg:py-2",
       isLast ? "border-b-0" : "border-b border-base-300",
     ]}
   >
-    <div class="w-full lg:w-60 aspect-video">
+    <div class="flex w-full aspect-[5/3] lg:w-[282px] lg:min-w-[282px] lg:aspect-[47/28]">
       <Image
         src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
         alt={decode(String(article.title.rendered))}
-        width={800}
-        height={450} 
+        width={282}
+        height={168} 
         layout="responsive"
         loading={"eager"}
-        class="aspect-video rounded w-full h-full"
+        class="object-cover rounded-[2px] w-full h-full !max-w-none !max-h-none "
       />
     </div>
-    <div class="flex-1 space-y-2">
-      <h3 class="text-xl font-semibold lg:group-hover:underline">
-        <a href={`/${categorySlug}/${article.slug}`} title={decode(String(article.title.rendered))}>
-          {decode(String(article.title.rendered))}
-        </a>
-      </h3>
-      <p class="text-base-content/80 max-w-xl text-pretty" set:html={article.excerpt.rendered} >   </p>
-    </div>
-    <div class="text-sm lg:hidden flex item-center text-base-content/70 pt-2">
-      <time
-        class="flex items-center gap-1"
-        datetime={String(article.date)}
-      >
-        <span>
-          {formatDateTime(article.date)}
+    <div class="flex flex-col gap-4 justify-center " >
+      <div class="flex flex-col gap-2   ">
+        <h3 class="text-xl font-semibold text-[#081423] line-clamp-2 lg:group-hover:underline">
+          <a href={`/${category.slug}/${article.slug}`} title={decode(String(article.title.rendered))}>
+            {decode(String(article.title.rendered))}
+          </a>
+        </h3>
+        <div class="text-[#5B5B5B]  font-light text-pretty line-clamp-2" set:html={article.excerpt.rendered} >   </div>
+      </div>
+
+      <div class="flex items-center text-[#0E4F8F] text-xs">
+        <span class="flex min-h-[18px] items-center text-[#10477C] font-medium dark:text-secondary px-2.5 mr-[4px] bg-[#FBC208] min-h[18px] rounded-md">
+          {category.name}
         </span>
-      </time>
-      <Divider />
-      <small class="flex items-center gap-1">
-        <span class="capitalize text-sm">
-          <!-- {article.data.category.id} -->
-        </span>
-      </small>
+        <span>{formatDateTime(article.date)}</span>
+        <Divider />
+        <span class=" dark:text-secondary">{SITE.author}</span>
+      </div>
     </div>
   </div>
 </li>

@@ -3,7 +3,6 @@ import { articlesHandler } from "@/lib/handlers/articles";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import type { Article, Category, Meta } from "@/lib/types";
 import ListLayout from "@/layouts/list.astro";
-import { capitalizeFirstLetter } from "@/lib/utils/letter";
 import WideCard from "@/components/cards/wideCard.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
 import { decode } from "html-entities";
@@ -44,28 +43,32 @@ const meta: Meta = {
 
 ---
 <ListLayout headerTitle={title} meta={meta}>
-  <div class="flex flex-col lg:flex-row ">
+  <div class="flex flex-col lg:flex-row lg:w-[1024px] max-w-[1024px] ">
     <BigArticleCard
       article={bigArticle}
       category={category}
     />
     <RecentNews page="category" />
   </div>
+  <div class="flex justify-start lg:w-[1024px] max-w-[1024px] ">
   {articles.length === 0 
     ? null
     :(
-    <ul class="flex flex-col gap-2 flex-1">
+    <ul class="flex flex-col max-w-[733px] gap-5 flex-1 ">
       {
         articles.map((article) => (
           <WideCard
-            categorySlug={categoria}
+            category={category}
             article={article}
             isLast={articles.lastIndexOf(article) === articles.length - 1}
           />
         ))
       }
     </ul>
+    
+    <div class="flex " ></div>
     )}
+    </div>
     <!-- {
       articles.length > SITE.postsPerPage ? (
         <Pagination
