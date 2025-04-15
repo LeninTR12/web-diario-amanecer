@@ -1,16 +1,57 @@
 ---
+import Search01 from "@/assets/svgs/search-01.astro";
 import BaseLayout from "@/layouts/base.astro";
+import { searchHandler } from "@/lib/handlers/search";
+import type { Meta } from "@/lib/types";
 import "@pagefind/default-ui/css/ui.css";
-import { getEntry } from "astro:content";
 
-const entry = await getEntry("views", "search");
+const url = new URL(Astro.request.url);
+const query = url.searchParams.get("q");
+const type = url.searchParams.get("t");
 
-if (!entry) {
-  return Astro.redirect("/404");
+const searchArticles = query ? await searchHandler.searchArticles(query) : [];
+
+if (type) {
+  return new Response(JSON.stringify(searchArticles), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
+
+const meta: Meta = {
+  title: "",
+  metaTitle: "",
+  description: "",
+  type: "website",
+  ogImage: "",
+  ogImageAlt: "",
+};
 ---
 
-<BaseLayout entry={entry}>
+<BaseLayout meta={meta}>
+  <form
+    action="/search"
+    method="GET"
+    aria-label="Search"
+    class="flex w-[200px] h-6 bg-white text-[#1A346B] items-center justify-between rounded-full px-3 font-sans"
+  >
+    <input
+      type="text"
+      name="q"
+      placeholder="Buscar"
+      class="bg-transparent text-sm outline-none w-full placeholder-[#1A346B]"
+    />
+    <button type="submit" class="ml-2">
+      <Search01 />
+    </button>
+  </form>
+</BaseLayout>
+
+
+
+<!-- <BaseLayout meta={meta}>
   <div class="container py-4">
     <script is:inline src="/pagefind/pagefind-ui.js"></script>
 
@@ -90,4 +131,4 @@ if (!entry) {
     --pagefind-ui-image-box-ratio: 3 / 2;
     --pagefind-ui-font: var(--font-sans);
   }
-</style>
+</style> -->

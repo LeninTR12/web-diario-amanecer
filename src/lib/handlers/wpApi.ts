@@ -1,3 +1,5 @@
+import type { HTMLString } from "astro/runtime/server/escape.js";
+
 const API_URL = import.meta.env.API_URL
 
 export async function getPosts(){
@@ -63,3 +65,11 @@ export async function getPageBySlug(slug:string){
 //     const jsonResult = await res.json();
 //     return jsonResult;
 // }
+
+export async function getSearchPosts(query : string){
+    const res = await fetch(`${API_URL}/posts?search=${query}&_embed`);
+    if (!res.ok) throw new Error("Error retrieving posts by search");
+
+    const jsonResult = await res.json();
+    return jsonResult;
+}
