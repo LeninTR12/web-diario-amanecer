@@ -25,6 +25,8 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
     <Image
     src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
     alt={decode(String(article.title.rendered))}
+    width={500}
+      height={296}
     width={750}
       height={450}
       loading={index < 3 ? "eager" : "lazy"}
