@@ -18,16 +18,15 @@ import RecentNews from "@/pages/_home/recentNews.astro";
         <RecentNews page="singlePost" />
       </div>
     </section>
-    <div
-      class="flex justify-center items-center gap-2.5 bg-[#0E4F8F] text-white w-[234px] h-11 rounded-full"
+
+    <button
+      onclick="if (document.referrer) { history.back(); } else { window.location.href = '/' }"
+      class="font-semibold cursor-pointer flex justify-center items-center gap-2.5 bg-[#0E4F8F] text-white w-[234px] h-11 rounded-full"
     >
       <ArrowLeft size="20" />
-      <button
-        onclick="if (document.referrer) { history.back(); } else { window.location.href = '/' }"
-        class="font-semibold cursor-pointer"
-      >
-        Ir a la página anterior
-      </button>
-    </div>
+      Ir a la página anterior
+    </button>
   </div>
 </div>
+
+

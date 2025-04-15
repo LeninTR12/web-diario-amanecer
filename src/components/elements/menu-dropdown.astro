@@ -20,8 +20,8 @@ import { NAVIGATION_LINKS, OTHER_LINKS } from "@/lib/config";
     <li><a href="/" aria-label="Homepage">Actualidad</a></li>
 
     <li>
-      <details>
-        <summary>Categories</summary>
+      <details open="true">
+        <summary>Categorías</summary>
         <ul>
           {
             NAVIGATION_LINKS.map(({ href, text, target }) => (
@@ -36,21 +36,15 @@ import { NAVIGATION_LINKS, OTHER_LINKS } from "@/lib/config";
       </details>
     </li>
 
-    <li>
-      <details>
-        <summary>Other Pages</summary>
-        <ul>
-          {
-            OTHER_LINKS.map(({ href, text, target }) => (
-              <li>
-                <a href={href} target={target ?? "_self"} aria-label={text}>
-                  {text}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </details>
-    </li>
+    {
+      OTHER_LINKS.map(({ href, text, target }) => (
+        <li>
+            <a href={href} target={target ?? "_self"} aria-label={text}>
+              {text}
+            </a>
+          </li>
+        ))
+      }
+           
   </ul>
 </div>

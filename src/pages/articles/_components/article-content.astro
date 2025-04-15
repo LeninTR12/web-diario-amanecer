@@ -21,10 +21,10 @@ const { article } = Astro.props;
     class="flex w-full border-y h-9 border-[#E3E3E4] text-[#1A346B] justify-between items-center px-2"
   >
     <div class="flex items-center gap-2 text-sm">
-      <time class="hidden lg:block" datetime={article.date}>
+      <time class="hidden lg:block capitalize" datetime={article.date}>
         {formatDate(article.date, "short")}
       </time>
-      <time class="block lg:hidden" datetime={article.date}>
+      <time class="block lg:hidden capitalize" datetime={article.date}>
         {formatDate(article.date, "short")}
       </time>
       <Divider />
