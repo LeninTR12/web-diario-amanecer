@@ -1,28 +1,57 @@
 ---
 import type { Meta } from "@/lib/types";
 import BaseLayout from "../layouts/base.astro";
-import imageNotFound from "@/assets/images/404.webp";
+import ArrowLeft from "@/assets/svgs/arrow-left.astro";
+import News from "@/assets/svgs/news.astro";
 
-const meta : Meta = {
+const meta: Meta = {
   title: "404 - Página no encontrada",
   metaTitle: "404 - Página no encontrada",
   description: "La página que buscas no existe o fue movida ",
   type: "website",
-  ogImage: imageNotFound.src,
-  ogImageAlt: "404 - Página no encontrada", 
+  ogImage: "/404-pagina.webp",
+  ogImageAlt: "404 - Página no encontrada",
 };
-
 ---
 
 <BaseLayout meta={meta}>
-  <div class="container flex flex-col items-center justify-center py-20">
-    <h1 class="text-4xl text-[#FBC208]">¡Oops!
-      <span class="text-[#081423]">No encontramos esta noticia</span>
-    </h1>
-    <p class="mt-2">Parece que te perdiste. La página que buscas no existe o fue movida. </p>
-    <span>
-      <a href="javascript:history.back()" class="btn mt-6" aria-label="Volver a la página anterior">Volver</a>
-      <a href="/" class="btn mt-6" aria-label="Ir al inicio">Últimas noticias</a>
-    </span>
+  <div
+    class="container max-w-5xl flex flex-col-reverse lg:flex-row gap-8 items-center justify-center py-6 px-4 lg:py-16 lg:gap-[100px] lg:px-0"
+  >
+    <div class="flex flex-col gap-6 lg:text-left">
+      <h1 class="text-4xl font-semibold text-[#FBC208]">
+        ¡Oops! <span class="font-semibold text-[#081423]"
+          >No encontramos esta noticia</span
+        >
+      </h1>
+      <p class="font-light text-lg">
+        Parece que te perdiste. La página que buscas no existe o fue movida.
+      </p>
+      <div class="flex gap-6 justify-center lg:justify-start">
+        <a
+          href="javascript:history.back()"
+          class="flex gap-2.5 py-3 px-5 bg-[#FBC208] text-white font-semibold rounded-full items-center justify-center"
+          aria-label="Volver a la página anterior"
+        >
+          <ArrowLeft />
+          Volver
+        </a>
+        <a
+          href="/"
+          class="flex gap-2.5 py-3 px-5 bg-[#92929270] text-white font-semibold rounded-full items-center justify-center"
+          aria-label="Ir al inicio"
+        >
+          <News />
+          Últimas noticias
+        </a>
+      </div>
+    </div>
+    <div class="w-[355px] h-[357px]">
+      <img
+        src="../404-pagina.webp"
+        alt="Página no encontrada"
+        class="object-contain w-full h-full"
+      />
+    </div>
   </div>
 </BaseLayout>

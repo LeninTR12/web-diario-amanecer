@@ -4,13 +4,12 @@ import Navbar from "../elements/navbar.astro";
 import MenuDropdown from "../elements/menu-dropdown.astro";
 import { SITE } from "@/lib/config";
 
-import { slide,fade } from 'astro:transitions';
+import { slide, fade } from "astro:transitions";
 ---
 
 <header
-transition:animate={fade({ duration: '0.5s' })}
+  transition:animate={fade({ duration: "0.5s" })}
   class="fixed w-full top-0 border-b border-primary-content/80 dark:border-primary-content/20 bg-[#E3E3E4] z-[99999]"
-
 >
   <TopHeader />
 
@@ -21,7 +20,6 @@ transition:animate={fade({ duration: '0.5s' })}
       <MenuDropdown />
     </div>
     <a href="/" class="text-3xl md:text-4xl font-bold font-serif uppercase">{SITE.title}</a>
-    <span class="lg:hidden size-10">
   </div>
 
   </span>

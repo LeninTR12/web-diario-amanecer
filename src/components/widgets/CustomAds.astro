@@ -6,35 +6,94 @@ import Image from "astro/components/Image.astro";
 const customAds = await pagesHandler.onePageBySlug(API_PAGES.customAds.slug);
 ---
 
-<div class="w-full flex justify-center my-12">
+<div class="w-full flex justify-center px-4 pt-6 lg:px-0 lg:pt-14">
   {
     customAds ? (
       <div
-        class="slider-custom-ads object-cover w-full max-w-[1024px] bg-[#e2ca7b] flex justify-center items-center overflow-hidden mt-2"
+        class="slider-custom-ads flex overflow-hidden mt-2 w-full max-w-[1024px] aspect-[512/175] relative"
         set:html={customAds.content.rendered}
-      ></div>
+        id="customSlider"
+      />
     ) : (
       <Image
         src="/custom-ads.webp"
         alt={API_PAGES.customAds.title}
         width={1024}
         height={350}
-        class=""
-        layout="responsive"
+        class="object-cover w-full max-w-[1024px] aspect-[512/175]"
       />
     )
   }
 </div>
-<style is:global>
-    .slider-custom-ads{
-        flex-direction: row;
-        justify-content: start;
-                
 
-    }
-  .slider-custom-ads>figure.size-large,
-  .slider-custom-ads>figure.size-large>img {
-    max-width: 1024px !important;
-    
+<style is:global>
+  .slider-custom-ads {
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slider-custom-ads::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider-custom-ads > figure {
+    scroll-snap-align: start;
+    flex: 0 0 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slider-custom-ads > figure > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 512 / 175;
   }
 </style>
+
+<script is:inline>
+  let intervalId;
+
+  const startSlider = () => {
+    const slider = document.getElementById("customSlider");
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll("figure");
+    if (!slides.length) return;
+
+    let index = 0;
+    const total = slides.length;
+
+    intervalId = setInterval(() => {
+      index = index + 1 === total ? 0 : index + 1;
+
+      slider.scrollTo({
+        left: index * slider.clientWidth,
+        behavior: "smooth",
+      });
+    }, 4000);
+  };
+
+  const resetSlider = () => {
+    clearInterval(intervalId);
+    startSlider();
+  };
+
+  const setupSlider = () => {
+    clearInterval(intervalId);
+    setTimeout(() => {
+      resetSlider();
+    }, 100);
+  };
+
+  document.addEventListener("astro:page-load", setupSlider);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      setupSlider();
+    }
+  });
+</script>
