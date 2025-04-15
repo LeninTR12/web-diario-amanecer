@@ -13,7 +13,7 @@ import Location from "@/assets/svgs/location.astro";
 ---
 
 <footer
-  class="w-full bg-white dark:bg-black dark:border-primary-content/20 pt-[64px]"
+  class="w-full relative bg-white dark:bg-black dark:border-primary-content/20 pt-[64px]"
 >
   <button
     onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
@@ -35,7 +35,9 @@ import Location from "@/assets/svgs/location.astro";
     >
       <aside class="flex items-center">
         <p>
-          <strong class="text-4xl font-serif font-serif text-[#FFCA00]">AMANECER</strong>
+          <strong class="text-4xl font-serif font-serif text-[#FFCA00]"
+            >AMANECER</strong
+          >
         </p>
       </aside>
 
@@ -103,10 +105,15 @@ import Location from "@/assets/svgs/location.astro";
             Contacto
           </p>
           <div class="flex flex-col gap-4">
-
-            <span class="font-normal flex gap-2"> <Whatsapp /> +51 990 305 287</span>
-            <span class="font-normal flex gap-2"> <Mail/> info@amanecer.pe</span>
-            <span class="font-normal flex gap-2"> <Location/> Jr. Andalucía Cdra 2</span>
+            <span class="font-normal flex gap-2">
+              <Whatsapp /> +51 990 305 287</span
+            >
+            <span class="font-normal flex gap-2">
+              <Mail /> info@amanecer.pe</span
+            >
+            <span class="font-normal flex gap-2">
+              <Location /> Jr. Andalucía Cdra 2</span
+            >
           </div>
         </nav>
       </div>
@@ -145,4 +152,7 @@ import Location from "@/assets/svgs/location.astro";
       </p>
     </div>
   </div>
+  <span class="absolute bottom-4 right-4 text-xs font-light text-[#757575]"
+    >Dis. & Des. by <a href="https://digitaltangarana.com" class="hover:text-orange-400 transition-all" target="_blank" rel="opener referer" > Digital Tangarana</a></span
+  >
 </footer>
