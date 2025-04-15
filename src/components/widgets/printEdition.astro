@@ -9,16 +9,16 @@ const printEditionPage = await pagesHandler.onePageBySlug(
 );
 ---
 
-<aside class="flex flex-col w-[358px] h-auto gap-2.5">
+<aside class="flex flex-col w-full max-w-[634px] h-auto gap-2.5">
   <div class="flex gap-2.5 text-[#1A346B] w-full">
     <span class="font-sans font-semibold text-base !m-0">EDICIÓN IMPRESA</span>
   </div>
   <Image
     src={printEditionPage?._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
     alt={API_PAGES.printEdition.title}
-    width={358} 
-    height={540}
-    class="w-full h-auto border border-[#e3e3e4] p-1 rounded-md"
+    width={716} 
+    height={1080}
+    class="w-full min-w-full h-auto border border-[#e3e3e4] p-1 rounded-md"
   />
 </aside>
 

@@ -5,14 +5,18 @@ import { getEntry } from "astro:content";
 import PrintEdition from "@/components/widgets/printEdition.astro";
 import Check from "@/assets/svgs/check.astro";
 
-const entry = await getEntry("views", "search");
-
-if (!entry) {
-  return Astro.redirect("/404");
-}
+const meta = {
+  title: "Contacto - Actualidad",
+  metaTitle: "Contacto - Actualidad",
+  description: "Contacto - Actualidad",
+  type: "website",
+  ogImage: "/images/og-image.png",
+  ogImageAlt: "Contacto - Actualidad",
+};
+const { entry } = Astro.props as { entry: entry };
 ---
 
-<BaseLayout meta={entry}>
+<BaseLayout meta={meta}>
   <section
     class="flex w-full max-w-5xl m-auto px-4 py-6 md:justify-between lg:py-16 lg:px-0 md:gap-6"
   >
@@ -111,9 +115,8 @@ if (!entry) {
         </div>
         </span>
         <span class="text-[#5B5B5B] font-light">
-          Acepto las <a href="/politica-privacidad" class="text-[#105eac]"
-            >políticas de privacidad</a
-          > y uso de datos.
+          Acepto las 
+            políticas de privacidad y uso de datos.
         </span>
       </label>
 

@@ -39,7 +39,7 @@ const smallArticlesCategories = smallArticles.map((article) =>
             }
             alt={decode(String(article.title.rendered))}
             loading="eager"
-            class="object-cover rounded-md w-full h-full"
+            class="object-cover rounded-sm w-full h-full"
             width={600}
             height={380}
             layout="responsive"
@@ -48,9 +48,9 @@ const smallArticlesCategories = smallArticles.map((article) =>
         <div class="flex flex-col flex-1 gap-4">
           <div class="flex items-center gap-2 mb-1">
             <div class="flex-1">
-              <h3 class="text-xl lg:group-hover:underline line-clamp-2">
+              <h3 class="text-xl font-semibold lg:group-hover:underline line-clamp-2">
                 <a
-                  class="font-extrabold"
+                  class=""
                   href={`/${smallArticlesCategories[index].slug}/${article.slug}`}
                   title={decode(String(article.title.rendered))}
                 >

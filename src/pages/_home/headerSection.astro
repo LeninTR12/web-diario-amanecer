@@ -9,11 +9,12 @@ type Props = {
 const { title, link_url } = Astro.props;
 ---
 
-<div class="flex items-center justify-between" data-pagefind-ignore="all">
-  <h2 class="text-xl font-bold">
+<div class="flex items-center justify-between mt-6" data-pagefind-ignore="all">
+  <h2 class="font-bold flex gap-2 items-center">
+    <span class="block w-[2px] h-[16px] bg-[#1A346B]"></span>
     <a
     href={link_url}
-    class="flex items-center gap-1 text-sm text-base-content/80 group"
+    class="flex items-center gap-1 text-lg font-sans group uppercase text-[#1A346B]"
   > {title}
    </a>
 </h2>
