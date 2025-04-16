@@ -1,4 +1,3 @@
-import { string } from "astro:schema";
 import { getSearchPosts } from "./wpApi";
 import { encode } from "html-entities";
 import type { Article } from "../types";
