@@ -53,7 +53,11 @@ import Icon from "../bases/icon.astro";
   </div>
 </div>
 <script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
+  
+  document.addEventListener('astro:after-swap', topBarHandler);
+  document.addEventListener("DOMContentLoaded", topBarHandler);
+  
+  function topBarHandler(){
     const topBar = document.getElementById("top-bar");
     const heightTopBar = getComputedStyle(topBar).height;
     const header = document.querySelector("header");
@@ -61,7 +65,7 @@ import Icon from "../bases/icon.astro";
     window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
 
-      topBarHandler(scrollY);
+      hiddenTopBar(scrollY);
       
     });
 
@@ -77,11 +81,11 @@ import Icon from "../bases/icon.astro";
       clearTimeout(timeout);
 
       const scrollY = window.scrollY;
-      topBarHandler(scrollY);
+      hiddenTopBar(scrollY);
     });
     
 
-    function topBarHandler(scrollY){
+    function hiddenTopBar(scrollY){
       if (scrollY > parseInt(heightTopBar)) {
         topBar.style.height = "0px";
         header.style.boxShadow = "0px 2px 6px #8f8f8fc2";
@@ -91,5 +95,5 @@ import Icon from "../bases/icon.astro";
       }
     }
 
-  });
+  };
 </script>

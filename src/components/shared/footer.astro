@@ -33,9 +33,9 @@ import Location from "@/assets/svgs/location.astro";
     <div
       class="flex flex-col py-4 gap-4 lg:gap-8 md:items-center md:justify-center"
     >
-      <aside class="flex items-center">
+      <aside class="flex items-center justify-center">
         <p>
-          <strong class="text-4xl font-serif font-serif text-[#FFCA00]"
+          <strong class="text-4xl font-serif text-[#FFCA00]"
             >AMANECER</strong
           >
         </p>
@@ -45,11 +45,11 @@ import Location from "@/assets/svgs/location.astro";
         <div class="flex flex-col gap-4 w-full lg:w-1/2 lg:gap-8">
           <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
             <p
-              class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3"
+              class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3 w-full text-center md:text-left"
             >
               Nuestras categorías
             </p>
-            <div class="flex flex-col gap-2 lg:flex-row lg:flex-wrap lg:gap-6">
+            <div class="flex flex-col gap-2 items-center lg:flex-row lg:items-start lg:flex-wrap lg:gap-6 ">
               {
                 NAVIGATION_LINKS.map(({ href, text, target }) => (
                   <a href={href} class="font-normal" target={target ?? "_self"}>
@@ -62,13 +62,21 @@ import Location from "@/assets/svgs/location.astro";
 
           <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
             <p
-              class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3"
+              class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3 w-full text-center md:text-left"
             >
               Enlaces de interés
             </p>
-            <div class="flex flex-col gap-2 lg:flex-row lg:gap-6">
+            <div class="flex flex-col items-center gap-2 lg:flex-row lg:items-start lg:gap-6 ">
               {
                 SCOPE_LINKS.map(({ href, text, target }) => (
+                  <a href={href} class="font-normal" target={target ?? "_self"}>
+                    {text}
+                  </a>
+                ))
+              }
+              <span class=" hidden font-normal lg:flex ">|</span>
+              {
+                OTHER_LINKS.map(({ href, text, target }) => (
                   <a href={href} class="font-normal" target={target ?? "_self"}>
                     {text}
                   </a>
@@ -78,81 +86,88 @@ import Location from "@/assets/svgs/location.astro";
           </nav>
         </div>
 
-        <nav class="flex flex-col gap-2 text-base lg:text-sm font-semibold">
+        <div class="flex flex-col gap-2 text-base lg:text-sm font-semibold items-center md:items-start">
           <p
-            class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3"
+            class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3 w-full text-center md:text-left"
           >
             Diario Amanecer
           </p>
 
-          <p class="font-normal max-w-[200px]">
+          <p class="font-normal max-w-[200px] w-full text-center md:text-left">
             Una propuesta de prensa escrita desde el Alto Mayo para toda la
-            región San Martín
+            región San Martín
           </p>
-          {
-            OTHER_LINKS.map(({ href, text, target }) => (
-              <a href={href} class="font-normal" target={target ?? "_self"}>
-                {text}
-              </a>
-            ))
-          }
-        </nav>
+        </div>
 
-        <nav class="flex flex-col gap-2 text-base lg:text-sm font-light">
+        <nav class="flex flex-col items-center gap-2 text-base lg:text-sm font-light md:items-start">
           <p
-            class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3"
+            class="font-semibold font-serif text-lg border-y border-[#E3E3E4] py-3 w-full text-center md:text-left"
           >
             Contacto
           </p>
-          <div class="flex flex-col gap-4">
-            <span class="font-normal flex gap-2">
-              <Whatsapp /> +51 990 305 287</span
+          <div class="flex flex-col gap-4 items-center md:items-start">
+            <a
+              class="font-normal flex gap-2"
+              href="https://wa.me/51990305287"
+              target="_blank"
             >
-            <span class="font-normal flex gap-2">
-              <Mail /> info@amanecer.pe</span
-            >
-            <span class="font-normal flex gap-2">
-              <Location /> Jr. Andalucía Cdra 2</span
-            >
+              <Whatsapp />
+              +51 990 305 287
+            </a>
+            <a class="font-normal flex gap-2" href="mailto:info@amanecer.pe">
+              <Mail />
+              info@amanecer.pe
+            </a>
+            <a
+              class="font-normal flex gap-2"
+              href="https://maps.app.goo.gl/szQznp94e2VdX1199"
+              target="_blank"
+              >
+              <Location />
+              Jr. Andalucía Cdra 2
+            </a>
           </div>
         </nav>
       </div>
 
-      <div class="flex flex-col gap-4">
-        <div class="flex flex-col gap-4">
-          <p class="font-bold text-lg lg:text-center font-serif">
-            Visítanos en:
-          </p>
-          <ul class="flex gap-4">
-            {
-              SOCIAL_LINKS.map(({ href, icon, text, target }) => (
-                <li>
-                  <a
-                    href={href}
-                    class="link link-hover"
-                    target={target ?? "_blank"}
-                    title={text}
-                    aria-label={text}
-                  >
-                    <Icon icon={icon} />
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+      <div class="flex flex-col items-center mt-4 gap-4 md:items-start">
+        <p class="font-bold text-lg lg:text-center font-serif">Visítanos en:</p>
+        <ul class="flex gap-4">
+          {
+            SOCIAL_LINKS.map(({ href, icon, text, target }) => (
+              <li>
+                <a
+                  href={href}
+                  class="link link-hover"
+                  target={target ?? "_blank"}
+                  title={text}
+                  aria-label={text}
+                >
+                  <Icon icon={icon} />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </div>
 
     <div
       class="flex flex-col border-t border-[#E3E3E4] py-3 items-center justify-center"
     >
-      <p class="font-serif">
+      <p class="font-serif text-center">
         © 2025 Diario Amanecer. Todos los derechos reservados.
       </p>
     </div>
   </div>
   <span class="absolute bottom-4 right-4 text-xs font-light text-[#757575]"
-    >Dis. & Des. by <a href="https://digitaltangarana.com" class="hover:text-orange-400 transition-all" target="_blank" rel="opener referer" > Digital Tangarana</a></span
+    >Dis. & Des. by <a
+      href="https://digitaltangarana.com"
+      class="hover:text-orange-400 transition-all"
+      target="_blank"
+      rel="opener referer"
+    >
+      Digital Tangarana</a
+    ></span
   >
 </footer>
