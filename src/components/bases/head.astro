@@ -1,5 +1,4 @@
 ---
-import Roboto from "@/assets/fonts/roboto.css";
 import { ClientRouter } from "astro:transitions";
 import "@/assets/styles/globals.css";
 import { SITE } from "@/lib/config";
@@ -79,6 +78,5 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
       </>
     ) : null
   }
-
   <ClientRouter />
 </head>
