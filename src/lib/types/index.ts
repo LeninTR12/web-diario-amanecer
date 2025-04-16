@@ -101,3 +101,9 @@ export type Page = {
                   "wp:featuredmedia": any[]
                   };
 }
+
+export type cacheResponse = {
+  slug: string
+  date : number,
+  data : Page[] | Article[] | Category | any
+}

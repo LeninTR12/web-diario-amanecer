@@ -1,5 +1,9 @@
 import type { Link } from "../types";
 
+export const CACHE = {
+  cacheTime : 30 //time at minutes
+}
+
 export const SITE = {
   title: "Amanecer",
   description: " Una propuesta de prensa escrita desde el Alto Mayo para toda la región San Martín",
@@ -100,7 +104,7 @@ export const SOCIAL_LINKS: Link[] = [
     icon: "youtube",
   },
   {
-    href: "https://wa.me/51921402321",
+    href: "https://wa.me/51921402321?text=Hola%20Diario%20Amanecer.",
     text: "Whatsapp",
     icon: "whatsapp",
   },
