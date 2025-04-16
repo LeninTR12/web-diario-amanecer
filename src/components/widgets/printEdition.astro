@@ -13,8 +13,8 @@ const printEditionPage = await pagesHandler.onePageBySlug(
   <div class="flex gap-2.5 text-[#1A346B] w-full">
     <span class="font-sans font-semibold text-base !m-0">EDICIÓN IMPRESA</span>
   </div>
-  <Image
-    src={printEditionPage?._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
+  <img
+    src={printEditionPage?._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound.src}
     alt={API_PAGES.printEdition.title}
     width={716} 
     height={1080}

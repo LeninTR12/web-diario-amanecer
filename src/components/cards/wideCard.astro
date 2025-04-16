@@ -28,12 +28,11 @@ const { category, article, isLast } = Astro.props;
     ]}
   >
     <div class="flex w-full aspect-[5/3] lg:w-[282px] lg:min-w-[282px] lg:aspect-[47/28]">
-      <Image
-        src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound}
+      <img
+        src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound.src}
         alt={decode(String(article.title.rendered))}
         width={282}
         height={168} 
-        layout="responsive"
         loading={"eager"}
         class="object-cover rounded-[2px] w-full h-full !max-w-none !max-h-none "
       />

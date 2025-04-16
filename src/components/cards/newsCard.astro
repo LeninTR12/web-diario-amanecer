@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import Divider from "../bases/divider.astro";
 import imageNotFound from "@/assets/images/404.webp";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import type { Article } from "@/lib/types";
@@ -20,14 +18,13 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
 
 <article class="flex flex-col w-full gap-4">
   <div class="aspect-video overflow-hidden rounded-sm">
-    <Image
+    <img
       src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
-        imageNotFound}
+        imageNotFound.src}
       alt={decode(String(article.title.rendered))}
       width={750}
       height={450}
-      loading={index < 3 ? "eager" : "lazy"}
-      layout="responsive"
+      loading={"lazy"}
       class="w-full h-full object-cover"
     />
   </div>

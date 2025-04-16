@@ -19,10 +19,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   experimental: {
-    responsiveImages: false,
+    responsiveImages: true,
     session: true,
   },
-  images: {
-    domains:["api2.amanecer.pe"],
-  }
 });

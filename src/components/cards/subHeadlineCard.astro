@@ -40,9 +40,9 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
           : "h-[60px] aspect-[17/10]",
     ]}
   >
-    <Image
+    <img
       src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
-        imageNotFound}
+        imageNotFound.src}
       alt={decode(String(article.title.rendered))}
       loading="eager"
       class:list={[
