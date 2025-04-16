@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 import { SITE } from "./src/lib/config";
 import tailwindcss from "@tailwindcss/vite";
-import netlify from "@astrojs/netlify"
+import netlify from "@astrojs/netlify";
 
 import sitemap from "@astrojs/sitemap";
 
@@ -22,4 +22,7 @@ export default defineConfig({
     responsiveImages: true,
     session: true,
   },
+  images: {
+    domains:["api2.amanecer.pe"],
+  }
 });
