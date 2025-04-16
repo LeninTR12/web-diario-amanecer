@@ -1,19 +1,20 @@
 ---
-import type { entry } from "@/lib/types";
 import BaseLayout from "@/layouts/base.astro";
 import { getEntry } from "astro:content";
 import PrintEdition from "@/components/widgets/printEdition.astro";
 import Check from "@/assets/svgs/check.astro";
+import { SITE } from "@/lib/config";
+import type { Meta } from "@/lib/types";
 
-const meta = {
-  title: "Contacto - Actualidad",
-  metaTitle: "Contacto - Actualidad",
-  description: "Contacto - Actualidad",
+const meta : Meta = {
+  title: `Contacto - ${SITE.title} `,
+  metaTitle: `Contacto - ${SITE.title} `,
+  description: `Contacta con  ${SITE.author} , tu fuente local de noticias. Envíanos tus preguntas, sugerencias o inquietudes y estaremos encantados de ayudarte`,
   type: "website",
-  ogImage: "/images/og-image.png",
-  ogImageAlt: "Contacto - Actualidad",
+  ogImage: "/favicon-96x96..png",
+  ogImageAlt: `Contacto - ${SITE.title}`,
 };
-const { entry } = Astro.props as { entry: entry };
+
 ---
 
 <BaseLayout meta={meta}>

@@ -15,11 +15,6 @@ export type Link = {
   target?: "_blank" | "_self";
 };
 
-type Author = {
-  name: string;
-  link: string;
-};
-
 export type Meta = {
   title: string;
   metaTitle: string;
