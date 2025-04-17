@@ -102,7 +102,7 @@ export type Page = {
                   };
 }
 
-export type cacheResponse = {
+export type CacheResponse = {
   slug: string
   date : number,
   data : Page[] | Article[] | Category | any

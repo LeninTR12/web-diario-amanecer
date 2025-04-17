@@ -1,12 +1,12 @@
 import { CACHE } from "../config";
-import type { cacheResponse, Page } from "../types";
+import type { CacheResponse, Page } from "../types";
 import { getPageBySlug } from "./wpApi";
 
-let cacheResponsesPage: cacheResponse[] = [];
+let cachePages :CacheResponse[] = [];
 
 export const pagesHandler = {
   onePageBySlug: async (slug: string) => {
-    const cachePage = cacheResponsesPage.filter((cachePage) =>
+    const cachePage = cachePages.filter((cachePage) =>
       cachePage.slug.includes(slug)
     );
 
@@ -19,14 +19,14 @@ export const pagesHandler = {
       }
     }
     const newCacheData = await getOnePageBySlug(slug);
-    const indexCache = cacheResponsesPage.findIndex(
+    const indexCache = cachePages.findIndex(
       (cachePage) => cachePage.slug === slug
     );
 
     if (indexCache !== -1) {
-      cacheResponsesPage[indexCache] = newCacheData;
+      cachePages[indexCache] = newCacheData;
     } else {
-      cacheResponsesPage.push(newCacheData);
+      cachePages.push(newCacheData);
     }
 
     return newCacheData.data[0] as Page;
@@ -41,5 +41,5 @@ async function getOnePageBySlug(slug: string) {
     slug: slug,
     date: date,
     data: data,
-  };
+  } as CacheResponse;
 }
