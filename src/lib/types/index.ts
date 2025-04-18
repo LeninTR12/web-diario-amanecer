@@ -103,7 +103,7 @@ export type Page = {
 }
 
 export type CacheResponse = {
-  slug: string
+  slug: string 
   date : number,
-  data : Page[] | Article[] | Category | any
+  data : Page[] | Article[] | any
 }

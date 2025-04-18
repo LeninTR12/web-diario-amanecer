@@ -14,7 +14,7 @@ import BigArticleCard from "@/components/cards/bigArticleCard.astro";
 const { categoria } = Astro.params;
 
 const categoryXCat = await categoriesHandler.oneCategoryBySlug(categoria as string);
-const categoryXScope = await scopesHandler.oneScopeSlug(categoria as string);
+const categoryXScope = await scopesHandler.oneScopeBySlug(categoria as string);
 const category = categoryXCat || categoryXScope;
 
  if (!category) return Astro.redirect("/404");

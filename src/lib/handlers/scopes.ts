@@ -12,7 +12,7 @@ export const scopesHandler = {
         // }
         return scope as Scope;
     },
-    oneScopeSlug: (scopeSlug: string) => {
+    oneScopeBySlug: (scopeSlug: string) => {
         const scope = ScopeCollection.find((scope:Scope) => scope.slug == scopeSlug);
         // if (!category) {
         //     throw new Error(`Category with slug ${categorySlug} not found`);

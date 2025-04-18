@@ -14,7 +14,7 @@ import { decode } from "html-entities";
 const { categoria, slug } = Astro.params;
 
 const categoryXcat: Category = await categoriesHandler.oneCategoryBySlug(categoria as string);
-const categoryXScope = await scopesHandler.oneScopeSlug(categoria as string);
+const categoryXScope = await scopesHandler.oneScopeBySlug(categoria as string);
 
 const category = categoryXcat || categoryXScope;
 if (!category) return Astro.redirect("/404");
