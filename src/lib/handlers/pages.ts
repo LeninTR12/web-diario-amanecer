@@ -10,9 +10,9 @@ export const pagesHandler = {
     if (cachePage) return cachePage.data[0] as Page;
 
     const newCache = await caching(cachePages, slug, "pages");
-    cachePages = newCache.cacheResponses;
 
-    return newCache.cache.data[0] as Page;
+
+    return newCache.data[0] as Page;
   }
 };
 

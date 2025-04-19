@@ -9,7 +9,7 @@ const cacheTime = CACHE.cacheTime
 export function isCahed(cacheResponses:CacheResponse[], slug : string){
 
     const cacheResponse = cacheResponses.filter((cacheResponse) =>
-        cacheResponse.slug.includes(slug))[0];
+        cacheResponse.slug == slug )[0];
     
         if (cacheResponse) {
           const dateNow = new Date().getTime();
@@ -23,22 +23,49 @@ export function isCahed(cacheResponses:CacheResponse[], slug : string){
 } 
 
 export async function caching(cacheResponses:CacheResponse[], slug: string, typeData: "pages" | "allArticles" |"articlesByCategory"|"articlesByScope"|  "oneArticle" ){
-
+    
     const cache = await getCache(slug, typeData);
     const indexCache = cacheResponses.findIndex(
-      (cacheResponse) => cacheResponse.slug.includes(slug)
+      (cacheResponse) => cacheResponse.slug === slug
     );
+    
+    if( typeData === "oneArticle"  ){
+      if(cache.data[0]){
+        savecache();
+      }
+    }else{
+      savecache();
+    }   
+    return  cache;
 
-    if (indexCache !== -1) {
-        cacheResponses[indexCache] = cache;
-    } else {
-        cacheResponses.push(cache);
-    }
 
-    return {cacheResponses, cache};
-
-
+    function savecache(){
+      if (indexCache !== -1) {
+          cacheResponses[indexCache] = cache;
+      } else {
+          cacheResponses.push(cache);
+      }
+    }   
 } 
+
+export function articleIsCached( arrayCacheResponses:CacheResponse[][] , slug :string){
+  for(const cacheResponses of arrayCacheResponses){
+    for(const cacheResponse of cacheResponses){
+
+       const dateNow = new Date().getTime();
+       const diferenceTime = (dateNow - cacheResponse.date) / (1000*60)
+
+        if(diferenceTime < cacheTime) {
+          const foundArticle = cacheResponse.data.find((article)  => article.slug === slug);
+          if(foundArticle) return foundArticle as Article;
+      }       
+    };
+  };
+
+  return  false;
+
+
+}
 
 
 async function getCache(slug: string, type:string) {
