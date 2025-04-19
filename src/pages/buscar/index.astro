@@ -1,6 +1,7 @@
 ---
-import Search01 from "@/assets/svgs/search-01.astro";
-import BaseLayout from "@/layouts/base.astro";
+import WideCard from "@/components/cards/wideCard.astro";
+import LisLayout from "@/layouts/list.astro";
+import { categoriesHandler } from "@/lib/handlers/categories";
 import { searchHandler } from "@/lib/handlers/search";
 import type { Meta } from "@/lib/types";
 import "@pagefind/default-ui/css/ui.css";
@@ -20,6 +21,8 @@ if (type) {
   });
 }
 
+const title = `Resultados para: ${query}`;
+
 const meta: Meta = {
   title: "",
   metaTitle: "",
@@ -30,24 +33,34 @@ const meta: Meta = {
 };
 ---
 
-<BaseLayout meta={meta}>
-  <form
-    action="/search"
-    method="GET"
-    aria-label="Search"
-    class="flex w-[200px] h-6 bg-white text-[#1A346B] items-center justify-between rounded-full px-3 font-sans"
-  >
-    <input
-      type="text"
-      name="q"
-      placeholder="Buscar"
-      class="bg-transparent text-sm outline-none w-full placeholder-[#1A346B]"
-    />
-    <button type="submit" class="ml-2">
-      <Search01 />
-    </button>
-  </form>
-</BaseLayout>
+<LisLayout meta={meta} headerTitle={title} type="search" >
+  <div class="flex justify-start lg:w-[1024px] max-w-[1024px] ">
+    {searchArticles.length !== 0 
+      ? (
+      <ul class="flex flex-col max-w-[733px] gap-5 flex-1 ">
+        {
+          searchArticles.map((article) => {
+            const category = categoriesHandler.oneCategory(article.categories[0]);
+
+            return (
+              <WideCard
+              category={category}
+              article={article}
+              isLast={searchArticles.lastIndexOf(article) === searchArticles.length - 1}
+              />
+            )
+          })
+        }
+      </ul>
+      
+      <div class="flex " ></div>
+      )
+      :(
+        <span>Sin resultados</span>
+      )
+      }
+      </div>
+</LisLayout>
 
 
 

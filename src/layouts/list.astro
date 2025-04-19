@@ -2,21 +2,38 @@
 import CustomAds from "@/components/widgets/CustomAds.astro";
 import BaseLayout from "./base.astro";
 import type { Meta } from "@/lib/types";
+import FormSearch from "@/pages/buscar/_components/formSearch.astro";
 
 type Props = {
   headerTitle: string;
   meta: Meta;
+  type?: "taxonomy" | "search"
 };
 
-const { meta, headerTitle } = Astro.props;
+const { meta, headerTitle, type="taxonomy" } = Astro.props;
 ---
 
 <BaseLayout meta={meta}>
-  <CustomAds/>
-  <section class="container flex flex-col pb-8 pt-4 gap-5 items-center " data-pagefind-ignore="all">
+  {
+    type === "taxonomy"
+    ?(
+      <CustomAds/>
+    <section class="container flex flex-col pb-8 pt-4 gap-5 items-center " data-pagefind-ignore="all">
     <span class="flex  max-w-[1024px] lg:w-[1024px] border-b-2 border-primary/10 p-1 ">
       <h1 class="text-xl font-medium">{headerTitle}</h1>
     </span>
     <slot />
   </section>
+    )
+    :(
+    <section class="container flex flex-col pb-8 pt-4 gap-5 items-center " data-pagefind-ignore="all">
+    <FormSearch/>
+    <span class="flex  max-w-[1024px] lg:w-[1024px] border-b-2 border-primary/10 p-1 ">
+      <h1 class="text-xl font-medium">{headerTitle}</h1>
+    </span>
+    <slot />
+  </section>
+    )
+  }
+  
 </BaseLayout>
