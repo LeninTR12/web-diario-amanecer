@@ -6,7 +6,7 @@ import Icon from "../bases/icon.astro";
 ---
 
 <div
-  class="flex w-full h-[40px] bg-[#1A346B] items-center justify-center transition-all duration-300 ease-in-out overflow-hidden hover:min-h-[40px]"
+  class="flex w-full h-[40px] bg-[#1A346B] items-center justify-center transition-all duration-400 ease-in-out overflow-hidden hover:min-h-[40px]"
   id="top-bar"
 >
   <div
@@ -59,40 +59,26 @@ import Icon from "../bases/icon.astro";
   
   function topBarHandler(){
     const topBar = document.getElementById("top-bar");
-    const heightTopBar = getComputedStyle(topBar).height;
+    const originalTopBarHeight = getComputedStyle(topBar).height;
     const header = document.querySelector("header");
+    let lastScroll = 0;
 
     window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
 
-      hiddenTopBar(scrollY);
-      
+      hiddenTopBar(scrollY, lastScroll);  
+      if(scrollY === 0) header.style.boxShadow = "none";
+
+      lastScroll = scrollY  
     });
 
-    let timeout = null;
-    header.addEventListener('mouseenter', ()=>{
-      timeout = setTimeout(()=>{
-        topBar.style.height = heightTopBar;
-      },200);
-      
-    })
-
-    header.addEventListener('mouseleave', ()=>{
-      clearTimeout(timeout);
-
-      const scrollY = window.scrollY;
-      hiddenTopBar(scrollY);
-    });
-    
-
-    function hiddenTopBar(scrollY){
-      if (scrollY > parseInt(heightTopBar)) {
+    function hiddenTopBar(scrollY, lastScroll){
+      if (scrollY > lastScroll) {
         topBar.style.height = "0px";
-        header.style.boxShadow = "0px 2px 6px #8f8f8fc2";
+        header.style.boxShadow = "0px 2px 4px #00000059";
       } else {
-        topBar.style.height = heightTopBar;
-        header.style.boxShadow = "none";
-      }
+        topBar.style.height = originalTopBarHeight;        
+      }      
     }
 
   };

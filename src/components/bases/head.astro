@@ -63,6 +63,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
   <meta property="twitter:image" content={meta.ogImage} />
   <meta property="twitter:image:alt" content={meta.ogImageAlt} />
 
+  <!-- Global JS -->
+  <script type='text/javascript'>
+    document.oncontextmenu = ()=> false;
+  </script>
+
   {
     isArticleMeta(meta) ? (
       <>
