@@ -30,15 +30,17 @@ export const formatDateTime = (isoDate: string) => {
   const date = toZonedTime(new Date(isoDate), TIMEZONE); 
   const isToday = toZonedTime(new Date(), TIMEZONE);
 
+  const datePlus = new Date(new Date(isoDate).getTime() + (5*60*60*1000));
+
   const limitDays = TIMES_CONF.maxDistanceDays;
   
   const isDistance = (isToday.getTime() - date.getTime()) < (limitDays);
 
   if(isDistance){
-    return getDateDistance(date.toISOString());
+    return getDateDistance(datePlus.toISOString());
   }
     
-  return formatDate(date.toISOString(), "short");
+  return formatDate(datePlus.toISOString(), "short");
   
 
 }
