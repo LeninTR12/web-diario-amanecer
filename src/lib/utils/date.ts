@@ -40,7 +40,7 @@ export const formatDateTime = (isoDate: string) => {
     return getDateDistance(datePlus.toISOString());
   }
     
-  return formatDate(datePlus.toISOString(), "short");
+  return formatDate(isoDate, "short");
   
 
 }
