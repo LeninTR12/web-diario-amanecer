@@ -1,7 +1,8 @@
 import type { Link } from "../types";
 
-export const CACHE = {
-  cacheTime : 30 //time at minutes
+export const TIMES_CONF = {
+  maxCacheTime : 30, //time at minutes
+  maxDistanceDays: (6*24*60*60*1000) //time at milliseconds
 }
 
 export const SITE = {
@@ -10,6 +11,7 @@ export const SITE = {
   author: "Diario Amanecer",
   url: "https://amanecer.pe",
   locale: "es-Es",
+  timeZone: "America/Lima",
   dir: "ltr",
   charset: "UTF-8",
   basePath: "/",

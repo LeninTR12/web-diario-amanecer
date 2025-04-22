@@ -1,9 +1,9 @@
-import { CACHE } from "../config";
+import { TIMES_CONF } from "../config";
 import type { Article, CacheResponse, Page } from "../types";
 import { getPageBySlug, getPostBySlug, getPosts, getPostsByCategory, getPostsByScope } from "./wpApi";
 
 
-const cacheTime = CACHE.cacheTime
+const cacheTime = TIMES_CONF.maxCacheTime
 
 
 export function isCahed(cacheResponses:CacheResponse[], slug : string){
