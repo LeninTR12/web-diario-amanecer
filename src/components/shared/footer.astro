@@ -4,12 +4,14 @@ import {
   SOCIAL_LINKS,
   OTHER_LINKS,
   SCOPE_LINKS,
+  COMPANY_DATA
 } from "@/lib/config";
 import Icon from "../bases/icon.astro";
 import CircleArrowUp from "@/assets/svgs/circle-arrow-up.astro";
 import Whatsapp from "@/assets/svgs/whatsapp.astro";
 import Mail from "@/assets/svgs/mail.astro";
 import Location from "@/assets/svgs/location.astro";
+import { SITE } from "@/lib/config";
 ---
 
 <footer
@@ -35,8 +37,8 @@ import Location from "@/assets/svgs/location.astro";
     >
       <aside class="flex items-center justify-center">
         <p>
-          <strong class="text-4xl font-serif text-[#FFCA00]"
-            >AMANECER</strong
+          <strong class="text-4xl font-serif text-[#FFCA00] uppercase"
+            >{SITE.title}</strong
           >
         </p>
       </aside>
@@ -108,23 +110,26 @@ import Location from "@/assets/svgs/location.astro";
           <div class="flex flex-col gap-4 items-center md:items-start">
             <a
               class="font-normal flex gap-2"
-              href="https://wa.me/51990305287"
+              href=`https://wa.me/${COMPANY_DATA.contact.Whatsapp}`
               target="_blank"
             >
               <Whatsapp />
-              +51 990 305 287
+              {`+${COMPANY_DATA.contact.Whatsapp.slice(0,2)}
+               ${COMPANY_DATA.contact.Whatsapp.slice(2,5)} 
+               ${COMPANY_DATA.contact.Whatsapp.slice(5,8)} 
+               ${COMPANY_DATA.contact.Whatsapp.slice(8,11)}`}
             </a>
-            <a class="font-normal flex gap-2" href="mailto:info@amanecer.pe">
+            <a class="font-normal flex gap-2" href=`mailto:${COMPANY_DATA.contact.email}`>
               <Mail />
-              info@amanecer.pe
+              {COMPANY_DATA.contact.email}
             </a>
             <a
               class="font-normal flex gap-2"
-              href="https://maps.app.goo.gl/szQznp94e2VdX1199"
+              href={COMPANY_DATA.contact.address.link}
               target="_blank"
               >
               <Location />
-              Jr. Andalucía Cdra 2
+              {COMPANY_DATA.contact.address.text}
             </a>
           </div>
         </nav>
@@ -160,10 +165,10 @@ import Location from "@/assets/svgs/location.astro";
       </p>
     </div>
   </div>
-  <span class="absolute bottom-4 right-4 text-xs font-light text-[#757575]"
-    >Dis. & Des. by <a
+  <span class="absolute bottom-4 right-4 font-[sans-serif] text-xs font-light text-[#757575]"
+    >Desarrollo: <a
       href="https://digitaltangarana.com"
-      class="hover:text-orange-400 transition-all"
+      class="hover:text-[#fda260] active:text-[#FF7A1C] text-[#FF7A1C] transition-all"
       target="_blank"
       rel="opener referer"
     >
