@@ -6,11 +6,11 @@ import Image from "astro/components/Image.astro";
 const customAds = await pagesHandler.onePageBySlug(API_PAGES.customAds.slug);
 ---
 
-<div class="w-full flex justify-center px-4 pt-6 lg:px-0 lg:pt-14">
+<div class="w-full flex justify-center px-4 pt-0 pb-4 lg:pt-8 lg:px-0 ">
   {
     customAds ? (
       <div
-        class="slider-custom-ads flex overflow-hidden mt-2 w-full max-w-[1024px] aspect-[512/175] relative"
+        class="slider-custom-ads flex overflow-hidden w-full max-w-[1024px] aspect-[512/175] relative"
         set:html={customAds.content.rendered}
         id="customSlider"
       />

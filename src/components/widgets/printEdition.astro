@@ -9,9 +9,9 @@ const printEditionPage = await pagesHandler.onePageBySlug(
 );
 ---
 
-<aside class="flex flex-col w-full max-w-[634px] h-auto gap-2.5">
+<aside class="flex flex-col w-full md:col-span-2 max-w-[634px] h-auto gap-2.5 my-16 md:my-0 lg:mt-4">
   <div class="flex gap-2.5 text-[#1A346B] w-full">
-    <span class="font-sans font-semibold text-base !m-0">EDICIÓN IMPRESA</span>
+    <span class="font-sans font-semibold text-base !m-0 flex gap-2 items-center">  <span class="block w-[2px] h-[16px] bg-[#1A346B]"></span>EDICIÓN IMPRESA</span>
   </div>
   <img
     src={printEditionPage?._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound.src}
