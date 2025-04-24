@@ -1,9 +1,10 @@
-import {  parseISO, format, formatDistanceToNowStrict } from "date-fns";
+import {parseISO, format, formatDistanceToNowStrict } from "date-fns";
 import {toZonedTime  } from 'date-fns-tz';
 import { es } from "date-fns/locale";
 import { SITE, TIMES_CONF } from "../config";
 
 const TIMEZONE = SITE.timeZone;
+const UTC = SITE.utc;
 
 export const getDateDistance = (date: string) =>
   formatDistanceToNowStrict(parseISO(date), {
@@ -19,6 +20,7 @@ export const formatDate = (
   formatDate: "long" | "short" = "long"
 ) => {
   const parseDate = parseISO(date);
+
   if (formatDate === "short") {
     return format(parseDate, "MMMM dd, yyyy", {locale: es});
   }
@@ -27,20 +29,19 @@ export const formatDate = (
 };
 
 export const formatDateTime = (isoDate: string) => {
-  const date = toZonedTime(new Date(isoDate), TIMEZONE); 
-  const isToday = toZonedTime(new Date(), TIMEZONE);
 
-  const datePlus = new Date(new Date(isoDate).getTime() + (5*60*60*1000));
+  const date = parseISO(isoDate + UTC); 
+  const isToday = new Date();
 
   const limitDays = TIMES_CONF.maxDistanceDays;
   
   const isDistance = (isToday.getTime() - date.getTime()) < (limitDays);
 
   if(isDistance){
-    return getDateDistance(datePlus.toISOString());
+    return getDateDistance(date.toISOString());
   }
     
-  return formatDate(isoDate, "short");
+  return formatDate(date.toISOString(), "short");
   
 
 }

@@ -13,6 +13,7 @@ export const SITE = {
   url: "https://amanecer.pe",
   locale: "es-Es",
   timeZone: "America/Lima",
+  utc : "-05:00",
   dir: "ltr",
   charset: "UTF-8",
   basePath: "/",
