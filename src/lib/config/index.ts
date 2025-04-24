@@ -1,4 +1,3 @@
-import Whatsapp from "@/assets/svgs/whatsapp.astro";
 import type { Link } from "../types";
 
 export const TIMES_CONF = {
@@ -27,7 +26,7 @@ export const COMPANY_DATA = {
       text: "Jr. Andalucía Cdra 3",
       link: "https://maps.app.goo.gl/szQznp94e2VdX1199"
     },
-    Whatsapp: "51921402321",
+    whatsapp: "51921402321",
     email: "info@amanecer.pe"
   }
 }
@@ -120,7 +119,7 @@ export const SOCIAL_LINKS: Link[] = [
     icon: "youtube",
   },
   {
-    href: `https://wa.me/${COMPANY_DATA.contact.Whatsapp}?text=Hola%20Diario%20Amanecer.`,
+    href: `https://wa.me/${COMPANY_DATA.contact.whatsapp}?text=Hola%20Diario%20Amanecer.`,
     text: "Whatsapp",
     icon: "whatsapp",
   },

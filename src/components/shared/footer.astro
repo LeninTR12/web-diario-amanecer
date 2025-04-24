@@ -110,14 +110,14 @@ import { SITE } from "@/lib/config";
           <div class="flex flex-col gap-4 items-center md:items-start">
             <a
               class="font-normal flex gap-2"
-              href=`https://wa.me/${COMPANY_DATA.contact.Whatsapp}`
+              href=`https://wa.me/${COMPANY_DATA.contact.whatsapp}`
               target="_blank"
             >
               <Whatsapp />
-              {`+${COMPANY_DATA.contact.Whatsapp.slice(0,2)}
-               ${COMPANY_DATA.contact.Whatsapp.slice(2,5)} 
-               ${COMPANY_DATA.contact.Whatsapp.slice(5,8)} 
-               ${COMPANY_DATA.contact.Whatsapp.slice(8,11)}`}
+              {`+${COMPANY_DATA.contact.whatsapp.slice(0,2)}
+               ${COMPANY_DATA.contact.whatsapp.slice(2,5)} 
+               ${COMPANY_DATA.contact.whatsapp.slice(5,8)} 
+               ${COMPANY_DATA.contact.whatsapp.slice(8,11)}`}
             </a>
             <a class="font-normal flex gap-2" href=`mailto:${COMPANY_DATA.contact.email}`>
               <Mail />
