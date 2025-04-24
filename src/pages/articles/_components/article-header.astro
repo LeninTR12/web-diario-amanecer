@@ -1,14 +1,5 @@
 ---
-import { Image, Picture } from "astro:assets";
-import { formatDate } from "@/lib/utils/date";
-import ResourcesAdd from "@/assets/svgs/resources-add.astro";
-import Time04 from "@/assets/svgs/time-04.astro";
-import Calendar04 from "@/assets/svgs/calendar-04.astro";
-import Divider from "@/components/bases/divider.astro";
-import { categoriesHandler } from "@/lib/handlers/categories";
-// import { authorsHandler } from "@/lib/handlers/authors";
-import Share from "@/components/elements/share.astro";
-import type { Article, Category } from "@/lib/types";
+import type { Article } from "@/lib/types";
 import imageNotFound from "src/assets/images/404.webp";
 import { decode } from "html-entities";
 import ArrowLeft from "@/assets/svgs/arrow-left.astro";
@@ -46,7 +37,7 @@ const { article } = Astro.props;
       width={1024}
       height={576}
       loading="eager"
-      class="w-full h-full object-cover rounded-sm"
+      class="w-full h-full object-cover rounded-sm aspect-[16/9] "
     />
   </div>
 </section>
