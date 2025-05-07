@@ -1,7 +1,6 @@
 import { getSearchPosts } from "./wpApi";
-import { encode } from "html-entities";
 import type { Article } from "../types";
-import { serialize } from "v8";
+
 
 
 export const searchHandler = {

@@ -53,7 +53,7 @@ const smallArticlesCategories = smallArticles.map((article) =>
                   href={`/${smallArticlesCategories[index].slug}/${article.slug}`}
                   title={decode(String(article.title.rendered))}
                 >
-                  {article.title.rendered}
+                  {decode(String(article.title.rendered))}
                 </a>
               </h3>
             </div>

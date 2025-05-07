@@ -1,4 +1,3 @@
-import type { HTMLString } from "astro/runtime/server/escape.js";
 
 const API_URL = import.meta.env.API_URL
 
