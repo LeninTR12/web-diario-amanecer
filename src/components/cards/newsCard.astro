@@ -4,7 +4,6 @@ import { categoriesHandler } from "@/lib/handlers/categories";
 import type { Article } from "@/lib/types";
 import { formatDateTime } from "@/lib/utils/date";
 import { decode } from "html-entities";
-import { SITE } from "@/lib/config";
 
 type Props = {
   article: Article;
@@ -24,7 +23,8 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
       alt={decode(String(article.title.rendered))}
       width={750}
       height={450}
-      loading={"lazy"}
+      loading="eager"
+      draggable="false"
       class="w-full h-full object-cover"
     />
   </div>

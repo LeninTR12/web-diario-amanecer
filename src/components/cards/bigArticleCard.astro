@@ -1,6 +1,5 @@
 ---
 import type { Article, Category } from "@/lib/types";
-import { Image } from "astro:assets";
 import { decode } from "html-entities";
 import imageNotFound from "src/assets/images/404.webp";
 import { formatDateTime } from "@/lib/utils/date";
@@ -20,7 +19,8 @@ const { article, category } = Astro.props as Props;
       alt={decode(String(article.title.rendered))}
       width={720}
       height={430}
-      loading={"eager"}
+      loading="eager"
+      draggable="false"
       class="rounded-sm"
     />
   </div>

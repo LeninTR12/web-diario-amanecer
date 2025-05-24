@@ -10,7 +10,7 @@ import { scopesHandler } from "@/lib/handlers/scopes";
 import Content from "../articles/_components/article-content.astro";
 import { SITE } from "@/lib/config";
 import { decode } from "html-entities";
-import { cleanArticleExcerp } from "@/lib/utils/letter";
+import { HTMLToString } from "@/lib/utils/letter";
 
 const { categoria, slug } = Astro.params;
 
@@ -25,9 +25,9 @@ const article:Article = await articlesHandler.oneArticleBySlug(slug as string);
 if (!article) return Astro.redirect("/404");
 
 const meta: ArticleMeta = {
-  title: `${decode(String (article.title.rendered))} - Noticias en ${category.name} - ${SITE.title}`,
+  title: `${HTMLToString(decode(String(article.title.rendered)))} | Noticias en ${category.name} - ${SITE.title}`,
   metaTitle: decode(String (article.title.rendered)),
-  description: cleanArticleExcerp(article.excerpt.rendered),
+  description: HTMLToString(article.excerpt.rendered),
   type: "article",
   ogImage: article._embedded["wp:featuredmedia"]?.[0]["source_url"],
   ogImageAlt:decode(String (article.title.rendered)),

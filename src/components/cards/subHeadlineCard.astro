@@ -43,6 +43,7 @@ const category: Category = categoriesHandler.oneCategory(article.categories[0]);
         imageNotFound.src}
       alt={decode(String(article.title.rendered))}
       loading="eager"
+      draggable="false"
       class:list={[
         "object-cover w-full h-full",
         !type

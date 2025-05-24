@@ -43,7 +43,27 @@ export type Category = Scope & {
   parent?:      number;
 }
 
-export type Article = {
+export type Article ={
+  id : number;
+  date: string;
+  slug: string;
+  title: string;
+  content: HTMLString;
+  excerpt: {
+    rendered: HTMLString;
+    text: string;
+  }
+  category: Category;
+  ambito: Category;
+  media: {
+    original: string;
+    thumbnail: string;
+    medium: string;
+    full: string;
+    alt: string;
+  }
+}
+export type originArticle = {
   id:             string;
   date:           string;
   date_gmt:       string;
