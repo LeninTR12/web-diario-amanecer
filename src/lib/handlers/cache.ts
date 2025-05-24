@@ -1,5 +1,5 @@
 import { TIMES_CONF } from "../config";
-import type { Article, CacheResponse, Page } from "../types";
+import type { originArticle, CacheResponse, Page } from "../types";
 import { getPageBySlug, getPostBySlug, getPosts, getPostsByCategory, getPostsByScope } from "./wpApi";
 
 
@@ -57,7 +57,7 @@ export function articleIsCached( arrayCacheResponses:CacheResponse[][] , slug :s
 
         if(diferenceTime < cacheTime) {
           const foundArticle = cacheResponse.data.find((article)  => article.slug === slug);
-          if(foundArticle) return foundArticle as Article;
+          if(foundArticle) return foundArticle as originArticle;
       }       
     };
   };
@@ -71,7 +71,7 @@ export function articleIsCached( arrayCacheResponses:CacheResponse[][] , slug :s
 async function getCache(slug: string, type:string) {
 
     const date = new Date().getTime();
-    let data : Article[] | Page[] = [];
+    let data : originArticle[] | Page[] = [];
 
     switch (type){
         case "pages":

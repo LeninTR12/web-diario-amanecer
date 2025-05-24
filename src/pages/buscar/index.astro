@@ -3,17 +3,18 @@ import WideCard from "@/components/cards/wideCard.astro";
 import LisLayout from "@/layouts/list.astro";
 import { categoriesHandler } from "@/lib/handlers/categories";
 import { searchHandler } from "@/lib/handlers/search";
-import type { Meta } from "@/lib/types";
+import type { Article, Meta } from "@/lib/types";
+import { parseArticles } from "@/lib/utils/objects";
 import "@pagefind/default-ui/css/ui.css";
 
 const url = new URL(Astro.request.url);
 const query = url.searchParams.get("q");
 const type = url.searchParams.get("t");
 
-const searchArticles = query ? await searchHandler.searchArticles(query) : [];
+const foundArticles : Article[] = query ? parseArticles(await searchHandler.searchArticles(query)) : [];
 
 if (type) {
-  return new Response(JSON.stringify(searchArticles), {
+  return new Response(JSON.stringify(foundArticles), {
     status: 200,
     headers: {
       "Content-Type": "application/json",
@@ -35,21 +36,17 @@ const meta: Meta = {
 
 <LisLayout meta={meta} headerTitle={title} type="search" >
   <div class="flex justify-start lg:w-[1024px] max-w-[1024px] ">
-    {searchArticles.length !== 0 
+    {foundArticles.length !== 0 
       ? (
       <ul class="flex flex-col max-w-[733px] gap-5 flex-1 ">
         {
-          searchArticles.map((article) => {
-            const category = categoriesHandler.oneCategory(article.categories[0]);
-
-            return (
-              <WideCard
-              category={category}
-              article={article}
-              isLast={searchArticles.lastIndexOf(article) === searchArticles.length - 1}
-              />
-            )
-          })
+          foundArticles.map((article) => 
+          (
+            <WideCard
+            article={article}
+            isLast={foundArticles.lastIndexOf(article) === foundArticles.length - 1}
+            />
+          ))
         }
       </ul>
       

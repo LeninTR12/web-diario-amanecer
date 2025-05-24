@@ -1,5 +1,5 @@
 import { getSearchPosts } from "./wpApi";
-import type { Article } from "../types";
+import type { originArticle } from "../types";
 
 
 
@@ -9,6 +9,6 @@ export const searchHandler = {
     const allArticles = await getSearchPosts(encodedQuery);
     const articles = allArticles.slice(0, 10);
       
-    return articles as Article[];
+    return articles as originArticle[];
   },
 }

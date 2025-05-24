@@ -4,8 +4,8 @@ import { HTMLToString } from "./letter";
 import { categoriesHandler } from "../handlers/categories";
 import { scopesHandler } from "../handlers/scopes";
 
-export const parseArticle = (article :originArticle)=>{
-    const parseArticle: Article = {
+export function parseArticle(article :originArticle){
+    return  {
         id : Number(article.id),
         date : article.date,
         slug : article.slug,
@@ -25,7 +25,9 @@ export const parseArticle = (article :originArticle)=>{
             alt: HTMLToString(decode(String(article.title.rendered))),
         }
 
-    }
+    } as Article;
+}
 
-    return parseArticle;
+export function parseArticles(articles:originArticle[]){
+    return articles.map(article => parseArticle(article)) as Article[];
 }

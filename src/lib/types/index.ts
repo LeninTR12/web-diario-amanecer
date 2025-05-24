@@ -125,5 +125,5 @@ export type Page = {
 export type CacheResponse = {
   slug: string 
   date : number,
-  data : Page[] | Article[]
+  data : Page[] | originArticle[]
 }

@@ -6,17 +6,16 @@ import { formatDateTime } from "@/lib/utils/date";
 
 type Props = {
   article: Article;
-  category: Category;
 };
 
-const { article, category } = Astro.props as Props;
+const { article } = Astro.props as Props;
 ---
 
 <article class="group relative isolate flex flex-col md:flex-col gap-5 ">
   <div class="flex bg-cover rounded-md">
     <img
-      src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] || imageNotFound.src}
-      alt={decode(String(article.title.rendered))}
+      src={article.media.full || imageNotFound.src}
+      alt={article.media.alt}
       width={720}
       height={430}
       loading="eager"
@@ -30,10 +29,10 @@ const { article, category } = Astro.props as Props;
         class="text-[2rem] font-serif font-semibold leading-8 lg:group-hover:underline underline-offset-2 line-clamp-3"
       >
         <a
-          href={`/${category.slug}/${article.slug}`}
-          title={decode(String(article.title.rendered))}
+          href={`/${article.category.slug}/${article.slug}`}
+          title={article.title}
         >
-          {decode(String(article.title.rendered))}
+          {article.title}
         </a>
       </h2>
       <span
@@ -44,7 +43,7 @@ const { article, category } = Astro.props as Props;
     <div class="flex text-xs items-center gap-2">
       <span
         class="flex px-1.5 py-0.5 rounded-md font-semibold uppercase text-[#10477C] bg-[#FBC208]"
-        >{category.name}</span
+        >{article.category.name}</span
       >
       <span class="flex gap-1 text-[#10477C]">
         <span>{formatDateTime(article.date)}</span>

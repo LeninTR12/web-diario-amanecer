@@ -1,5 +1,5 @@
 
-import type { Article, CacheResponse } from "../types";
+import type { originArticle, CacheResponse } from "../types";
 import { categoriesHandler } from "./categories";
 import { scopesHandler } from "./scopes";
 import { articleIsCached, caching, isCahed } from "./cache";
@@ -17,7 +17,7 @@ export const articlesHandler = {
     const cacheArticles = isCahed(cacheAllArticles, "allArticles");
 
     if (cacheArticles) {
-      return cacheArticles.data as Article[];
+      return cacheArticles.data as originArticle[];
     }
 
     const newCache = await caching(
@@ -26,21 +26,21 @@ export const articlesHandler = {
       "allArticles"
     );
 
-    return newCache.data as Article[];
+    return newCache.data as originArticle[];
   },
 
   mainHeadline: async () => {
     const allArticles: any = await articlesHandler.allArticles();
     const articles = allArticles.slice(0, 3);
 
-    return articles as Article[];
+    return articles as originArticle[];
   },
 
   subHeadlines: async () => {
     const allArticles: any = await articlesHandler.allArticles();
     const articles = allArticles.slice(3, 6);
 
-    return articles as Article[];
+    return articles as originArticle[];
   },
 
   articlesByCategory: async (category: string | number) => {
@@ -50,7 +50,7 @@ export const articlesHandler = {
       : categoriesHandler.oneCategoryBySlug(category).id;
 
     const cacheArticles = isCahed(cacheByCategory, categoryId.toString());
-    if (cacheArticles) return cacheArticles.data as Article[];
+    if (cacheArticles) return cacheArticles.data as originArticle[];
 
     const newCache = await caching(
       cacheByCategory,
@@ -58,7 +58,7 @@ export const articlesHandler = {
       "articlesByCategory"
     );
 
-    return newCache.data as Article[];
+    return newCache.data as originArticle[];
   },
 
   articlesByScope: async (scope: string | number) => {
@@ -66,18 +66,18 @@ export const articlesHandler = {
     const scopeId = isId ? scope : scopesHandler.oneScopeBySlug(scope).id;
 
     const cacheArticles = isCahed(cacheByScope, scopeId.toString());
-    if (cacheArticles) return cacheArticles.data as Article[];
+    if (cacheArticles) return cacheArticles.data as originArticle[];
 
     const newCache = await caching(cacheByScope, scopeId.toString(), "articlesByScope" );
-    return newCache.data as Article[];
+    return newCache.data as originArticle[];
   },
 
   oneArticleBySlug: async (slug: string) => {
     const cacheArticle = articleIsCached([cacheAllArticles, cacheByCategory, cacheByScope, cacheOneArticles], slug);
-    if (cacheArticle) return cacheArticle as Article;
+    if (cacheArticle) return cacheArticle as originArticle;
 
     const newCache = await caching(cacheOneArticles, slug, "oneArticle");
-    return newCache.data[0] as Article;
+    return newCache.data[0] as originArticle;
   },
 };
 

@@ -3,36 +3,38 @@ import NewsCard from "@/components/cards/newsCard.astro";
 import HeaderSection from "./headerSection.astro";
 import { articlesHandler } from "@/lib/handlers/articles";
 import type { Article } from "@/lib/types";
+import { parseArticles } from "@/lib/utils/objects";
 
-interface Props{
-  title:string,
-  link_title: string
-  link_url: string,
-  count: number
+interface Props {
+  title: string;
+  scope: string;
+  count: number;
 }
 
-const {title, link_title, link_url,count}:Props = Astro.props;
+const { title, scope, count }: Props = Astro.props;
 
-const allArticles :Article[] = await articlesHandler.allArticles();
-const removeArticles:Article[] = allArticles.slice(0,6);
-const scopeArticles:Article[] = await articlesHandler.articlesByScope(link_url.replace("/", ""));
+const allArticles = await articlesHandler.allArticles();
+const removeArticles = allArticles.slice(0, 6);
+const scopeArticles = await articlesHandler.articlesByScope(scope);
 
-const articles:Article[] =  scopeArticles.filter((article)=>(
-  !removeArticles.some((removeArticle)=>
-    removeArticle.id ===article.id)));
-
+const articles : Article[] = parseArticles(
+  scopeArticles.filter(
+    (article) =>
+      !removeArticles.some((removeArticle) => removeArticle.id === article.id)
+  )
+);
 ---
 
-<section class="flex flex-col w-full px-4 xl:px-0 max-w-[1024px] m-auto gap-8 py-8" data-pagefind-ignore="all">
-  <HeaderSection
-    title={title}
-    link_url={link_url}
-  />
+<section
+  class="flex flex-col w-full px-4 xl:px-0 max-w-[1024px] m-auto gap-8 py-8"
+  data-pagefind-ignore="all"
+>
+  <HeaderSection title={title} link_url={scope} />
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 gap-y-8">
     {
       articles
         .slice(0, count)
-        .map((article, index) => <NewsCard article={article} index={index} />)
+        .map((article) => <NewsCard article={article} />)
     }
   </div>
 </section>

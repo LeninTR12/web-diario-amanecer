@@ -1,28 +1,23 @@
 ---
 import imageNotFound from "@/assets/images/404.webp";
-import { categoriesHandler } from "@/lib/handlers/categories";
 import type { Article } from "@/lib/types";
 import { formatDateTime } from "@/lib/utils/date";
-import { decode } from "html-entities";
 
 type Props = {
   article: Article;
-  index: number;
 };
 
-const { article, index } = Astro.props;
+const { article } = Astro.props;
 
-const category = categoriesHandler.oneCategory(article.categories[0]);
 ---
 
 <article class="flex flex-col w-full gap-4">
   <div class="aspect-video overflow-hidden rounded-sm">
     <img
-      src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
-        imageNotFound.src}
-      alt={decode(String(article.title.rendered))}
-      width={750}
-      height={450}
+      src={article.media.medium || imageNotFound.src}
+      alt={article.media.alt}
+      width={650}
+      height={350}
       loading="eager"
       draggable="false"
       class="w-full h-full object-cover"
@@ -33,9 +28,9 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
       class="text-xl font-serif font-semibold lg:group-hover:underline leading-6 line-clamp-2 min-h-[48px]"
     >
       <a
-        href={`/${category.slug}/${article.slug}`}
-        set:html={article.title.rendered}
-        title={decode(String(article.title.rendered))}
+        href={`/${article.category.slug}/${article.slug}`}
+        set:html={article.title}
+        title={article.title}
       />
     </h3>
 
@@ -43,7 +38,7 @@ const category = categoriesHandler.oneCategory(article.categories[0]);
       <span
         class="flex px-1.5 py-0.5 rounded-md font-semibold uppercase text-[#10477C] bg-[#FBC208]"
       >
-        {category.name}
+        {article.category.name}
       </span>
       <span class="flex gap-1 text-[#10477C]">
         <span>{formatDateTime(article.date)}</span>|

@@ -6,7 +6,8 @@ import LatestNews from "./_home/latestNews.astro";
 import type { Meta } from "@/lib/types";
 import { SCOPE_LINKS, SITE } from "@/lib/config";
 import CustomAds from "src/components/widgets/CustomAds.astro";
-const countByScopes = [6,3,3];
+
+const countByScope = [6,3,3];
 
 const meta:Meta ={
   title : `Diario ${SITE.title} - Prensa escrita del Alto Mayo para San Martín`,
@@ -23,7 +24,7 @@ const meta:Meta ={
   <Headlines />  
   {
     SCOPE_LINKS.map((item, index)=>(
-    <LatestNews title={item.text} link_title="Ver más" link_url={item.href} count={countByScopes[index]} /> 
+    <LatestNews title={item.text} scope={item.href.replace("/","")} count={countByScope[index]} /> 
     ))
   }
 </BaseLayout> 
