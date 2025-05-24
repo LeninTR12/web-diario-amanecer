@@ -28,15 +28,16 @@ const { article } = Astro.props;
 
     <h1
       class="text-3xl font-bold font-serif lg:text-4xl"
-      set:html={article.title.rendered}
+      set:html={article.title}
     />
     <img
-      src={article._embedded["wp:featuredmedia"]?.[0]["source_url"] ||
+      src={article.media.original ||
         imageNotFound.src}
-      alt={decode(String(article.title.rendered))}
+      alt={article.media.alt}
       width={1024}
       height={576}
       loading="eager"
+      draggable="false"
       class="w-full h-full object-cover rounded-sm aspect-[16/9] "
     />
   </div>

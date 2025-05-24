@@ -9,28 +9,27 @@ import CustomAds from "src/components/widgets/CustomAds.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
 import Content from "../articles/_components/article-content.astro";
 import { SITE } from "@/lib/config";
-import { decode } from "html-entities";
-import { HTMLToString } from "@/lib/utils/letter";
+import { parseArticle } from "@/lib/utils/objects";
 
 const { categoria, slug } = Astro.params;
 
-const categoryXcat: Category = await categoriesHandler.oneCategoryBySlug(categoria as string);
-const categoryXScope = await scopesHandler.oneScopeBySlug(categoria as string);
+const category = categoriesHandler.oneCategoryBySlug(categoria as string);
+const isScope = !category;
+const taxonomy = category || scopesHandler.oneScopeBySlug(categoria as string); 
 
-const category = categoryXcat || categoryXScope;
-if (!category) return Astro.redirect("/404");
+if (!taxonomy) return Astro.redirect("/404");
 
-const article:Article = await articlesHandler.oneArticleBySlug(slug as string);
+const article = parseArticle(await articlesHandler.oneArticleBySlug(slug as string));
 
 if (!article) return Astro.redirect("/404");
 
 const meta: ArticleMeta = {
-  title: `${HTMLToString(decode(String(article.title.rendered)))} | Noticias en ${category.name} - ${SITE.title}`,
-  metaTitle: decode(String (article.title.rendered)),
-  description: HTMLToString(article.excerpt.rendered),
+  title: `${article.title} - Noticias ${ isScope ? 'del ámbito ' : 'en '} ${taxonomy.name} | ${SITE.title}`,
+  metaTitle: article.title,
+  description: article.excerpt.text,
   type: "article",
-  ogImage: article._embedded["wp:featuredmedia"]?.[0]["source_url"],
-  ogImageAlt:decode(String (article.title.rendered)),
+  ogImage: article.media.medium,
+  ogImageAlt:article.media.alt,
   publishedTime: article.date + SITE.utc,
   lastModified: article.modified + SITE.utc,
 };

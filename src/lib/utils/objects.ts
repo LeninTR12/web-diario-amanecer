@@ -5,9 +5,11 @@ import { categoriesHandler } from "../handlers/categories";
 import { scopesHandler } from "../handlers/scopes";
 
 export function parseArticle(article :originArticle){
+    if(!article) return null;
     return  {
         id : Number(article.id),
         date : article.date,
+        modified : article.modified,
         slug : article.slug,
         title : HTMLToString(decode(String(article.title.rendered))),
         content : article.content.rendered,

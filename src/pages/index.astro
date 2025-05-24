@@ -2,7 +2,7 @@
 export const prerender = false;
 import BaseLayout from "@/layouts/base.astro";
 import Headlines from "./_home/headlines.astro";
-import LatestNews from "./_home/latestNews.astro";
+import ScopedNews from "./_home/scopedNews.astro";
 import type { Meta } from "@/lib/types";
 import { SCOPE_LINKS, SITE } from "@/lib/config";
 import CustomAds from "src/components/widgets/CustomAds.astro";
@@ -24,7 +24,7 @@ const meta:Meta ={
   <Headlines />  
   {
     SCOPE_LINKS.map((item, index)=>(
-    <LatestNews title={item.text} scope={item.href.replace("/","")} count={countByScope[index]} /> 
+    <ScopedNews title={item.text} scope={item.href.replace("/","")} count={countByScope[index]} /> 
     ))
   }
 </BaseLayout> 

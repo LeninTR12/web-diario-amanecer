@@ -1,6 +1,7 @@
 ---
 import SubHeadlineCard from '@/components/cards/subHeadlineCard.astro';
 import { articlesHandler } from '@/lib/handlers/articles';
+import { parseArticles } from '@/lib/utils/objects';
 
 
 type Props = {
@@ -11,9 +12,11 @@ type Props = {
 const {page} =Astro.props as Props;
 
 const mainArticles = await articlesHandler.mainHeadline();
-const articles = page === "singlePost" 
+const articles = parseArticles(
+    page === "singlePost" 
     ? mainArticles 
-    :  mainArticles.concat(await articlesHandler.subHeadlines());
+    : mainArticles.concat(await articlesHandler.subHeadlines())
+);
 
 
 

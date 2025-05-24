@@ -46,6 +46,7 @@ export type Category = Scope & {
 export type Article ={
   id : number;
   date: string;
+  modified: string;
   slug: string;
   title: string;
   content: HTMLString;

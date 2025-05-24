@@ -34,7 +34,7 @@ const articles : Article[] = parseArticles(
     {
       articles
         .slice(0, count)
-        .map((article) => <NewsCard article={article} />)
+        .map((article) => <NewsCard taxonomy="scope" article={article} />)
     }
   </div>
 </section>

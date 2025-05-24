@@ -4,10 +4,12 @@ import type { Article } from "@/lib/types";
 import { formatDateTime } from "@/lib/utils/date";
 
 type Props = {
-  article: Article;
+  article: Article,
+  taxonomy?: "category" | "scope",
 };
 
-const { article } = Astro.props;
+const { article, taxonomy="category" } = Astro.props;
+const linkArticle = taxonomy === "scope" ? `/${article.ambito.slug}/${article.slug}` : `/${article.category.slug}/${article.slug}`;
 
 ---
 
@@ -28,10 +30,11 @@ const { article } = Astro.props;
       class="text-xl font-serif font-semibold lg:group-hover:underline leading-6 line-clamp-2 min-h-[48px]"
     >
       <a
-        href={`/${article.category.slug}/${article.slug}`}
-        set:html={article.title}
+        href={linkArticle}
         title={article.title}
-      />
+      >
+        {article.title}
+      </a>
     </h3>
 
     <div class="flex text-xs items-center gap-2">

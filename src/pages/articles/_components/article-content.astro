@@ -32,9 +32,9 @@ const { article } = Astro.props;
     </div>
 
     <div class="flex items-center">
-      <Share text={decode(String(article.title.rendered))} />
+      <Share text={article.title} />
     </div>
   </div>
 
-  <article set:html={article.content.rendered} />
+  <article set:html={article.content} />
 </div>

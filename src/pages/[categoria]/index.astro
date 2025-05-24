@@ -5,48 +5,51 @@ import type { Article, Meta } from "@/lib/types";
 import ListLayout from "@/layouts/list.astro";
 import WideCard from "@/components/cards/wideCard.astro";
 import { scopesHandler } from "@/lib/handlers/scopes";
-import { decode } from "html-entities";
 import { SITE } from "@/lib/config";
 import RecentNews from "../_home/recentNews.astro";
 import BigArticleCard from "@/components/cards/bigArticleCard.astro";
+import { parseArticles } from "@/lib/utils/objects";
 
 
 const { categoria } = Astro.params;
 
-const categoryXCat = await categoriesHandler.oneCategoryBySlug(categoria as string);
-const categoryXScope = await scopesHandler.oneScopeBySlug(categoria as string);
-const category = categoryXCat || categoryXScope;
+const category = categoriesHandler.oneCategoryBySlug(categoria as string);
+const isScope = !category;
+const taxonomy = category || scopesHandler.oneScopeBySlug(categoria as string); 
+ 
+if(!taxonomy) return Astro.redirect("/404");
 
- if (!category) return Astro.redirect("/404");
 
-const allArticles: Article[] = categoryXCat
-  ?await articlesHandler.articlesByCategory(category.id) 
-  : await articlesHandler.articlesByScope(category.id); 
+const taxonomyArticles: Article[] = parseArticles(
+  isScope
+  ? await articlesHandler.articlesByScope(taxonomy.id)
+  : await articlesHandler.articlesByCategory(taxonomy.id) 
+); 
 
- if(allArticles.length === 0) return Astro.redirect("/404");
+ if(taxonomyArticles.length === 0) return Astro.redirect("/404");
 
-const bigArticle = allArticles[0];
-const articles = allArticles.slice(1, allArticles.length);
+const bigArticle = taxonomyArticles[0];
+const articles = taxonomyArticles.slice(1, taxonomyArticles.length);
 
- const title = categoryXCat 
-                ? `Noticias en ${(category.name).toLowerCase()}`
-                : `Noticias del ámbito ${(category.name).toLowerCase()}`;
+ const title = isScope 
+                ? `Noticias del ámbito ${(taxonomy.name).toLowerCase()}`
+                : `Noticias en ${(taxonomy.name).toLowerCase()}`; 
 
 const meta: Meta = {
-  title:`${title} - ${SITE.title}`,
+  title:`${title} | ${SITE.title}`,
   metaTitle: title,
-  description: category.description,
+  description: taxonomy.description,
   type: "website",
-  ogImage: bigArticle?._embedded["wp:featuredmedia"]?.[0]["source_url"],
-  ogImageAlt: decode(String (bigArticle?.title.rendered)),
+  ogImage: "/og-favicon.webp",
+  ogImageAlt: title,
 };
 
 ---
 <ListLayout headerTitle={title} meta={meta}>
   <div class="flex flex-col lg:flex-row lg:w-[1024px] max-w-[1024px] ">
     <BigArticleCard
+      taxonomy={isScope ? "scope" : "category"}
       article={bigArticle}
-      category={category}
     />
     <RecentNews page="category" />
   </div>
@@ -58,7 +61,7 @@ const meta: Meta = {
       {
         articles.map((article) => (
           <WideCard
-            category={category}
+            taxonomy={isScope ? "scope" : "category"}
             article={article}
             isLast={articles.lastIndexOf(article) === articles.length - 1}
           />
@@ -69,19 +72,6 @@ const meta: Meta = {
     <div class="flex " ></div>
     )}
     </div>
-    <!-- {
-      articles.length > SITE.postsPerPage ? (
-        <Pagination
-          length={page.lastPage}
-          currentUrl={page.url.current}
-          currentPage={page.currentPage}
-          firstUrl={`/${firstPath}`}
-          prevUrl={page.url.prev}
-          nextUrl={page.url.next}
-          lastUrl={`/${firstPath}/${page.lastPage}`}
-        />
-      ) : null
-    } -->
   </ListLayout>
 
 

@@ -1,14 +1,15 @@
 ---
 import type { Article, Category } from "@/lib/types";
-import { decode } from "html-entities";
 import imageNotFound from "src/assets/images/404.webp";
 import { formatDateTime } from "@/lib/utils/date";
 
 type Props = {
   article: Article;
+  taxonomy?: "category" | "scope" ;
 };
 
-const { article } = Astro.props as Props;
+const { article, taxonomy="category" } = Astro.props as Props;
+const linkArticle = taxonomy === "scope" ? `/${article.ambito.slug}/${article.slug}` : `/${article.category.slug}/${article.slug}`;
 ---
 
 <article class="group relative isolate flex flex-col md:flex-col gap-5 ">
@@ -29,7 +30,7 @@ const { article } = Astro.props as Props;
         class="text-[2rem] font-serif font-semibold leading-8 lg:group-hover:underline underline-offset-2 line-clamp-3"
       >
         <a
-          href={`/${article.category.slug}/${article.slug}`}
+          href={linkArticle}
           title={article.title}
         >
           {article.title}
