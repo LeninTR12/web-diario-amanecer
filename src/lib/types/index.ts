@@ -25,6 +25,7 @@ export type Meta = {
 };
 
 export type ArticleMeta = Meta & {
+  canonical: string;
   publishedTime: string;
   lastModified: string;
 };

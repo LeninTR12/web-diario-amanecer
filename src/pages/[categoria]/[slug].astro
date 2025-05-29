@@ -30,6 +30,7 @@ const meta: ArticleMeta = {
   type: "article",
   ogImage: article.media.medium,
   ogImageAlt:article.media.alt,
+  canonical:`/${article.category.slug}/${article.slug}`,
   publishedTime: article.date + SITE.utc,
   lastModified: article.modified + SITE.utc,
 };

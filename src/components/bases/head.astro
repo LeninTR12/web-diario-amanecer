@@ -13,7 +13,7 @@ const { meta } = Astro.props;
 // Type guard to check if props is ArticleMeta
 const isArticleMeta = (props: Props["meta"]): props is ArticleMeta =>
   props.type === "article";
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const canonicalURL = isArticleMeta(meta) ? new URL(meta.canonical ,Astro.site).href : new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <head>
