@@ -4,7 +4,10 @@ export const TIMES_CONF = {
   maxCacheTime : 30, //time at minutes
   maxDistanceDays: (6*24*60*60*1000) //time at milliseconds
 }
-
+export const SITEMAP = {
+  perWPPage: 100,
+  perSitemap:1000,
+}
 export const SITE = {
   title: "Amanecer",
   description: " Una propuesta de prensa escrita desde el Alto Mayo para toda la región San Martín",
@@ -33,14 +36,14 @@ export const COMPANY_DATA = {
 
 export const API_PAGES = {
   printEdition: {
-    title: "Edición Impresa",
+    title: "Edición impresa",
     description: "Edición Impresa del Diario Amanecer",
     slug: "edicion-impresa",
   },
   customAds: {
-    title: "Publicidad Personalizada",
-    description: "Publicidad Personalizada del Diario Amanecer",
-    slug: "pulicidad-pesonalizada",
+    title: "Publicidad personalizada",
+    description: "Publicidad personalizada del Diario Amanecer",
+    slug: "publicidad-pesonalizada",
   },
 };
 

@@ -10,7 +10,7 @@ const url = new URL(Astro.request.url);
 const query = url.searchParams.get("q");
 const type = url.searchParams.get("t");
 
-const foundArticles : Article[] = query ? parseArticles(await searchHandler.searchArticles(query)) : [];
+const foundArticles = query ? parseArticles(await searchHandler.searchArticles(query)) : [];
 
 if (type) {
   return new Response(JSON.stringify(foundArticles), {

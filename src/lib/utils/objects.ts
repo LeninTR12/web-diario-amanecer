@@ -6,7 +6,6 @@ import { scopesHandler } from "../handlers/scopes";
 
 export function parseArticle(article :originArticle){
     if(!article) return null;
-    console.log(article._embedded["wp:featuredmedia"]?.[0]["source_url"])
     return  {
         id : Number(article.id),
         date : article.date,
@@ -32,5 +31,6 @@ export function parseArticle(article :originArticle){
 }
 
 export function parseArticles(articles:originArticle[]){
+    if(!articles) return null;
     return articles.map(article => parseArticle(article)) as Article[];
 }

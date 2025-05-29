@@ -8,16 +8,19 @@ export const GET:APIRoute = async ({request}) =>{
     sitemaps.push(`<url>
             <loc>${SITE.url}</loc>
             </url>`)
+
     NAVIGATION_LINKS.forEach(link => {
         sitemaps.push(`<url>
             <loc>${SITE.url + link.href}</loc>
             </url>`)
     });
+
     SCOPE_LINKS.forEach(link => {
         sitemaps.push(`<url>
             <loc>${SITE.url + link.href}</loc>
             </url>`)
     });
+    
     OTHER_LINKS.forEach(link => {
         sitemaps.push(`<url>
             <loc>${SITE.url + link.href}</loc>

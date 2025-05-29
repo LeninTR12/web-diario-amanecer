@@ -8,9 +8,10 @@ export async function getPostsCount(perPage:number){
     return totalPost;
 }
 export async function getPostsPerPage(page=1, perPage:number){
- const res = await fetch(`${API_URL}/posts?_embed&page=${page}&per_page=${perPage}`);
- console.log(`${API_URL}/posts?_embed&page=${page}&per_page=${perPage}`);
-    if(!res.ok) throw new Error("Error retrieving posts per page") ;
+    const res = await fetch(`${API_URL}/posts?_embed&page=${page}&per_page=${perPage}`);
+    console.log(`${API_URL}/posts?_embed&page=${page}&per_page=${perPage}`)
+    if(!res.ok) return null; 
+
     const jsonResult = await res.json();
     return jsonResult;   
 }
