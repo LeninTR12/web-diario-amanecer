@@ -6,6 +6,7 @@ import { scopesHandler } from "../handlers/scopes";
 
 export function parseArticle(article :originArticle){
     if(!article) return null;
+    console.log(article._embedded["wp:featuredmedia"]?.[0]["source_url"])
     return  {
         id : Number(article.id),
         date : article.date,
@@ -20,10 +21,10 @@ export function parseArticle(article :originArticle){
         category: categoriesHandler.oneCategory(article.categories[0]),
         ambito: scopesHandler.oneScope(article.ambito[0]),
         media: {
-            original: article._embedded["wp:featuredmedia"]?.[0]["source_url"],
-            thumbnail: article._embedded["wp:featuredmedia"]?.[0].media_details.sizes.thumbnail.source_url,
-            medium: article._embedded["wp:featuredmedia"]?.[0].media_details.sizes.medium.source_url,
-            full: article._embedded["wp:featuredmedia"]?.[0].media_details.sizes.full.source_url,
+            original: article._embedded["wp:featuredmedia"]?.[0]?.["source_url"] || null,
+            thumbnail: article._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes?.thumbnail?.source_url || null,
+            medium: article._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes?.medium?.source_url || null,
+            full: article._embedded["wp:featuredmedia"]?.[0]?.media_details.sizes?.full?.source_url || null,
             alt: HTMLToString(decode(String(article.title.rendered))),
         }
 

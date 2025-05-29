@@ -1,11 +1,25 @@
 
 const API_URL = import.meta.env.API_URL
 
+export async function getPostsCount(perPage:number){
+    const res = await fetch(`${API_URL}/posts?&per_page=${perPage}`);
+    if(!res.ok) throw new Error("Error counting total posts ") ;
+    const totalPost =  parseInt(res.headers.get("x-wp-total") || "0");
+    return totalPost;
+}
+export async function getPostsPerPage(page=1, perPage:number){
+ const res = await fetch(`${API_URL}/posts?_embed&page=${page}&per_page=${perPage}`);
+ console.log(`${API_URL}/posts?_embed&page=${page}&per_page=${perPage}`);
+    if(!res.ok) throw new Error("Error retrieving posts per page") ;
+    const jsonResult = await res.json();
+    return jsonResult;   
+}
+
 export async function getPosts(){
     const res = await fetch(`${API_URL}/posts?_embed&_=${new Date().getTime()}`);
     if(!res.ok) throw new Error("Error retrieving posts") ;
     const jsonResult = await res.json();
-    return jsonResult;
+    return jsonResult;    
 }
 
 export async function getPostBySlug(slug:string){
@@ -22,14 +36,14 @@ export async function getPostById(id:number){
     return jsonResult;
 }
 export async function getPostsByCategory(id:number){
-    const res = await fetch(`${API_URL}/posts?categories=${id}&_embed`);
+    const res = await fetch(`${API_URL}/posts?categories=${id}&_embed&per_page=30`);
     if (!res.ok) throw new Error("Error retrieving posts by category");
 
     const jsonResult = await res.json();   
     return jsonResult;
 }
 export async function getPostsByScope(id:number){
-    const res = await fetch(`${API_URL}/posts?ambito=${id}&_embed`);
+    const res = await fetch(`${API_URL}/posts?ambito=${id}&_embed&per_page=30`);
     if (!res.ok) throw new Error("Error retrieving posts by scopes");
     
     const jsonResult = await res.json();  
